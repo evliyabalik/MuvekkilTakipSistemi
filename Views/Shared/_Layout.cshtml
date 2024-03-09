@@ -21,7 +21,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 
-	<title>@ViewBag.Title</title>
+	<title>@ViewData["Title"]</title>
 
 	@await Html.PartialAsync("_Styles")
 </head>
@@ -57,9 +57,15 @@
 								
 							</ul>
 							<div class="user_option">
-								<a href="">
-									<img src="~/images/user.png" alt="">
-								</a>
+									<div class="dropdown">
+										<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<img src="~/images/user.png" alt="">
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href=@Url.ActionLink("Login","Home")>Giriş Yap</a>
+										<a class="dropdown-item" href=@Url.ActionLink("Register","Home")>Kayıt Ol</a>
+										</div>
+									</div>
 								<form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
 									<button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
 								</form>
@@ -88,7 +94,7 @@
 											</h1>
 											
 											<div class="">
-												<a href="">
+											<a href=@Url.ActionLink("Concat","Home")>
 													Bizimle iletişime geçin
 												</a>
 											</div>
@@ -111,13 +117,84 @@
 	@RenderBody()
 
 
+    <!-- info section -->
+    <section class="info_section ">
+        <div class="container">
+            <div class="row">
+				<div class="col-md-5">
+                    <div class="info_contact">
+                        <h5>
+                            About Shop
+                        </h5>
+                        <div>
+                            <div class="img-box">
+                                <img src="~/images/telephone-white.png" width="12px" alt="">
+                            </div>
+                            <a href="tel:+905399291280">
+                               +90 5399291280
+                            </a>
+                        </div>
+                        <div >
+                            <div class="img-box">
+                                <img src="~/images/envelope-white.png" width="18px" alt="">
+                            </div>
+                            <a  href="mailto:evliyabalik@gmail.com">
+                                evliyabalik@gmail.com
+                                
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info_info">
+                        <h5>
+                            Menüler
+                        </h5>
+                        <ul>
+                            @foreach (var item in nav)
+                            {
+                                <li class="navbar-light"><a href=@Url.ActionLink(item.ActionName, item.ControlName) style="color:white">@item.MenuText</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+				<div class="col-md-3">
+                    <div class="info_form ">
+                        <h5>
+                            Bülten için abone ol
+                        </h5>
+                        <form action="">
+                            <input type="email" placeholder="Enter your email">
+                            <button>
+                                Abone ol
+                            </button>
+                        </form>
+                        <div class="social_box">
+                            <a href="">
+                                <img src="images/fb.png" alt="">
+                            </a>
+                            <a href="">
+                                <img src="images/twitter.png" alt="">
+                            </a>
+                            <a href="">
+                                <img src="images/linkedin.png" alt="">
+                            </a>
+                            <a href="">
+                                <img src="images/youtube.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end info section -->
 
 	<!-- footer section -->
 	<section class="container-fluid footer_section">
 		<p>
-			&copy; 2020 All Rights Reserved By
-			<a href="https://html.design/">Free Html Templates</a>
-			Distrubuted By <a href="https://themewagon.com">ThemeWagon</a>
+			&copy; 2024 Tüm Hakları Saklıdır.
 		</p>
 	</section>
 	<!-- footer section -->

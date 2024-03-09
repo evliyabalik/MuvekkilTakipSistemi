@@ -96,9 +96,21 @@ body {
 .hero_area {
   height: 100vh;
   background-color: #b5caee;
-  background-image: url(../images/lawyerOffice.jpg);
+  background-image: url(../images/lawyerOffice.png);
   background-size: 100% 100%;
   opacity:40%;
+}
+
+.Login-area {
+    height: 10vh;
+    background-color: black;
+}
+
+sub_page{ 
+    .Login_area {
+    height: auto;
+}
+
 }
 
 .sub_page {
@@ -553,7 +565,7 @@ span {
     padding: 25px;
     border-radius: 20px;
 
-    input {
+    input, textarea {
       border: none;
       outline: none;
       background-color: transparent;
@@ -598,91 +610,88 @@ span {
 /* end contact section */
 
 
-
 // info section
 .info_section {
-  background-color: #232323;
-  color: $white;
-  padding: 90px 0 45px 0;
+    background-color: #232323;
+    color: $white;
+    padding: 90px 0 45px 0;
 
-  h5 {
-    margin-bottom: 25px;
-    font-size: 24px;
-  }
-
-  .info_insta {
-
-    .insta_container {
-      &>div {
-        display: flex;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      .insta-box {
-        margin: 5px;
-        display: flex;
-        align-items: stretch;
-        background-color: $white;
-        padding: 10px 20px;
-      }
-
-
-    }
-  }
-
-  .info_contact {
-    .img-box {
-      width: 35px;
-      display: flex;
-      justify-content: center;
+    h5 {
+        margin-bottom: 25px;
+        font-size: 24px;
     }
 
-    p {
-      margin: 0;
+    .info_insta {
+
+        .insta_container {
+            & > div {
+                display: flex;
+            }
+
+            img {
+                width: 100%;
+            }
+
+            .insta-box {
+                margin: 5px;
+                display: flex;
+                align-items: stretch;
+                background-color: $white;
+                padding: 10px 20px;
+            }
+        }
     }
 
-    >div {
-      display: flex;
-      align-items: center;
-      margin: 20px 0;
+    .info_contact {
+        .img-box {
+            width: 35px;
+            display: flex;
+            justify-content: center;
+        }
 
-      img {
-        height: auto;
-        margin-right: 12px;
-      }
-    }
-  }
+        a {
+            margin: 0;
+        }
 
-  .info_form {
-    form {
-      input {
-        outline: none;
-        width: 100%;
-        padding: 7px 10px;
-      }
+        > div {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
 
-      button {
-        @include hero-btn(#fbca47, $white, 8px, 30px);
-        margin-top: 15px;
-        text-transform: uppercase;
-        font-size: 15px;
-      }
+
+            img {
+                height: auto;
+                margin-right: 12px;
+            }
+        }
     }
 
-    .social_box {
-      margin-top: 35px;
-      width: 100%;
-      display: flex;
+    .info_form {
+        form {
+            input {
+                outline: none;
+                width: 100%;
+                padding: 7px 10px;
+            }
 
-      a {
-        margin-right: 25px;
-      }
+            button {
+                @include hero-btn(#fbca47, $white, 8px, 30px);
+                margin-top: 15px;
+                text-transform: uppercase;
+                font-size: 15px;
+            }
+        }
+
+        .social_box {
+            margin-top: 35px;
+            width: 100%;
+            display: flex;
+
+            a {
+                margin-right: 25px;
+            }
+        }
     }
-  }
-
 }
 
 // end info section

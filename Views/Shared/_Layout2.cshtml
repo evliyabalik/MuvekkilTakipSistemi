@@ -1,0 +1,106 @@
+﻿@{
+	List<Navigation> nav = new List<Navigation>()
+			{
+				new Navigation(){MenuText="Anasayfa",ActionName="Index",ControlName="Home"},
+				new Navigation(){MenuText="Hakkımızda",ActionName="About",ControlName="Home"},
+				new Navigation(){MenuText="İletişim",ActionName="Concat",ControlName="Home"},
+			};
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>@ViewData["Title"]</title>
+
+	@await Html.PartialAsync("_Styles")
+</head>
+<body>
+	<div class="Login-area">
+		<!-- header section strats -->
+		<header class="header_section">
+			<div class="container-fluid">
+				<nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+					
+					<a class="navbar-brand" href="@Url.Action(nav[0].ActionName, nav[0].ControlName,null)">
+						<span>
+							Müvekkil Takip Sistemi
+						</span>
+					</a>
+					
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!--Navigation-->
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+							<ul class="navbar-nav">
+								@foreach (var item in nav)
+								{
+
+									<li class="nav-item">
+										@Html.ActionLink(item.MenuText, item.ActionName, item.ControlName, null, new { @class = "nav-link" })
+									</li>
+								}
+
+								
+							</ul>
+							<div class="user_option">
+									<div class="dropdown">
+										<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<img src="~/images/user.png" alt="">
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href=@Url.ActionLink("Login","Home")>Giriş Yap</a>
+										<a class="dropdown-item" href=@Url.ActionLink("Register","Home")>Kayıt Ol</a>
+										</div>
+									</div>
+								<form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+									<button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!-- end header section -->
+		<!-- slider section -->
+		
+		<!-- end slider section -->
+	</div>
+
+
+
+	@RenderBody()
+
+
+
+
+	<!-- footer section -->
+	<section class="container-fluid footer_section " style="position:fixed; bottom:0px; margin-top:100px;">
+		<p>
+			&copy; 2024 Tüm Hakları Saklıdır.
+		</p>
+	</section>
+	<!-- footer section -->
+	<!-- owl carousel script
+	-->
+	<!-- end owl carousel script -->
+	@await Html.PartialAsync("_Scripts");
+
+
+</body>
+
+</html>
