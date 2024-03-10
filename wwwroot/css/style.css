@@ -77,8 +77,10 @@ body {
 }
 
 .Login-area {
-    height: 10vh;
+    height: 30vh;
     background-color: black;
+    background-image: url(../images/lawyerOffice.png);
+    background-size: cover;
 }
 
 .sub_page .hero_area, .sub_page .Login_area {
@@ -150,7 +152,7 @@ a:focus {
 }
 
 .custom_nav-container .nav_search-btn {
-    background-image: url(../images/search-icon.png);
+   // background-image: url(../images/search-icon.png);
     background-size: 22px;
     background-repeat: no-repeat;
     background-position-y: 7px;

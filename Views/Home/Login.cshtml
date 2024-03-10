@@ -18,7 +18,7 @@
                         <div class="contact-form">
                             <form action="">
                                 <div>
-                                    <input type="text" placeholder="Kullanıcı Adı ">
+                                    <input type="text" placeholder="Baro Sicil No">
                                 </div>
                                 <div>
                                     <input type="password" placeholder="Şifre">
@@ -30,8 +30,8 @@
                                 </div>
                             </form>
 
-                            <a href="#">Şifremi unuttum</a><br />
-                            <a href="#">Kayıt ol</a>
+                            <a href=@Url.ActionLink("ForgotPass","Home")>Şifremi unuttum</a><br />
+                            <a href=@Url.ActionLink("Register","Home")>Kayıt ol</a>
                         </div>
                     </div>
                 </div>
