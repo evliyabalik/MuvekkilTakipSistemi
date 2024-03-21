@@ -152,7 +152,7 @@ a:focus {
 }
 
 .custom_nav-container .nav_search-btn {
-   // background-image: url(../images/search-icon.png);
+    // background-image: url(../images/search-icon.png);
     background-size: 22px;
     background-repeat: no-repeat;
     background-position-y: 7px;
@@ -292,41 +292,41 @@ a:focus {
         }
 
 
-.do_section .do_container .box .img-box img {
-    background-color: black;
-    width: 45px;
-}
+            .do_section .do_container .box .img-box img {
+                background-color: black;
+                width: 45px;
+            }
 
-.do_section .do_container .box .detail-box {
-    margin-top: 35px;
-}
+        .do_section .do_container .box .detail-box {
+            margin-top: 35px;
+        }
 
-.do_section .do_container .box:hover .img-box {
-    background-color: #fec016;
-}
+        .do_section .do_container .box:hover .img-box {
+            background-color: #fec016;
+        }
 
-.do_section .do_container .arrow_bg::before {
-    content: "";
-    position: absolute;
-    top: -23px;
-    left: -17px;
-    width: 262%;
-    height: 90%;
-    z-index: 3;
-    background-size: cover;
-}
+    .do_section .do_container .arrow_bg::before {
+        content: "";
+        position: absolute;
+        top: -23px;
+        left: -17px;
+        width: 262%;
+        height: 90%;
+        z-index: 3;
+        background-size: cover;
+    }
 
-.do_section .do_container .arrow-start::before {
-    background-image: url(../images/arrow-start.png);
-}
+    .do_section .do_container .arrow-start::before {
+        background-image: url(../images/arrow-start.png);
+    }
 
-.do_section .do_container .arrow-middle::before {
-    background-image: url(../images/arrow-middle.png);
-}
+    .do_section .do_container .arrow-middle::before {
+        background-image: url(../images/arrow-middle.png);
+    }
 
-.do_section .do_container .arrow-end::before {
-    background-image: url(../images/arrow-end.png);
-}
+    .do_section .do_container .arrow-end::before {
+        background-image: url(../images/arrow-end.png);
+    }
 
 .who_section .row {
     -webkit-box-align: center;
@@ -547,47 +547,51 @@ a:focus {
     border-radius: 20px;
 }
 
-    .contact_section .contact-form input, textarea {
-        border: none;
-        outline: none;
-        background-color: transparent;
-        width: 100%;
-        margin: 15px 0;
-        padding: 10px 20px;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-        border-radius: 30px;
-    }
+select {
+    border-radius: 30px;
+}
 
-        .contact_section .contact-form textarea.input_message {
-            height: 175px;
-        }
+.contact_section .contact-form input, textarea {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    margin: 15px 0;
+    padding: 10px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+}
 
-        .contact_section .contact-form input::-webkit-input-placeholder {
-            color: rgba(0, 0, 0, 0.4);
-        }
+.contact_section .contact-form textarea.input_message {
+    height: 175px;
+}
 
-        .contact_section .contact-form input:-ms-input-placeholder {
-            color: rgba(0, 0, 0, 0.4);
-        }
+.contact_section .contact-form input::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
 
-        .contact_section .contact-form input::-ms-input-placeholder {
-            color: rgba(0, 0, 0, 0.4);
-        }
+.contact_section .contact-form input:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
 
-        .contact_section .contact-form input::placeholder {
-            color: rgba(0, 0, 0, 0.4);
-        }
+.contact_section .contact-form input::-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
 
-    .contact_section .contact-form button {
-        border: none;
-        outline: none;
-        padding: 12px 50px;
-        text-transform: uppercase;
-        margin-top: 25px;
-        background-color: #fec913;
-        color: #fff;
-        border-radius: 30px;
-    }
+.contact_section .contact-form input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.contact_section .contact-form button {
+    border: none;
+    outline: none;
+    padding: 12px 50px;
+    text-transform: uppercase;
+    margin-top: 25px;
+    background-color: #fec913;
+    color: #fff;
+    border-radius: 30px;
+}
 
 .contact_section .map_img-box {
     width: 80%;
@@ -607,10 +611,10 @@ a:focus {
 
 
 
-.info_section h5 {
-    margin-bottom: 25px;
-    font-size: 24px;
-}
+    .info_section h5 {
+        margin-bottom: 25px;
+        font-size: 24px;
+    }
 
     .info_section .info_insta .insta_container > div {
         display: -webkit-box;

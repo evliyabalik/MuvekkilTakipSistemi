@@ -1,4 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using MuvekkilTakipSistemi.DatabaseContext;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Baðlantý dizisini ayarlayýn
+builder.Services.AddDbContext<MyContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
