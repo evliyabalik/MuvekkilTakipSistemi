@@ -170,6 +170,7 @@
 	-->
 	<!-- end owl carousel script -->
 	@await Html.PartialAsync("_Scripts");
+	@await RenderSectionAsync("Scripts", required: false)
 
 
 </body>

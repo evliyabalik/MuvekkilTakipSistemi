@@ -71,6 +71,15 @@ namespace MuvekkilTakipSistemi.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Register(string Tcno, string BaroSicilNo, string Adsoyad, string Telno,
+            string Pass, string PassR, string Email, string EmailR)
+        {
+
+
+            return View();
+        }
+
         public IActionResult ForgotPass()
         {
             return View();
