@@ -34,7 +34,7 @@ namespace MuvekkilTakipSistemi.Controllers
         [HttpPost]
         public IActionResult Concat(string Adsoyad, string Email, string Telno, string Department, string Message)
         {
-            if(!String.IsNullOrEmpty(Adsoyad))
+            if (!String.IsNullOrEmpty(Adsoyad))
             {
                 try
                 {
@@ -54,10 +54,10 @@ namespace MuvekkilTakipSistemi.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ViewData["contactvalue"] = "Kayýt eklenmedi hata: "+ex.Message;
+                    ViewData["contactvalue"] = "Kayýt eklenmedi hata: " + ex.Message;
                 }
             }
-            
+
 
             return View();
         }
@@ -73,9 +73,52 @@ namespace MuvekkilTakipSistemi.Controllers
 
         [HttpPost]
         public IActionResult Register(string Tcno, string BaroSicilNo, string Adsoyad, string Telno,
-            string Pass, string PassR, string Email, string EmailR)
+            string Pass, string Email)
         {
+            if (!String.IsNullOrEmpty(Tcno))
+            {
+                try
+                {
+                    var user = new User()
+                    {
+                        Tcno = Tcno,
+                        BaroSicilNo = BaroSicilNo,
+                        Adsoyad = Adsoyad,
+                        Pass = Pass,
+                        StatusId = 1,
+                        IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString()
+                    };
 
+                    var userContact = new UserContact()
+                    {
+                        Email = Email,
+                        Telno = Telno
+                    };
+
+
+                    if (_context.User.FirstOrDefault(u => u.Tcno == Tcno) != null && _context.User.FirstOrDefault(u => u.BaroSicilNo == BaroSicilNo) != null)
+                    {
+                        ViewData["registerValue"] = "Kullanýcý zaten kayýtlý";
+                        ViewData["Class"] = "bg-warning";
+                        return View();
+                    }
+
+                    _context.User.Add(user);
+                    _context.SaveChanges();
+
+                    _context.UserContact.Add(userContact);
+                    _context.SaveChanges();
+
+                    ViewData["registerValue"] = "Kayýt Baþarýyla Eklendi";
+                    ViewData["Class"] = "bg-success";
+
+                }
+                catch (Exception ex)
+                {
+                    ViewData["registerValue"] = "Kayýt Baþarýsýz Hata: " + ex;
+                    ViewData["Class"] = "bg-danger";
+                }
+            }
 
             return View();
         }

@@ -19,8 +19,8 @@
                 <div class="row">
                     <div class="col-md-9 mx-auto">
 
-                        <div class="bg-success">
-                            <p>@ViewData["deneme"]</p>
+                        <div class="@ViewData["Class"] rounded-pill" style="padding: 0px 15px 0 15px;">
+                            <p>@ViewData["registerValue"]</p>
                         </div>
 
                         <div class="contact-form">
@@ -30,14 +30,14 @@
                                 </div>
 
                                 <div>
-                                    <input type="text" placeholder="Baro Sicil Numaranız " name="BaroSicilNo" itemid="BaroSicilNo" required maxLength="10">
+                                    <input type="text" placeholder="Baro Sicil Numaranız " name="BaroSicilNo" id="BaroSicilNo" required maxLength="10">
                                 </div>
 
                                 <div>
-                                    <input type="text" placeholder="Adınız Soyadınız " name="Adsoyad" itemid="Adsoyad" required maxlength="35">
+                                    <input type="text" placeholder="Adınız Soyadınız " name="Adsoyad" id="Adsoyad" required maxlength="35">
                                 </div>
                                 <div>
-                                    <input type="text" placeholder="Telefon Numaranız örn(5xx xxx xx xx)" name="Telno" itemid="Telno" required maxlength="10">
+                                    <input type="text" placeholder="Telefon Numaranız örn(5xx xxx xx xx)" name="Telno" id="Telno" required maxlength="10">
                                 </div>
 
                                 <div>
@@ -45,7 +45,7 @@
                                 </div>
 
                                 <div>
-                                    <input type="password" placeholder="Şifre Tekrar" name="Pass" id="PassR" required maxlength="16">
+                                    <input type="password" placeholder="Şifre Tekrar" name="PassR" id="PassR" required maxlength="16">
                                 </div>
 
 
@@ -53,7 +53,7 @@
                                     <input type="email" placeholder="Email Adresiniz" name="Email" id="Email" required maxlength="50">
                                 </div>
                                 <div>
-                                    <input type="email" placeholder="Email Adresiniz tekrar" name="Email" id="EmailR" required maxlength="50">
+                                    <input type="email" placeholder="Email Adresiniz tekrar" name="EmailR" id="EmailR" required maxlength="50">
                                 </div>
 
                                 <div class="d-flex justify-content-center">
@@ -68,140 +68,7 @@
 
                         @section Scripts
                         {
-                            <script>
-                               /* var interval = setInterval(function () {
-                                    if (document.getElementById("Email").value != "" && document.getElementById("EmailR").value!=""
-                                        && document.getElementById("Email").value === document.getElementById("EmailR").value
-                                        && document.getElementById("Pass").value != "" && document.getElementById("PassR").value!=""
-                                        && document.getElementById("Pass").value === document.getElementById("PassR").value) {
-                                            /////////////////////////////////////////////////////////////////
-                                        document.getElementById("submit").removeAttribute("disabled");
-                                        document.getElementById("submit").style.backgroundColor = "#004580";
-                                        document.getElementById("submit").style.cursor = "pointer";
-                                    }
-                                    else {
-                                        document.getElementById("submit").setAttribute("disabled", "disabled");
-                                        document.getElementById("submit").style.backgroundColor = "red";
-                                        document.getElementById("submit").style.cursor = "initial";
-                                    }
-
-
-                                }, 1000);
-
-
-                                const form = document.getElementById("myForm");
-
-                                $(document).ready(function () {
-                                    $("#myForm").validate();
-
-                                    $("#myForm").submit(function (event) {
-                                        if (!$("#myForm").valid()) {
-                                            event.style.backgroundColor = "red";
-                                            // Formdaki hataları kullanıcıya bildirin.
-                                        }
-                                    });
-                                });*/
-
-                                //Tc Kontrolü
-                                $("document").ready(function () {
-
-                                    var checkTcNum = function (value) {
-                                        value = value.toString();
-                                        var isEleven = /^[0-9]{11}$/.test(value);
-                                        var totalX = 0;
-                                        for (var i = 0; i < 10; i++) {
-                                            totalX += Number(value.substr(i, 1));
-                                        }
-                                        var isRuleX = totalX % 10 == value.substr(10, 1);
-                                        var totalY1 = 0;
-                                        var totalY2 = 0;
-                                        for (var i = 0; i < 10; i += 2) {
-                                            totalY1 += Number(value.substr(i, 1));
-                                        }
-                                        for (var i = 1; i < 10; i += 2) {
-                                            totalY2 += Number(value.substr(i, 1));
-                                        }
-                                        var isRuleY = ((totalY1 * 7) - totalY2) % 10 == value.substr(9, 0);
-                                        return isEleven && isRuleX && isRuleY;
-                                    };
-
-
-                                    $('#Tcno').on('keyup focus blur load', function (event) {
-                                        event.preventDefault();
-                                        var isValid = checkTcNum($(this).val());
-                                        console.log('isValid ', isValid);
-                                        if (isValid) {
-                                            document.getElementById("Tcno").style.borderColor = "green";
-                                        }
-                                        else {
-                                            document.getElementById("Tcno").style.borderColor = "red";
-                                        }
-                                    });
-
-
-                                    //Şifre ve Email Kontrolü
-
-                                    var checkInputValues = function(input1, input2) {
-                                        return input1.value === input2.value && input1.value !== "" && input2.value !== "";
-                                    }
-
-                                    //Değişkenler
-
-                                    
-
-                                    // Define input field selectors (replace with your actual IDs)
-                                    const emailSelector = "#Email";
-                                    const emailRSelector = "#EmailR";
-                                    const PassSelector = "#Pass"; // Assuming this is the field to enable/disable
-                                    const PassRSelector = "#PassR"; // Assuming this is the field to enable/disable
-                                    const SubmitSelector = "#submit"; // Assuming this is the field to enable/disable
-
-                                    // Attach events to the relevant input fields (replace with your desired events)
-                                    $(emailSelector).on("keyup focus blur load input", function () {
-                                        const isValid = checkInputValues(this, $(emailRSelector)[0]); // Get DOM element
-                                        if (isValid) { document.getElementById("Email").style.borderColor = "green" }
-                                        else { document.getElementById("Email").style.borderColor = "red" }
-                                        updateTcnoState(isValid); // Call function to update Tcno state
-                                    });
-
-                                    $(emailRSelector).on("keyup focus blur load input", function () {
-                                        const isValid = checkInputValues(this, $(emailSelector)[0]); // Get DOM element
-                                        if (isValid) { document.getElementById("EmailR").style.borderColor = "green" }
-                                        else { document.getElementById("EmailR").style.borderColor = "red" }
-                                        updateTcnoState(isValid); // Call function to update Tcno state
-                                    });
-
-                                    // Attach events to the relevant input fields (replace with your desired events)
-                                    $(PassSelector).on("keyup focus blur load input", function () {
-                                        const isValid = checkInputValues(this, $(PassRSelector)[0]); // Get DOM element
-                                        if (isValid) { document.getElementById("Pass").style.borderColor = "green" }
-                                        else { document.getElementById("Pass").style.borderColor = "red" }
-                                        updateTcnoState(isValid); // Call function to update Tcno state
-                                    });
-
-                                    $(PassRSelector).on("keyup focus blur load input", function () {
-                                        const isValid = checkInputValues(this, $(PassSelector)[0]); // Get DOM element
-                                        if (isValid) { document.getElementById("PassR").style.borderColor = "green" }
-                                        else { document.getElementById("PassR").style.borderColor = "red" }
-                                        updateTcnoState(isValid); // Call function to update Tcno state
-                                    });
-
-                                    // Function to enable/disable Tcno field based on isValid flag
-                                    function updateTcnoState(isValid) {
-                                        if (isValid) {
-                                            $(SubmitSelector).removeAttr("disabled");
-                                        } else {
-                                            $(SubmitSelector).attr("disabled", "disabled");
-                                        }
-                                    }
-
-                                    
-
-                                }); //document.ready
-
-
-                               
-                            </script>
+                            <script type="text/javascript" src="~/js/Control.js"></script>
                         }
 
 

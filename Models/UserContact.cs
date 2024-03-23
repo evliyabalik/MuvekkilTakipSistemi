@@ -7,7 +7,6 @@ namespace MuvekkilTakipSistemi.Models
         [Key]
         public int UserId { get; set; }
         public string Telno { get; set; }
-        public string Pass { get; set; }
         public string Email { get; set; }
     }
 }
