@@ -66,6 +66,22 @@ namespace MuvekkilTakipSistemi.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Login(string BaroSicilNo, string Pass)
+        {
+            var bSicilNo = _context.User.FirstOrDefault(u => u.BaroSicilNo == BaroSicilNo);
+            var pass = _context.User.FirstOrDefault(u => u.Pass == Pass);
+
+            if (bSicilNo != null && pass != null)
+                ViewData["login"] = "Tebrikler Giriþ Baþarýlý";
+            else
+                ViewData["login"] = "Baro sicil no veya þifre hatalý";
+
+            return View();
+        }
+
+
         public IActionResult Register()
         {
             return View();
