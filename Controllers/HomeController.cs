@@ -3,6 +3,9 @@ using MuvekkilTakipSistemi.Models;
 using System.Diagnostics;
 using MuvekkilTakipSistemi.DatabaseContext;
 
+using System.Security.Cryptography;
+using MuvekkilTakipSistemi.Helper;
+
 namespace MuvekkilTakipSistemi.Controllers
 {
     public class HomeController : Controller
@@ -51,10 +54,12 @@ namespace MuvekkilTakipSistemi.Controllers
                     _context.ConcatTable.Add(c);
                     _context.SaveChanges();
                     ViewData["contactvalue"] = "Kayýt eklendi.";
+                    ViewData["Class"] = "bg-success";
                 }
                 catch (Exception ex)
                 {
                     ViewData["contactvalue"] = "Kayýt eklenmedi hata: " + ex.Message;
+                    ViewData["Class"] = "bg-danger";
                 }
             }
 
@@ -71,12 +76,18 @@ namespace MuvekkilTakipSistemi.Controllers
         public IActionResult Login(string BaroSicilNo, string Pass)
         {
             var bSicilNo = _context.User.FirstOrDefault(u => u.BaroSicilNo == BaroSicilNo);
-            var pass = _context.User.FirstOrDefault(u => u.Pass == Pass);
+            var pass = _context.User.FirstOrDefault(u => u.Pass == HashHelper.GetMd5Hash(Pass));
 
             if (bSicilNo != null && pass != null)
+            {
                 ViewData["login"] = "Tebrikler Giriþ Baþarýlý";
+                ViewData["Class"] = "bg-success";
+            }
             else
+            {
                 ViewData["login"] = "Baro sicil no veya þifre hatalý";
+                ViewData["Class"] = "bg-warning";
+            }
 
             return View();
         }
@@ -100,7 +111,7 @@ namespace MuvekkilTakipSistemi.Controllers
                         Tcno = Tcno,
                         BaroSicilNo = BaroSicilNo,
                         Adsoyad = Adsoyad,
-                        Pass = Pass,
+                        Pass = HashHelper.GetMd5Hash(Pass),
                         StatusId = 1,
                         IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString()
                     };
@@ -141,6 +152,46 @@ namespace MuvekkilTakipSistemi.Controllers
 
         public IActionResult ForgotPass()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ForgotPass(string BaroSicilNo, string Email)
+        {
+            var barosno = _context.User.FirstOrDefault(u => u.BaroSicilNo == BaroSicilNo);
+            var email = _context.UserContact.FirstOrDefault(u => u.Email == Email);
+
+            if (barosno != null && email != null)
+            {
+                var adSoyad = _context.User.Select(u => u.Adsoyad).FirstOrDefault();
+                var emailTo = _context.UserContact.Select(u => u.Email).FirstOrDefault();
+                var pass = _context.User.Select(u => u.Pass).FirstOrDefault();
+
+                var message = $"Sayýn {adSoyad}\nÞifreniz: {pass}";
+
+                if (MailModel.SendMessage(emailTo, "Þifre Ýsteme", message))
+                {
+                    ViewData["forgetValue"] = "Mailinize þifreniz iletilmiþtir.";
+                    ViewData["Class"] = "bg-success";
+                }
+                else
+                {
+                    ViewData["forgetValue"] = "Bir hata ile karþýlandý: " + MailModel.GetErrorMessage();
+                    ViewData["Class"] = "bg-danger";
+                }
+
+
+
+            }
+            else
+            {
+                ViewData["forgetValue"] = "Bilgilerinizi kontrol ediniz.";
+                ViewData["Class"] = "bg-warning";
+            }
+
+
+
+
             return View();
         }
 

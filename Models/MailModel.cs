@@ -10,7 +10,7 @@ namespace MuvekkilTakipSistemi.Models
 
         private static string? ErrorMessage { get; set; }
 
-        public static bool SendMessage(string Adsoyad, string Telno, string Email, string Konu, string Message)
+        public static bool SendMessage(string Email, string Konu, string Message)
         {
             try
             {
@@ -22,10 +22,10 @@ namespace MuvekkilTakipSistemi.Models
                 smtpClient.EnableSsl = true;
 
                 var mailMessage = new MailMessage(
-                    from:Email,
-                    to:myMail,
+                    from: myMail,
+                    to:Email,
                     subject:Konu,
-                    $"Gönderen: {Adsoyad} Telefon: {Telno}\n\n{Message}"
+                    Message
                     );
                 smtpClient.Send(mailMessage);
                 return true;
