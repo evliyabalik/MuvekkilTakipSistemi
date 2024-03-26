@@ -5,6 +5,7 @@ using MuvekkilTakipSistemi.DatabaseContext;
 
 using System.Security.Cryptography;
 using MuvekkilTakipSistemi.Helper;
+using Microsoft.AspNetCore.Identity;
 
 namespace MuvekkilTakipSistemi.Controllers
 {
@@ -12,6 +13,7 @@ namespace MuvekkilTakipSistemi.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly MyContext _context;
+
 
         public HomeController(ILogger<HomeController> logger, MyContext context)
         {
@@ -161,15 +163,24 @@ namespace MuvekkilTakipSistemi.Controllers
             var barosno = _context.User.FirstOrDefault(u => u.BaroSicilNo == BaroSicilNo);
             var email = _context.UserContact.FirstOrDefault(u => u.Email == Email);
 
+          
+
             if (barosno != null && email != null)
             {
                 var adSoyad = _context.User.Select(u => u.Adsoyad).FirstOrDefault();
                 var emailTo = _context.UserContact.Select(u => u.Email).FirstOrDefault();
-                var pass = _context.User.Select(u => u.Pass).FirstOrDefault();
 
-                var message = $"Sayýn {adSoyad}\nÞifreniz: {pass}";
 
-                if (MailModel.SendMessage(emailTo, "Þifre Ýsteme", message))
+                //Token oluþturma
+                var token = HashHelper.GenerateToken(emailTo);
+                var ResetLink = Url.Action("Index", "ResetPass", new { Email, token }, Request.Scheme);
+
+                var message = $"Sayýn {adSoyad}\n\r\n\r" +
+                    $"Þifrenizin sýfýrlanmasýný talep ettiniz. Yeni bir þifre seçmek için \"Þifremi sýfýrla\"ya týklayýn þifre.\r\nÞifrenizi deðiþtirmek ayný zamanda API belirtecinizi de sýfýrlayacaktýr"+
+                  
+                    $"\r\n\r\n{ResetLink}";
+
+                if (MailModel.SendMessage(emailTo, "Þifre Sýfýrlama", message))
                 {
                     ViewData["forgetValue"] = "Mailinize þifreniz iletilmiþtir.";
                     ViewData["Class"] = "bg-success";

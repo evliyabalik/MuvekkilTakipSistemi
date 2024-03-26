@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace MuvekkilTakipSistemi.Models
 {
-    public class UserContact
+    public class UserContact 
     {
         [Key]
         public int UserId { get; set; }
