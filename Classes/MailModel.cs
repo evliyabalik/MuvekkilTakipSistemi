@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
-namespace MuvekkilTakipSistemi.Models
+namespace MuvekkilTakipSistemi.Classes
 {
 
 
@@ -23,8 +23,8 @@ namespace MuvekkilTakipSistemi.Models
 
                 var mailMessage = new MailMessage(
                     from: myMail,
-                    to:Email,
-                    subject:Konu,
+                    to: Email,
+                    subject: Konu,
                     Message
                     );
                 smtpClient.Send(mailMessage);
