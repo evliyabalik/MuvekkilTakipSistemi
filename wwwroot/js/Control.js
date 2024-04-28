@@ -60,42 +60,42 @@ $("document").ready(function () {
 
 
 
-    // Define input field selectors (replace with your actual IDs)
+    // Giriş alanı seçicileri
     const emailSelector = "#Email";
     const emailRSelector = "#EmailR";
-    const PassSelector = "#Pass"; // Assuming this is the field to enable/disable
-    const PassRSelector = "#PassR"; // Assuming this is the field to enable/disable
-    const SubmitSelector = "#submit"; // Assuming this is the field to enable/disable
+    const PassSelector = "#Pass"; 
+    const PassRSelector = "#PassR"; 
+    const SubmitSelector = "#submit"; 
 
-    // Attach events to the relevant input fields (replace with your desired events)
+    // Gerçekleştirilen olaylar
     $(emailSelector).on("keyup focus blur load input mouseover", function () {
-        const isValid = checkInputValues(this, $(emailRSelector)[0]); // Get DOM element
+        const isValid = checkInputValues(this, $(emailRSelector)[0]); // Email
         isEmail = isValid;
-        updateSubmitState(isValid); // Call function to update Tcno state
+        updateSubmitState(isValid); 
     });
 
     $(emailRSelector).on("keyup focus blur load input mouseover", function () {
-        const isValid = checkInputValues(this, $(emailSelector)[0]); // Get DOM element
+        const isValid = checkInputValues(this, $(emailSelector)[0]); // email Tekrar
         isEmailR = isValid;
         UpdateEventBgColor(isValid, isEmail, emailSelector, emailRSelector);
-        updateSubmitState(isValid); // Call function to update Tcno state
+        updateSubmitState(isValid); 
     });
 
-    // Attach events to the relevant input fields (replace with your desired events)
+
     $(PassSelector).on("keyup focus blur load input", function () {
-        const isValid = checkInputValues(this, $(PassRSelector)[0]);
+        const isValid = checkInputValues(this, $(PassRSelector)[0]); //Şifre 
         isPass = isValid;
-        updateSubmitState(isValid); // Call function to update Tcno state
+        updateSubmitState(isValid); 
     });
 
     $(PassRSelector).on("keyup focus blur load input", function () {
-        const isValid = checkInputValues(this, $(PassSelector)[0]); // Get DOM element
+        const isValid = checkInputValues(this, $(PassSelector)[0]); //Şifre Tekara
         isPassR = isValid;
         UpdateEventBgColor(isValid, isPass, PassSelector, PassRSelector);
-        updateSubmitState(isValid); // Call function to update Tcno state
+        updateSubmitState(isValid);
     });
 
-    // Function to enable/disable Tcno field based on isValid flag
+    //Submit disable/enable
     function updateSubmitState(isValid) {
         if (isValid && isEmail && isEmailR && isPass &&  isPassR && isTc) {
             $(SubmitSelector).removeAttr("disabled");
@@ -105,6 +105,7 @@ $("document").ready(function () {
         }
     }
 
+    //Event durum renkleri.
     function UpdateEventBgColor(isValid, isValid2, eventName, eventName2) {
         if (isValid && isValid2) {
             $(eventName).css("border-color", "green");

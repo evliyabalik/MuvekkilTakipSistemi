@@ -10,7 +10,7 @@ namespace MuvekkilTakipSistemi.DatabaseContext
             
         }
 
-        public DbSet<ConcatTable> ConcatTable { get; set; }
+        public DbSet<ContactTable> ContactTable { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserContact> UserContact { get; set; }
 

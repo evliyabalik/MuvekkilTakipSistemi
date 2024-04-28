@@ -2,7 +2,7 @@
 
 namespace MuvekkilTakipSistemi.Models
 {
-    public class ConcatTable
+    public class ContactTable
     {
         [Key]
         public int id { get; set; }

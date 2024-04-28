@@ -8,7 +8,7 @@ using System.Text.Unicode;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Baðlantý dizisini ayarlayýn
+// Baðlantý dizisi
 builder.Services.AddDbContext<MyContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -19,6 +19,13 @@ builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeR
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
 
 
 var app = builder.Build();
@@ -38,6 +45,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

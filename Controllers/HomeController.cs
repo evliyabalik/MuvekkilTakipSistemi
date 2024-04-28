@@ -8,6 +8,7 @@ using MuvekkilTakipSistemi.Helper;
 using Microsoft.AspNetCore.Identity;
 using System.Web;
 using MuvekkilTakipSistemi.Classes;
+using Microsoft.AspNetCore.Http;
 
 
 namespace MuvekkilTakipSistemi.Controllers
@@ -46,7 +47,7 @@ namespace MuvekkilTakipSistemi.Controllers
 			{
 				try
 				{
-					var c = new ConcatTable()
+					var c = new ContactTable()
 					{
 						Name_surname = HtmlEncodes.EncodeTurkishCharacters(Adsoyad.Trim()),
 						Email = HtmlEncodes.EncodeTurkishCharacters(Email.Trim()),
@@ -56,7 +57,7 @@ namespace MuvekkilTakipSistemi.Controllers
 						Ip_address = Request.HttpContext.Connection.RemoteIpAddress.ToString()
 					};
 
-					_context.ConcatTable.Add(c);
+					_context.ContactTable.Add(c);
 					_context.SaveChanges();
 					ViewData["contactvalue"] = "Kayýt eklendi.";
 					ViewData["Class"] = "bg-success";
@@ -83,16 +84,30 @@ namespace MuvekkilTakipSistemi.Controllers
 			var bSicilNo = _context.User.FirstOrDefault(u => u.BaroSicilNo == HtmlEncodes.EncodeTurkishCharacters(BaroSicilNo.Trim()));
 			var pass = _context.User.FirstOrDefault(u => u.Pass == HashHelper.GetMd5Hash(Pass.Trim()));
 
+			var bsicilNo = _context.User.Where(u => u.BaroSicilNo == HtmlEncodes.EncodeTurkishCharacters(BaroSicilNo.Trim())).FirstOrDefault();
+
+			HttpContext.Session.SetString("BSicilNo", bsicilNo.BaroSicilNo);
+			HttpContext.Session.SetString("Adsoyad", bsicilNo.Adsoyad);
+			HttpContext.Session.SetInt32("UserId", bsicilNo.UserId);
+
+			HttpContext.Session.GetString("BSicilNo");
+			HttpContext.Session.GetString("Adsoyad");
+			HttpContext.Session.GetInt32("UserId");
+
+
 			if (bSicilNo != null && pass != null)
 			{
-				ViewData["login"] = "Tebrikler Giriþ Baþarýlý";
-				ViewData["Class"] = "bg-success";
+				/*ViewData["login"] = "Tebrikler Giriþ Baþarýlý";
+				ViewData["Class"] = "bg-success";*/
+
+				return RedirectToAction("Index", "User");
 			}
 			else
 			{
 				ViewData["login"] = "Baro sicil no veya þifre hatalý";
 				ViewData["Class"] = "bg-warning";
 			}
+
 
 			return View();
 		}
@@ -182,18 +197,19 @@ namespace MuvekkilTakipSistemi.Controllers
 				var ResetLink = Url.Action("Index", "ResetPass", new { Email, token }, Request.Scheme);
 
 				var message = $"Sayýn {adSoyad}\n\r\n\r" +
-					$"Þifrenizin sýfýrlanmasýný talep ettiniz. Yeni bir þifre seçmek için \"Þifremi sýfýrla\"ya týklayýn þifre.\r\nÞifrenizi deðiþtirmek ayný zamanda API belirtecinizi de sýfýrlayacaktýr" +
+					$"Þifrenizin sýfýrlanmasýný talep ettiniz. Yeni bir þifre seçmek için \"Þifremi sýfýrla\"ya týklayýn þifre.\r\nÞifrenizi deðiþtirmek ayný zamanda API belirtecinizi de sýfýrlayacaktýr\n\r\n\r" +
+					"Link 1 saat sonra aktif olmayacaktýr!"+
 
 					$"\r\n\r\n{ResetLink}";
 
 				if (MailModel.SendMessage(emailTo, "Þifre Sýfýrlama", message))
 				{
-					ViewData["forgetValue"] = "Mailinize þifreniz iletilmiþtir.";
+					ViewData["forgetValue"] = "Mailinize sýfýrlama baðlantýsý iletilmiþtir.";
 					ViewData["Class"] = "bg-success";
 				}
 				else
 				{
-					ViewData["forgetValue"] = "Bir hata ile karþýlandý: " + MailModel.GetErrorMessage();
+					ViewData["forgetValue"] = "Bir hata ile karþýlaþýldý: " + MailModel.GetErrorMessage();
 					ViewData["Class"] = "bg-danger";
 				}
 
