@@ -1,0 +1,128 @@
+﻿@{
+	Layout = "_Layout3";
+	ViewData["Title"] = "Dosyalar";
+
+
+}
+<div class="col-md-9">
+
+    <div class="row">
+        <div class="col-md-12" style="padding:10px">
+            <div class="col-md-4" style="">
+                <form>
+                    <input type="text" name="FilesNo" id="FilesNo" placeholder="Dosya No" />
+
+                    <select id="FilesStatus" name="FilesStatus">
+                         <option value="all" selected>Tümü</option>
+                      <option value="open">Açık</option>
+                      <option value="closed">Kapalı</option>
+                    </select><br />
+
+                    <input type="text" name="UserName" id="UserName" placeholder="Ad/Ünvan" /><br />
+                    <input type="text" name="GroupName" id="GroupName" placeholder="Grup Adı" /><br />
+                    <input type="submit" name="Sorgula" value="Sorgula" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+      <h1 class="display-4">Dosyalar</h1>
+
+         <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary">Yeni</button>
+                <button class="btn btn-secondary">Kopyala</button>
+                <button class="btn btn-secondary">Düzenle</button>
+                <button class="btn btn-secondary">İncele</button>
+                <button class="btn btn-secondary">Sil</button>
+        
+                <button class="btn btn-secondary">Kayıt Ara</button>
+                <button class="btn btn-secondary">Bakiye Detay</button>
+           
+     
+                <button class="btn btn-secondary">Excel'den Aktar</button>
+                <button class="btn btn-secondary">Excel'e Aktar</button>
+            </div>
+        </div>
+
+        <table class="table table-striped" style="overflow-x:auto; width:100%;">
+
+            <thead>
+
+                <tr>
+
+                    <th>Dosya No</th>
+
+                    <th>Avukat</th>
+
+                    <th>Müvekkil</th>
+
+                    <th>Müvekkil Grup</th>
+
+                    <th>Mahkeme</th>
+
+                    <th>Konusu</th>
+
+                    <th>Ad/Telefon 1</th>
+                    <th>Ad/Telefon 2</th>
+                    <th>Özel Alan 1</th>
+                    <th>Özel Alan 2</th>
+
+                    <th>Referans</th>
+                    <th>Ücretli Sözleşmeli</th>
+                    <th>Sözleşme No</th>
+                    <th>Serbest dosya makbuzu kesildi</th>
+                    <th>Dosya Kapandı</th>
+ 
+
+                    <th>Borcu</th>
+
+                    <th>Alacağı</th>
+
+                    <th>Bakiye</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>23135</td>
+
+                    <td>Evliya Balık</td>
+
+                    <td>Evliya BALIK</td>
+
+                    <td>Alacaklı</td>
+
+                    <td>Mahkeme 1</td>
+
+                    <td>Alacaklı icra</td>
+
+                    <td>sdgf</td>
+                    <td>sdgf</td>
+                    <td>sdgf</td>
+                    <td>sdgf</td>
+
+                    <td>Kadir Can</td>
+
+                    <td>Evet</td>
+                    <td>21215</td>
+                    <td>Evet</td>
+                    <td>Hayır</td>
+
+                    <td>0.00</td>
+
+                    <td>0.00</td>
+
+                    <td>0.00</td>
+
+                </tr
+            </tbody>
+        </table>
+       
+ 
+  
+</div>

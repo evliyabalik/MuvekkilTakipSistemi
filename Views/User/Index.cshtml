@@ -1,9 +1,101 @@
 ﻿@{
-	Layout = "_Layout2";
-	ViewData["Title"] = "User-Index";
+	Layout = "_Layout3";
+	ViewData["Title"] = "Müvekkiller";
 
 
 }
 
-<h1> Hoş Geldiniz sayın @ViewData["isim"] </h1>
+<div class="col-md-9">
 
+    <div class="row">
+        <div class="col-md-12" style="padding:10px">
+            <div class="col-md-4" style="">
+                <form>
+                    <input type="text" name="UserName" id="UserName" placeholder="Ad/Ünvan" /><br />
+                    <input type="text" name="GroupName" id="GroupName" placeholder="Grup Adı" /><br />
+                    <input type="submit" name="Sorgula" value="Sorgula" >
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <h1 class="display-4">Müvekkiller</h1>
+
+         <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary">Yeni</button>
+                <button class="btn btn-secondary">Kopyala</button>
+                <button class="btn btn-secondary">Düzenle</button>
+                <button class="btn btn-secondary">İncele</button>
+                <button class="btn btn-secondary">Sil</button>
+        
+                <button class="btn btn-secondary">Kayıt Ara</button>
+                <button class="btn btn-secondary">Bakiye Detay</button>
+           
+     
+                <button class="btn btn-secondary">Excel'den Aktar</button>
+                <button class="btn btn-secondary">Excel'e Aktar</button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>Adı/Ünvanı</th>
+
+                    <th>Grup Adı</th>
+
+                    <th>Telefon 1</th>
+
+                    <th>Gsm No</th>
+
+                    <th>TC No</th>
+
+                    <th>Vergi Dairesi</th>
+
+                    <th>Vergi No</th>
+
+                    <th>Borcu</th>
+
+                    <th>Alacağı</th>
+
+                    <th>Bakiye</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>Evliya BALIK</td>
+
+                    <td>ALACAKLI</td>
+
+                    <td>026221212121</td>
+
+                    <td>0539999999</td>
+
+                    <td>323232323232</td>
+
+                    <td>Kocaeli Gebze</td>
+
+                    <td>2235310115555</td>
+
+                    <td>0,00</td>
+
+                    <td>0,00</td>
+
+                    <td>0,00</td>
+
+                </tr
+            </tbody>
+        </table>
+       
+ 
+  
+</div>

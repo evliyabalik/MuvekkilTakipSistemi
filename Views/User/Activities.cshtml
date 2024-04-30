@@ -1,0 +1,134 @@
+﻿@{
+	Layout = "_Layout3";
+	ViewData["Title"] = "İşlemler";
+
+
+}
+
+<div class="col-md-9">
+
+    <div class="row">
+        <div class="col-md-12" style="padding:10px">
+            <div class="col-md-4" style="">
+                <form>
+                    <input type="text" name="FilesNo" id="FilesNo" placeholder="Dosya No" />
+
+                    <select id="FilesStatus" name="FilesStatus">
+                          <option value="all" selected>Tümü</option>
+                          <option value="open">Açık</option>
+                          <option value="closed">Kapalı</option>
+                    </select><br />
+
+                    <input type="text" name="UserName" id="UserName" placeholder="Ad/Ünvan" /><br />
+
+                    <select id="OperationType" name="OperationType">
+                          <option value="avukatucret" selected>Avukatlık Ücreti</option>
+                          <option value="masraf">Masraflar</option>
+                          <option value="teminat">Yatıralan Teminat</option>
+                          <option value="odeme">Müvekkile Ödeme</option>
+                          <option value="tahsilat">Tahsilat</option>
+                          <option value="alinan-ucret">Alınan Ücret</option>
+                          <option value="alinan-masraf">Alınan Masraf</option>
+                    </select><br />
+
+                    <input type="date" name="Tarih" id="Tarih" />
+
+                    <input type="submit" name="Sorgula" value="Sorgula" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <h1 class="display-4">İşlemler</h1>
+
+         <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary">Yeni</button>
+                <button class="btn btn-secondary">Kopyala</button>
+                <button class="btn btn-secondary">Düzenle</button>
+                <button class="btn btn-secondary">İncele</button>
+                <button class="btn btn-secondary">Sil</button>
+        
+                <button class="btn btn-secondary">Kayıt Ara</button>
+                <button class="btn btn-secondary">Gruplandır</button>
+           
+     
+                <button class="btn btn-secondary">Excel'den Aktar</button>
+                <button class="btn btn-secondary">Excel'e Aktar</button>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>Tarih</th>
+
+                    <th>Evrak No</th>
+
+                    <th>Müvekkil</th>
+
+                    <th>Dosya No</th>
+
+                    <th>Avukat</th>
+
+                    <th>Mahkeme</th>
+
+                    <th>Konusu</th>
+
+                    <th>Ödeme Şekli</th>
+
+                    <th>Açıklama</th>
+
+                    <th>Dosya Kapandı</th>
+                    <th>Borcu</th>
+                    <th>Alacağı</th>
+
+                    <th>İşlem Türü</th>
+                    <th>Yapılan İşlem</th>
+                    <th>İşlem Tutarı</th>
+
+
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>30.04.2024</td>
+
+                    <td>321321</td>
+
+                    <td>Evliya Balık</td>
+
+                    <td>23135</td>
+
+                    <td>Evliya Balık</td>
+
+                    <td>Mahkeme 1</td>
+
+                    <td>Alacaklı icra</td>
+
+                    <td>None</td>
+
+                    <td>sdfsdfsd</td>
+
+                    <td>Hayır</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                    <td>Avukatlık Ücreti</td>
+                    <td>Peşin Harç</td>
+                    <td>0.00</td>
+
+                </tr
+            </tbody>
+        </table>
+       
+ 
+  
+</div>
