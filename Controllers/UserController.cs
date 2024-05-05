@@ -1,79 +1,45 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MuvekkilTakipSistemi.DatabaseContext;
 
 namespace MuvekkilTakipSistemi.Controllers
 {
 	public class UserController : Controller
 	{
-		[HttpGet]
-		public IActionResult Index()
+		private readonly ILogger<HomeController> _logger;
+		private readonly MyContext _context;
+		private  string _adsoyad;
+
+
+		public UserController(ILogger<HomeController> logger, MyContext context)
 		{
-			var adsoyad = HttpContext.Session.GetString("Adsoyad");
-			var bSicilNo = HttpContext.Session.GetString("BSicilNo");
-			var userId = HttpContext.Session.GetString("UserId");
-
-			TempData["isim"] = adsoyad;
-
-			if (adsoyad != null && bSicilNo != null && userId != null)
-				return View();
-			else
-			{
-				return Content("Bu sayfaya erişim izniniz bulunmamaktadır. " +
-					"Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.");
-			}
+			_logger = logger;
+			_context = context;
 		}
 
-        [HttpGet]
+		public IActionResult Index()
+		{
+			_adsoyad = HttpContext.Session.GetString("Adsoyad");
+			TempData["isim"] = _adsoyad;
+			return View();
+		}
+
         public IActionResult Files()
         {
-            var adsoyad = HttpContext.Session.GetString("Adsoyad");
-            var bSicilNo = HttpContext.Session.GetString("BSicilNo");
-            var userId = HttpContext.Session.GetString("UserId");
+			TempData["isim"] = _adsoyad;
+			return View();
+		}
 
-            TempData["isim"] = adsoyad;
-
-            if (adsoyad != null && bSicilNo != null && userId != null)
-                return View();
-            else
-            {
-                return Content("Bu sayfaya erişim izniniz bulunmamaktadır. " +
-                    "Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.");
-            }
-        }
-
-        [HttpGet]
         public IActionResult Activities()
         {
-            var adsoyad = HttpContext.Session.GetString("Adsoyad");
-            var bSicilNo = HttpContext.Session.GetString("BSicilNo");
-            var userId = HttpContext.Session.GetString("UserId");
+			TempData["isim"] = _adsoyad;
+			return View();
+		}
 
-            TempData["isim"] = adsoyad;
 
-            if (adsoyad != null && bSicilNo != null && userId != null)
-                return View();
-            else
-            {
-                return Content("Bu sayfaya erişim izniniz bulunmamaktadır. " +
-                    "Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.");
-            }
-        }
-
-		[HttpGet]
 		public IActionResult Settings()
 		{
-			var adsoyad = HttpContext.Session.GetString("Adsoyad");
-			var bSicilNo = HttpContext.Session.GetString("BSicilNo");
-			var userId = HttpContext.Session.GetString("UserId");
-
-			TempData["isim"] = adsoyad;
-
-			if (adsoyad != null && bSicilNo != null && userId != null)
-				return View();
-			else
-			{
-				return Content("Bu sayfaya erişim izniniz bulunmamaktadır. " +
-					"Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.");
-			}
+			TempData["isim"] = _adsoyad;
+			return View();
 		}
 
 		public IActionResult Exit()
@@ -86,3 +52,17 @@ namespace MuvekkilTakipSistemi.Controllers
 
 	}
 }
+
+/*var adsoyad = HttpContext.Session.GetString("Adsoyad");
+			var bSicilNo = HttpContext.Session.GetString("BSicilNo");
+			var userId = HttpContext.Session.GetString("UserId");
+
+			TempData["isim"] = adsoyad;
+
+			if (adsoyad != null && bSicilNo != null && userId != null)
+				return View();
+			else
+			{
+				return Content("Bu sayfaya erişim izniniz bulunmamaktadır. " +
+					"Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.");
+			}*/

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using MuvekkilTakipSistemi.DatabaseContext;
 using MuvekkilTakipSistemi.Models;
@@ -20,6 +21,12 @@ builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeR
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
+
+// HttpContextAccessor'ý ekleyin
+builder.Services.AddHttpContextAccessor();
+
+// Diðer hizmetleri ekleyin
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession(options =>
 {
@@ -48,8 +55,42 @@ app.UseAuthorization();
 
 app.UseSession();
 
+
+
+app.Use(async (context, next) =>
+{
+	var endpoint = context.GetEndpoint();
+
+	
+	// HomeController veya diðer controller'lar için
+	if (endpoint != null)
+	{
+		var controllerActionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
+
+	   if (controllerActionDescriptor != null && controllerActionDescriptor.ControllerName != "User")
+		{
+			await next();
+			return;
+		}
+
+		else
+		{
+			if (!context.Session.Keys.Contains("UserId"))
+			{
+				context.Response.Redirect("/Home/Login"); // Eðer session yoksa, login sayfasýna yönlendir.
+				return;
+			}
+		}
+	}
+
+	// UserController için
+	await next();
+});
+
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "Default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
