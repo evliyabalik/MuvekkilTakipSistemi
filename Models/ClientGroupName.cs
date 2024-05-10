@@ -3,14 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MuvekkilTakipSistemi.Models
 {
-	public class Navigation
+	public class ClientGroupName
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
 		public int Id { get; set; }
 
-		public string MenuText { get; set; }
-		public string ActionName { get; set; }
-		public string ControlName { get; set; }
+		[Required]
+		public string Group_Name { get; set; }
 	}
 }

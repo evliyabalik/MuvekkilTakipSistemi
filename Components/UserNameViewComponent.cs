@@ -1,7 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+
 
 namespace MuvekkilTakipSistemi.Components
 {
@@ -20,6 +22,8 @@ namespace MuvekkilTakipSistemi.Components
 
 			return userName;
 		}
+
+		
 	}
 }
 

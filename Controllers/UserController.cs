@@ -48,21 +48,24 @@ namespace MuvekkilTakipSistemi.Controllers
 			return RedirectToAction("Login", "Home");
 		}
 
+		[NonAction]
+		private JsonResult GetClient()
+		{
+			return Json("");
+		}
 
+		[NonAction]
+		private JsonResult GetFilesOnTable()
+		{
+			return Json("");
+		}
+
+		[NonAction]
+		private JsonResult GetActivities()
+		{
+			return Json("");
+		}
 
 	}
 }
 
-/*var adsoyad = HttpContext.Session.GetString("Adsoyad");
-			var bSicilNo = HttpContext.Session.GetString("BSicilNo");
-			var userId = HttpContext.Session.GetString("UserId");
-
-			TempData["isim"] = adsoyad;
-
-			if (adsoyad != null && bSicilNo != null && userId != null)
-				return View();
-			else
-			{
-				return Content("Bu sayfaya erişim izniniz bulunmamaktadır. " +
-					"Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.");
-			}*/

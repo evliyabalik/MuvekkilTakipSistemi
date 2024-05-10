@@ -13,13 +13,18 @@ namespace MuvekkilTakipSistemi.DatabaseContext
         public DbSet<ContactTable> ContactTable { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserContact> UserContact { get; set; }
+        public DbSet<Activies> Islemler { get; set; }
+        public DbSet<ClientGroupName> ClientGroupNames { get; set; }
+        public DbSet<ClientInfo> Muvekkil { get; set; }
+        public DbSet<Files> Dosyalar { get; set; }
+        public DbSet<Islem_Turu> Islem_Turleri { get; set; }
+        public DbSet<Mahkemeler> Mahkemeleer { get; set; }
+        public DbSet<Navigation> Menuler { get; set; }
+        public DbSet<Yapilan_Islem> Yapilan_Islem { get; set; }
+        public DbSet<OdemeSekli> Odeme_Sekli { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Muvekkil;" +
-                "Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;" +
-                "Application Intent=ReadWrite;Multi Subnet Failover=False");
-        }
+
+      
 
     }
 }
