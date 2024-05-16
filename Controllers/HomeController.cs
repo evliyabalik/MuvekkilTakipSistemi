@@ -190,6 +190,7 @@ namespace MuvekkilTakipSistemi.Controllers
 			{
 				var adSoyad = _context.User.Select(u => u.Adsoyad).FirstOrDefault();
 				var emailTo = _context.UserContact.Select(u => u.Email).FirstOrDefault();
+				
 
 
 				//Token oluþturma

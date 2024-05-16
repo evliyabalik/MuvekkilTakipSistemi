@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MuvekkilTakipSistemi.Classes;
 using MuvekkilTakipSistemi.DatabaseContext;
+using MuvekkilTakipSistemi.Models;
 
 namespace MuvekkilTakipSistemi.Controllers
 {
@@ -48,22 +50,42 @@ namespace MuvekkilTakipSistemi.Controllers
 			return RedirectToAction("Login", "Home");
 		}
 
-		[NonAction]
-		private JsonResult GetClient()
+
+		public JsonResult GetClient()
 		{
-			return Json("");
+			var client = _context.Muvekkil.ToList();
+			return Json(client);
 		}
 
-		[NonAction]
+        public JsonResult InserClient(ClientInfo info)
+        {
+			var id = HttpContext.Session.GetInt32("UserId");
+			var avukat = _context.User.Where(u => u.UserId==id).FirstOrDefault();
+
+			if (!ModelState.IsValid)
+			{
+				info.Avukat = avukat.Adsoyad;
+
+				_context.Muvekkil.Add(info);
+				_context.SaveChanges();
+				return Json("Müvekkil Başarı ile kaydedildi.");
+			}
+
+			return Json("Model Doğrulaması Başarısız.");
+        }
+
+        [NonAction]
 		private JsonResult GetFilesOnTable()
 		{
-			return Json("");
+			var files = _context.Dosyalar.ToList();
+			return Json(files);
 		}
 
 		[NonAction]
 		private JsonResult GetActivities()
 		{
-			return Json("");
+			var activities = _context.Islemler.ToList();
+			return Json(activities);
 		}
 
 	}

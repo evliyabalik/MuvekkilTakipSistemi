@@ -1,101 +1,141 @@
-﻿@{
-	Layout = "_Layout3";
-	ViewData["Title"] = "Müvekkiller";
+﻿@model MuvekkilTakipSistemi.Models.ClientInfo
 
+@{
+	//Model çağrılırken hata oluştu, kontrol edilecek.
+	ViewData["Title"] = "Müvekkiller";
+	Layout = "_Layout3";
 
 }
 
 <div class="col-md-9">
 
-    <div class="row">
-        <div class="col-md-12" style="padding:10px">
-            <div class="col-md-4" style="">
-                <form>
-                    <input type="text" name="UserName" id="UserName" placeholder="Ad/Ünvan" /><br />
-                    <input type="text" name="GroupName" id="GroupName" placeholder="Grup Adı" /><br />
-                    <input type="submit" name="Sorgula" value="Sorgula" >
-                </form>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-12" style="padding:10px">
+			<div class="col-md-4" style="">
+				<form>
+					<input type="text" name="UserName" id="UserName" placeholder="Ad/Ünvan" /><br />
+					<input type="text" name="GroupName" id="GroupName" placeholder="Grup Adı" /><br />
+					<input type="submit" name="Sorgula" value="Sorgula">
+				</form>
+			</div>
+		</div>
+	</div>
 
-        <h1 class="display-4">Müvekkiller</h1>
+	<h1 class="display-4">Müvekkiller</h1>
 
-         <div class="row">
-            <div class="col-md-12">
-                <button class="btn btn-primary">Yeni</button>
-                <button class="btn btn-secondary">Kopyala</button>
-                <button class="btn btn-secondary">Düzenle</button>
-                <button class="btn btn-secondary">İncele</button>
-                <button class="btn btn-secondary">Sil</button>
-        
-                <button class="btn btn-secondary">Kayıt Ara</button>
-                <button class="btn btn-secondary">Bakiye Detay</button>
-           
-     
-                <button class="btn btn-secondary">Excel'den Aktar</button>
-                <button class="btn btn-secondary">Excel'e Aktar</button>
-            </div>
-        </div>
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary" id="btnNew">Yeni</button>
+			<button class="btn btn-secondary">Kopyala</button>
+			<button class="btn btn-secondary">Düzenle</button>
+			<button class="btn btn-secondary">İncele</button>
+			<button class="btn btn-secondary">Sil</button>
 
-        <table class="table table-striped">
+			<button class="btn btn-secondary">Kayıt Ara</button>
+			<button class="btn btn-secondary">Bakiye Detay</button>
 
-            <thead>
 
-                <tr>
+			<button class="btn btn-secondary">Excel'e Aktar</button>
+		</div>
+	</div>
 
-                    <th>Adı/Ünvanı</th>
+	<table class="table table-striped table-success table-responsive table-hover">
 
-                    <th>Grup Adı</th>
+		<thead>
 
-                    <th>Telefon 1</th>
+			<tr>
 
-                    <th>Gsm No</th>
+				<th>Adı/Ünvanı</th>
 
-                    <th>TC No</th>
+				<th>Grup Adı</th>
 
-                    <th>Vergi Dairesi</th>
+				<th>TC No</th>
 
-                    <th>Vergi No</th>
+				<th>Gsm No</th>
 
-                    <th>Borcu</th>
+				<th>Telefon 1</th>
 
-                    <th>Alacağı</th>
+				<th>Vergi Dairesi</th>
 
-                    <th>Bakiye</th>
+				<th>Vergi No</th>
 
-                </tr>
+				<th>Avukat</th>
 
-            </thead>
+				<th>Özel Alan</th>
 
-            <tbody>
+				<th>Borcu</th>
 
-                <tr>
+				<th>Alacağı</th>
 
-                    <td>Evliya BALIK</td>
+				<th>Bakiye</th>
 
-                    <td>ALACAKLI</td>
+				<th>İşlem</th>
 
-                    <td>026221212121</td>
+			</tr>
 
-                    <td>0539999999</td>
+		</thead>
 
-                    <td>323232323232</td>
-
-                    <td>Kocaeli Gebze</td>
-
-                    <td>2235310115555</td>
-
-                    <td>0,00</td>
-
-                    <td>0,00</td>
-
-                    <td>0,00</td>
-
-                </tr
-            </tbody>
-        </table>
-       
- 
-  
+		<tbody id="tblBody">
+		</tbody>
+	</table>
 </div>
+
+<!--Modal Window-->
+<div class="modal" id="ClientModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="modalTitle"></h3>
+			</div>
+			<iv class="moal-body">
+				<div class="mb-2">
+					<input type="text" name="Ad_Unvan" id="Ad_Unvan" class="form-control" placeholder="Ad/Ünvan" />
+				</div>
+				<div class="mb-2">
+					<select name="GrupAdi" id="GrupAdi" class="form-control">
+						<option value="Deneme 1">Deneme 1</option>
+						<option value="Deneme 2">Deneme 2</option>
+					</select>
+				</div>
+
+				<div class="mb-2">
+					<input type="number" name="Tcno" id="Tcno" class="form-control" placeholder="Tc No" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="GSM" id="GSM" class="form-control" placeholder="Cep Tel" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Tel" id="Tel" class="form-control" placeholder="Tel No" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Vergi_Dairesi" id="Vergi_Dairesi" class="form-control" placeholder="Vergi Dairesi" />
+				</div>
+
+				<div class="mb-2">
+					<input type="number" name="No" id="No" class="form-control" placeholder="Vergi No" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Ozel_Alan" id="Ozel_Alan" class="form-control" placeholder="Açıklama" />
+				</div>
+			</iv>
+			<div class="modal-footer">
+				<button class="btn btn-primary" id="Save" type="submit" onclick="Insert();">Kaydet</button>
+
+				<button class="btn btn-success" id="Update" style="display:none;" type="submit" onclick="Update();">Güncelle</button>
+				<button class="btn btn-danger" data-bs-dismiss="modal" onclick="HideModal();">Kapat</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+@section Scripts
+{
+	<script type="text/javascript" src="~/js/ClientJS.js"></script>
+	<script type="text/javascript" src="~/js/Control.js"></script>
+}
