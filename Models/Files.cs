@@ -7,7 +7,7 @@ namespace MuvekkilTakipSistemi.Models
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)] 
-		public string Id { get; set; }
+		public int Id { get; set; }
 
 		[Required]
 		public string DosyaNo { get; set; }
@@ -31,24 +31,24 @@ namespace MuvekkilTakipSistemi.Models
 		public string Adres { get; set; }
 
 
-		public string Adi_telefon { get; set; }
+		public string? Adi_telefon { get; set; }
 
-		public string Adi_telefon2 { get; set; }
-
-
-		public string Ozel_Alan { get; set; }
+		public string? Adi_telefon2 { get; set; }
 
 
-		public string Ozel_Alan2 { get; set; }
+		public string? Ozel_Alan { get; set; }
+
+
+		public string? Ozel_Alan2 { get; set; }
 
 		[Required]
 		public string Referans { get; set; }
 
-		[Required]
+
 		public string Ucret_Sozlesmesi { get; set; }
 
 
-		public string Sozlesme_No { get; set; }
+		public string? Sozlesme_No { get; set; }
 
 		[Required]
 		public string Serbest_Meslek_Makbuzu { get; set; }

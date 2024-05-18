@@ -1,13 +1,13 @@
 
 
 $(document).ready(function () {
-    GetClient();
+    GetFiles();
 });
 
 /*Read Data*/
-function GetClient() {
+function GetFiles() {
     $.ajax({
-        url: '/user/GetClient',
+        url: '/user/GetFilesOnTable',
         type: 'get',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
@@ -26,15 +26,22 @@ function GetClient() {
                 var object = '';
                 $.each(response, function (index, item) {
                     object += '<tr>';
-                    object += '<td>' + item.ad_Unvan + '</td>';
-                    object += '<td>' + item.grupAdi + '</td>';
-                    object += '<td>' + item.tcno + '</td>';
-                    object += '<td>' + item.gsm + '</td>';
-                    object += '<td>' + item.tel + '</td>';
-                    object += '<td>' + item.vergi_Dairesi + '</td>';
-                    object += '<td>' + item.no + '</td>';
+                    object += '<td>' + item.dosyaNo + '</td>';
+                    object += '<td>' + item.konusu + '</td>';
                     object += '<td>' + item.avukat + '</td>';
+                    object += '<td>' + item.mahkeme + '</td>';
+                    object += '<td>' + item.muvekkil + '</td>';
+                    object += '<td>' + item.muvekkil_Grubu + '</td>';
+                    object += '<td>' + item.adres + '</td>';
+                    object += '<td>' + item.adi_telefon + '</td>';
+                    object += '<td>' + item.adi_telefon2 + '</td>';
                     object += '<td>' + item.ozel_Alan + '</td>';
+                    object += '<td>' + item.ozel_Alan2 + '</td>';
+                    object += '<td>' + item.referans + '</td>';
+                    object += '<td>' + item.ucret_Sozlesmesi + '</td>';
+                    object += '<td>' + item.sozlesme_No + '</td>';
+                    object += '<td>' + item.serbest_Meslek_Makbuzu + '</td>';
+                    object += '<td>' + item.dosya_Durumu + '</td>';
                     object += '<td> <a href="#" class="btn btn-primary btn-sm" onclick="Edit(' + item.id + ')">Edit</a>';
                     object += '<a href="#" class="btn btn-danger btn-sm" onclick="Delete(' + item.id + ')">Delete</a></td>';
                     object += '</tr>';
@@ -102,6 +109,13 @@ function HideModal() {
     ClearData();
     $('#ClientModal').modal('hide');
     ReloadPage();
+}
+//Reload
+function ReloadPage() {
+    // URL'i temizleyerek sayfayý yeniden yükle
+    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.replaceState({}, document.title, cleanUrl);
+    window.location.reload();
 }
 
 function ClearData() {
@@ -182,8 +196,6 @@ function Edit(id) {
                 $('#No').val(response.no);
                 $('#Ozel_Alan').val(response.ozel_Alan);
 
-               
-
             }//if
         },//success
         error: function () {
@@ -233,14 +245,6 @@ function Update() {
 
 
 }//method
-
-//Reload
-function ReloadPage() {
-    // URL'i temizleyerek sayfayý yeniden yükle
-    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-    window.history.replaceState({}, document.title, cleanUrl);
-    window.location.reload();
-}
 
 //Delete
 function Delete(id) {

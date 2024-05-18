@@ -18,14 +18,14 @@ namespace MuvekkilTakipSistemi.Models
 
 		public string GSM { get; set; }
 
-		public string Tel { get; set; } = "Boş";
+		public string? Tel { get; set; }
 
-		public string Vergi_Dairesi { get; set; } = "Boş";
+		public string? Vergi_Dairesi { get; set; }
 
-		public string No { get; set; } = "Boş";
+		public string? No { get; set; }
 
         public string Avukat { get; set; }
 
-		public string Ozel_Alan { get; set; } = "Boş";
+		public string? Ozel_Alan { get; set; }
     }
 }

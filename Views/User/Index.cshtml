@@ -1,7 +1,7 @@
 ﻿@model MuvekkilTakipSistemi.Models.ClientInfo
 
 @{
-	//Model çağrılırken hata oluştu, kontrol edilecek.
+
 	ViewData["Title"] = "Müvekkiller";
 	Layout = "_Layout3";
 
@@ -12,11 +12,9 @@
 	<div class="row">
 		<div class="col-md-12" style="padding:10px">
 			<div class="col-md-4" style="">
-				<form>
-					<input type="text" name="UserName" id="UserName" placeholder="Ad/Ünvan" /><br />
-					<input type="text" name="GroupName" id="GroupName" placeholder="Grup Adı" /><br />
-					<input type="submit" name="Sorgula" value="Sorgula">
-				</form>
+
+				<input type="text"  id="searchInput" placeholder="Ara..." class="form-control" /><br />
+					
 			</div>
 		</div>
 	</div>
@@ -26,16 +24,6 @@
 	<div class="row">
 		<div class="col-md-12">
 			<button class="btn btn-primary" id="btnNew">Yeni</button>
-			<button class="btn btn-secondary">Kopyala</button>
-			<button class="btn btn-secondary">Düzenle</button>
-			<button class="btn btn-secondary">İncele</button>
-			<button class="btn btn-secondary">Sil</button>
-
-			<button class="btn btn-secondary">Kayıt Ara</button>
-			<button class="btn btn-secondary">Bakiye Detay</button>
-
-
-			<button class="btn btn-secondary">Excel'e Aktar</button>
 		</div>
 	</div>
 
@@ -63,12 +51,6 @@
 
 				<th>Özel Alan</th>
 
-				<th>Borcu</th>
-
-				<th>Alacağı</th>
-
-				<th>Bakiye</th>
-
 				<th>İşlem</th>
 
 			</tr>
@@ -87,15 +69,21 @@
 			<div class="modal-header">
 				<h3 class="modal-title" id="modalTitle"></h3>
 			</div>
-			<iv class="moal-body">
+			<div class="modal-body">
+				<input asp-for="Id" type="hidden" value="0" id="id" />
+
 				<div class="mb-2">
 					<input type="text" name="Ad_Unvan" id="Ad_Unvan" class="form-control" placeholder="Ad/Ünvan" />
 				</div>
 				<div class="mb-2">
 					<select name="GrupAdi" id="GrupAdi" class="form-control">
-						<option value="Deneme 1">Deneme 1</option>
-						<option value="Deneme 2">Deneme 2</option>
+					@foreach (var item in (List<ClientGroupName>)ViewBag.GroupAdi)
+					{
+						<option value="@item.Group_Name">@item.Group_Name</option>
+					}
 					</select>
+
+					
 				</div>
 
 				<div class="mb-2">
@@ -121,7 +109,7 @@
 				<div class="mb-2">
 					<input type="text" name="Ozel_Alan" id="Ozel_Alan" class="form-control" placeholder="Açıklama" />
 				</div>
-			</iv>
+			</div>
 			<div class="modal-footer">
 				<button class="btn btn-primary" id="Save" type="submit" onclick="Insert();">Kaydet</button>
 
@@ -136,6 +124,15 @@
 
 @section Scripts
 {
+	<style>
+		.table-responsive {
+			max-height: 300px;
+		}
+	</style>
+
 	<script type="text/javascript" src="~/js/ClientJS.js"></script>
 	<script type="text/javascript" src="~/js/Control.js"></script>
+	
+
+	<script type="text/javascript" src="~/js/SearchData.js"></script>
 }
