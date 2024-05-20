@@ -45,16 +45,16 @@ namespace MuvekkilTakipSistemi.Models
 		public string Referans { get; set; }
 
 
-		public string Ucret_Sozlesmesi { get; set; }
+		public string Ucret_Sozlesmesi { get; set; } = "Yapılmadı";
 
 
 		public string? Sozlesme_No { get; set; }
 
 		[Required]
-		public string Serbest_Meslek_Makbuzu { get; set; }
+		public string Serbest_Meslek_Makbuzu { get; set; } = "Kesilmedi";
 
 		[Required]
-		public string Dosya_Durumu { get; set; }
+		public string Dosya_Durumu { get; set; } = "Hayır";
 
 
 	}

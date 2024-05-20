@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MuvekkilTakipSistemi.Classes;
 using MuvekkilTakipSistemi.DatabaseContext;
 using MuvekkilTakipSistemi.Models;
@@ -30,7 +31,13 @@ namespace MuvekkilTakipSistemi.Controllers
 
         public IActionResult Files()
         {
+			var id = HttpContext.Session.GetInt32("UserId");
+			var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
+
 			TempData["isim"] = _adsoyad;
+			ViewBag.Mahkeme = _context.Mahkemeleer.ToList();
+			ViewBag.Muvekkil = _context.Muvekkil.Where(u => u.Avukat == avukat.Adsoyad).ToList();
+			ViewBag.GroupAdi = _context.ClientGroupNames.ToList();
 			return View();
 		}
 
@@ -130,23 +137,27 @@ namespace MuvekkilTakipSistemi.Controllers
         {
             var id = HttpContext.Session.GetInt32("UserId");
             var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
+			var muvekkilGrubu = _context.Muvekkil.Where(u => u.Ad_Unvan == info.Muvekkil).FirstOrDefault();
 
-            if (!ModelState.IsValid)
+			if (!ModelState.IsValid)
             {
                 info.Avukat = avukat.Adsoyad;
+				info.Muvekkil_Grubu = muvekkilGrubu.GrupAdi;
 
-                _context.Dosyalar.Add(info);
+				_context.Dosyalar.Add(info);
                 _context.SaveChanges();
-                return Json("Müvekkil Başarı ile kaydedildi.");
+                return Json("Dosya Başarı ile kaydedildi.");
             }
 
             return Json("Model Doğrulaması Başarısız.");
         }
-        [HttpGet]
+
+
+		[HttpGet]
         public JsonResult EditFile(int id)
         {
-            var client = _context.Dosyalar.Find(id);
-            return Json(client);
+            var file = _context.Dosyalar.Find(id);
+            return Json(file);
         }
 
         [HttpPost]
@@ -155,7 +166,7 @@ namespace MuvekkilTakipSistemi.Controllers
 
             var id = HttpContext.Session.GetInt32("UserId");
             var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
-            if (!ModelState.IsValid)
+			if (!ModelState.IsValid)
             {
                 file.Avukat = avukat.Adsoyad;
                 _context.Dosyalar.Update(file);

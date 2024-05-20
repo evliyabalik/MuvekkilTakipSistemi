@@ -60,18 +60,13 @@ function GetFiles() {
 }
 
 
-/*Insert Data*/
-$('#btnNew').click(function () {
+/*Insert Client Data Data*/
+$('#newClient').click(function () {
     $('#ClientModal').modal('show');
     $('#modalTitle').text('Muvekkil Ekle');
 });
 
-function Insert() {
-    var result = IsValidate();
-    if (result == false) {
-        return false;
-    }
-
+function InsertClient() {
     var formData = new Object();
     formData.ad_Unvan = $('#Ad_Unvan').val();
     formData.grupAdi = $('#GrupAdi').val();
@@ -90,9 +85,9 @@ function Insert() {
             if (response == null || response == undefined || response.length == 0) {
                 alert("Kullanýcý eklerken hata oluþtu");
             } else {
-                HideModal();
-                GetClient();
-                alert(response);
+                updateSelect();
+
+                HideModalClient();
             }//if
 
         },//success
@@ -103,13 +98,112 @@ function Insert() {
 
     });//Ajax
 
+}
+
+function updateSelect() {
+
+    $.ajax({
+        url: '/User/GetClient',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+
+            // Clear the existing options
+            $('#mySelect').empty();
+
+            // Loop through the updated data and append new options
+            $.each(data, function (index, value) {
+                $('#Muvekkil').append('<option value="' + value.ad_Unvan + '">' + value.ad_Unvan + '</option>');
+
+            });
+
+        },
+        error: function () {
+
+            console.log('Error retrieving updated data');
+        }
+
+    });
+}
+
+
+
+/*Insert Files Data*/
+$('#btnNew').click(function () {
+    $('#FileModal').modal('show');
+    $('#modalTitle').text('Dosya Ekle');
+});
+
+function Insert() {
+    var result = IsValidate();
+    if (result == false) {
+        return false;
+    }
+
+    var formData = new Object();
+    formData.dosyaNo = $('#DosyaNo').val();
+    formData.konusu = $('#Konusu').val();
+    formData.mahkeme = $('#Mahkeme').val();
+    formData.muvekkil = $('#Muvekkil').val();
+    formData.adres = $('#Adres').val();
+    formData.adi_telefon = $('#Adi_Telefon').val();
+    formData.adi_telefon2 = $('#Adi_Telefon2').val();
+    formData.ozel_Alan = $('#Ozel_Alan').val();
+    formData.ozel_Alan2 = $('#Ozel_Alan2').val();
+    formData.referans = $('#Referans').val();
+    if ($('#Ucret_Sozlesmesi').is(':checked')) {
+        formData.ucret_Sozlesmesi = $('#Ucret_Sozlesmesi').val();
+    }
+
+
+    formData.sozlesme_No = $('#Sozlesme_No').val();
+
+    if ($('#Serbest_Meslek_Makbuzu').is(':checked')) {
+        formData.serbest_Meslek_Makbuzu = $('#Serbest_Meslek_Makbuzu').val();
+    }
+
+    if ($('#Dosya_Durumu').is(':checked')) {
+        formData.dosya_Durumu = $('#Dosya_Durumu').val();
+    }
+
+   
+
+    $.ajax({
+        url: '/User/InserFile',
+        data: formData,
+        type: 'post',
+        success: function (response) {
+            if (response == null || response == undefined || response.length == 0) {
+                alert("Dosya eklerken hata oluþtu");
+            } else {
+                HideModal();
+                GetFiles();
+                alert(response);
+            }//if
+
+        },//success
+
+        error: function () {
+            alert("Dosya eklerken hata oluþtu");
+        }//Error
+
+    });//Ajax
+
 }//Method
 
+//File Hide
 function HideModal() {
     ClearData();
-    $('#ClientModal').modal('hide');
+    $('#FileModal').modal('hide');
     ReloadPage();
 }
+
+//ClientHide
+function HideModalClient() {
+    ClearData();
+    $('#ClientModal').modal('hide');
+}
+
 //Reload
 function ReloadPage() {
     // URL'i temizleyerek sayfayý yeniden yükle
@@ -119,60 +213,130 @@ function ReloadPage() {
 }
 
 function ClearData() {
-    $('#Ad_Unvan').val('');
-    $('#Tcno').val('');
-    $('#GSM').val('');
-    $('#Tel').val('');
-    $('#Vergi_Dairesi').val('');
-    $('#No').val('');
+    $('#DosyaNo').val('');
+    $('#Konusu').val('');
+    $('#Mahkeme').val('');
+    $('#Muvekkil').val('');
+    $('#Adres').val('');
+    $('#Adi_Telefon').val('');
+    $('#Adi_Telefon2').val('');
     $('#Ozel_Alan').val('');
+    $('#Ozel_Alan2').val('');
+    $('#Referans').val('');
+    $('#Ucret_Sozlesmesi').val('');
+    $('#Sozlesme_No').val('');
+    $('#Serbest_Meslek_Makbuzu').val('');
+    $('#Dosya_Durumu').val('');
+
 }
 
 function IsValidate() {
     var validate = true;
-    if ($('#Ad_Unvan').val().trim() == '') {
+    if ($('#DosyaNo').val().trim() == '') {
         validate = false;
-        $('#Ad_Unvan').css("border-color", "Red");
+        $('#DosyaNo').css("border-color", "Red");
     }
     else {
-        $('#Ad_Unvan').css("border-color", "Green");
+        $('#DosyaNo').css("border-color", "Green");
     }
-    if ($('#Tcno').val().trim() == '') {
+    if ($('#Konusu').val().trim() == '') {
         validate = false;
-        $('#Tcno').css("border-color", "Red");
+        $('#Konusu').css("border-color", "Red");
     }
     else {
-        $('#Tcno').css("border-color", "Green"); 
+        $('#Konusu').css("border-color", "Green");
     }
-    if ($('#GSM').val().trim() == '') {
+    if ($('#Mahkeme').val().trim() == '') {
         validate = false;
-        $('#GSM').css("border-color", "Red");
+        $('#Mahkeme').css("border-color", "Red");
     }
     else {
-        $('#GSM').css("border-color", "Green"); 
+        $('#Mahkeme').css("border-color", "Green");
     }
+
+
+    if ($('#Muvekkil').val().trim() == '') {
+        validate = false;
+        $('#Muvekkil').css("border-color", "Red");
+    }
+    else {
+        $('#Muvekkil').css("border-color", "Green");
+    }
+    if ($('#Adres').val().trim() == '') {
+        validate = false;
+        $('#Adres').css("border-color", "Red");
+    }
+    else {
+        $('#Adres').css("border-color", "Green");
+    }
+    if ($('#Referans').val().trim() == '') {
+        validate = false;
+        $('#Referans').css("border-color", "Red");
+    }
+    else {
+        $('#Referans').css("border-color", "Green");
+    }
+    if ($('#Serbest_Meslek_Makbuzu').val().trim() == '') {
+        validate = false;
+        $('#Serbest_Meslek_Makbuzu').css("border-color", "Red");
+    }
+    else {
+        $('#Serbest_Meslek_Makbuzu').css("border-color", "Green");
+    }
+    if ($('#Dosya_Durumu').val().trim() == '') {
+        validate = false;
+        $('#Dosya_Durumu').css("border-color", "Red");
+    }
+    else {
+        $('#Dosya_Durumu').css("border-color", "Green");
+    }
+
+
     return validate;
 }
 
-$('#Ad_Unvan').change(function () {
+$('#DosyaNo').change(function () {
     IsValidate();
 });
 
-$('#Tcno').change(function () {
+$('#Konusu').change(function () {
     IsValidate();
 });
 
-$('#GSM').change(function () {
+$('#Mahkeme').change(function () {
     IsValidate();
 });
+
+$('#Muvekkil').change(function () {
+    IsValidate();
+});
+
+$('#Adres').change(function () {
+    IsValidate();
+});
+
+$('#Referans').change(function () {
+    IsValidate();
+});
+
+$('#Serbest_Meslek_Makbuzu').change(function () {
+    IsValidate();
+});
+
+$('#Dosya_Durumu').change(function () {
+    IsValidate();
+});
+
+
+
 
 //Edit
 function Edit(id) {
     $.ajax({
-        url:'User/EditClient?Id='+id,
-        type:'get',
-        contentType:'application/json;charset=utf-8',
-        dataType:'json',
+        url: '/User/EditFile?Id=' + id,
+        type: 'get',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
         success: function (response) {
             if (response == null || response == undefined) {
                 alert("Okuma baþarýsýz.")
@@ -182,19 +346,25 @@ function Edit(id) {
             }
 
             else {
-                $('#ClientModal').modal('show');
+                $('#FileModal').modal('show');
                 $('#modalTitle').text('Güncelle')
                 $('#Save').css('display', 'none');
                 $('#Update').css('display', 'block');
                 $('#id').val(response.id);
-                $('#Ad_Unvan').val(response.ad_Unvan);
-                $('#GrupAdi').val(response.grupAdi);
-                $('#Tcno').val(response.tcno);
-                $('#GSM').val(response.gsm);
-                $('#Tel').val(response.tel);
-                $('#Vergi_Dairesi').val(response.vergi_Dairesi);
-                $('#No').val(response.no);
+                $('#DosyaNo').val(response.dosyaNo);
+                $('#Konusu').val(response.konusu);
+                $('#Mahkeme').val(response.mahkeme);
+                $('#Muvekkil').val(response.muvekkil);
+                $('#Adres').val(response.adres);
+                $('#Adi_Telefon').val(response.adi_telefon);
+                $('#Adi_Telefon2').val(response.adi_telefon2);
                 $('#Ozel_Alan').val(response.ozel_Alan);
+                $('#Ozel_Alan2').val(response.ozel_Alan2);
+                $('#Referans').val(response.referans);
+                $('#Ucret_Sozlesmesi').val(response.ucret_Sozlesmesi);
+                $('#Sozlesme_No').val(response.sozlesme_No);
+                $('#Sozlesme_No').val(response.serbest_Meslek_Makbuzu);
+                $('#Dosya_Durumu').val(response.dosya_Durumu);
 
             }//if
         },//success
@@ -212,18 +382,24 @@ function Update() {
     }//if
 
     var formData = new Object();
-    formData.id = $('#id').val();
-    formData.ad_Unvan = $('#Ad_Unvan').val();
-    formData.grupAdi = $('#GrupAdi').val();
-    formData.tcno = $('#Tcno').val();
-    formData.gsm = $('#GSM').val();
-    formData.tel = $('#Tel').val();
-    formData.vergi_Dairesi = $('#Vergi_Dairesi').val();
-    formData.no = $('#No').val();
+    formData.id = $('#Id').val();
+    formData.dosyaNo = $('#DosyaNo').val();
+    formData.konusu = $('#Konusu').val();
+    formData.mahkeme = $('#Mahkeme').val();
+    formData.muvekkil = $('#Muvekkil').val();
+    formData.adres = $('#Adres').val();
+    formData.adi_telefon = $('#Adi_Telefon').val();
+    formData.adi_telefon2 = $('#Adi_Telefon2').val();
     formData.ozel_Alan = $('#Ozel_Alan').val();
+    formData.ozel_Alan2 = $('#Ozel_Alan2').val();
+    formData.referans = $('#Referans').val();
+    formData.ucret_Sozlesmesi = $('#Ucret_Sozlesmesi').val();
+    formData.sozlesme_No = $('#Sozlesme_No').val();
+    formData.serbest_Meslek_Makbuzu = $('#Serbest_Meslek_Makbuzu').val();
+    formData.dosya_Durumu = $('#Dosya_Durumu').val();
 
     $.ajax({
-        url: '/User/UpdateClient',
+        url: '/User/UpdateFile',
         data: formData,
         type: 'post',
         success: function (response) {
@@ -231,7 +407,7 @@ function Update() {
                 alert("Kullanýcý güncellenirken hata oluþtu");
             } else {
                 HideModal();
-                GetClient();
+                GetFiles();
                 alert(response);
             }//if
 
@@ -249,7 +425,7 @@ function Update() {
 //Delete
 function Delete(id) {
     $.ajax({
-        url: 'User/DeleteClient?Id=' + id,
+        url: 'User/DeleteFile?Id=' + id,
         type: 'post',
 
         success: function (response) {
@@ -260,7 +436,7 @@ function Delete(id) {
                 alert("Seçtiðiniz id'ye göre bir veri bulunamadý.")
             }
             else {
-                GetClient();
+                GetFiles();
                 alert(response)
             }//if
         },//success

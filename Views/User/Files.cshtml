@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<button class="btn btn-primary">Yeni</button>
+			<button class="btn btn-primary" id="btnNew">Yeni</button>
 		</div>
 	</div>
 
@@ -35,11 +35,12 @@
 
 				<th>Dosya No</th>
 				<th>Konusu</th>
+				<th>Avukat</th>
 				<th>Mahkeme</th>
 
 				<th>Müvekkil</th>
 				<th>Müvekkil Grup</th>
-				<th>Avukat</th>
+			
 
 				<th>Adres</th>
 				<th>Ad/Telefon 1</th>
@@ -54,11 +55,6 @@
 				<th>Dosya Kapandı</th>
 
 
-				<th>Borcu</th>
-
-				<th>Alacağı</th>
-
-				<th>Bakiye</th>
 
 			</tr>
 
@@ -72,6 +68,149 @@
 
 </div>
 
+<!--Add file-->
+<div class="modal" id="FileModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="modalTitle"></h3>
+			</div>
+			<div class="modal-body">
+				<input asp-for="Id" type="hidden" value="0" id="id" />
+
+				<div class="mb-2">
+					<input type="text" name="DosyaNo" id="DosyaNo" class="form-control" placeholder="Dosya No" />
+				</div>
+				<div class="mb-2">
+					<div class="mb-2">
+						<input type="text" name="Konusu" id="Konusu" class="form-control" placeholder="Konusu" />
+					</div>
+
+
+				</div>
+
+				<div class="mb-2">
+					<select name=" Mahkeme" id="Mahkeme" class="form-control">
+					@foreach (var item in (List<Mahkemeler>)ViewBag.Mahkeme)
+					{
+							<option value="@item.Name">@item.Name</option>
+					}
+					</select>
+				</div>
+
+				<div class="mb-2">
+					<select name=" Muvekkil" id="Muvekkil" class="form-control">
+						@foreach (var item in (List<ClientInfo>)ViewBag.Muvekkil)
+						{
+							<option value="@item.Ad_Unvan">@item.Ad_Unvan</option>
+						}
+					</select>
+					<button name="newClient" id="newClient" class="btn btn-primary">Yeni Ekle</button>
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Adres" id="Adres" class="form-control" placeholder="Adres" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Adi_Telefon" id="Adi_Telefon" class="form-control" placeholder="Şahit/Telefon" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Adi_Telefon2" id="Adi_Telefon2" class="form-control" placeholder="Şahit2/Telefon" />
+				</div>
+				<div class="mb-2">
+					<input type="text" name="Ozel_Alan" id="Ozel_Alan" class="form-control" placeholder="Özel Alan 1" />
+				</div>
+				<div class="mb-2">
+					<input type="text" name="Ozel_Alan2" id="Ozel_Alan2" class="form-control" placeholder="Özel Alan 2" />
+				</div>
+				<div class="mb-2">
+					<input type="text" name="Referans" id="Referans" class="form-control" placeholder="Referans" />
+				</div>
+				<div class="mb-2">
+					<label for=" Ucret_Sozlesmesi">Ücret Sözleşmesi</label>
+					<input type="checkbox" name="Ucret_Sozlesmesi" id="Ucret_Sozlesmesi"  value="Yapıldı" />
+				</div>
+				<div class="mb-2">
+					<input type="number" name="Sozlesme_No" id="Sozlesme_No" class="form-control" placeholder="Sözleşme No" />
+				</div>
+				<div class="mb-2">
+					<label for=" Serbest_Meslek_Makbuzu">Serbest Meslek Makbuzu Kesildi</label>
+					<input type="checkbox" name="Serbest_Meslek_Makbuzu" id="Serbest_Meslek_Makbuzu" value="Kesildi" />
+				</div>
+				<div class="mb-2">
+					<label for=" Dosya_Durumu">Dosya Kapandı mı</label>
+					<input type="checkbox" name="Dosya_Durumu" id="Dosya_Durumu"  value="Evet" />
+				</div>
+
+				
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" id="Save" type="submit" onclick="Insert();">Kaydet</button>
+
+				<button class="btn btn-success" id="Update" style="display:none;" type="submit" onclick="Update();">Güncelle</button>
+				<button class="btn btn-danger" data-bs-dismiss="modal" onclick="HideModal();">Kapat</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--Add Client-->
+<div class="modal" id="ClientModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="modalTitle"></h3>
+			</div>
+			<div class="modal-body">
+				<input asp-for="Id" type="hidden" value="0" id="id" />
+
+				<div class="mb-2">
+					<input type="text" name="Ad_Unvan" id="Ad_Unvan" class="form-control" placeholder="Ad/Ünvan" />
+				</div>
+				<div class="mb-2">
+					<select name="GrupAdi" id="GrupAdi" class="form-control">
+						@foreach (var item in (List<ClientGroupName>)ViewBag.GroupAdi)
+						{
+							<option value="@item.Group_Name">@item.Group_Name</option>
+						}
+					</select>
+
+
+				</div>
+
+				<div class="mb-2">
+					<input type="number" name="Tcno" id="Tcno" class="form-control" placeholder="Tc No" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="GSM" id="GSM" class="form-control" placeholder="Cep Tel" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Tel" id="Tel" class="form-control" placeholder="Tel No" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Vergi_Dairesi" id="Vergi_Dairesi" class="form-control" placeholder="Vergi Dairesi" />
+				</div>
+
+				<div class="mb-2">
+					<input type="number" name="No" id="No" class="form-control" placeholder="Vergi No" />
+				</div>
+
+				<div class="mb-2">
+					<input type="text" name="Ozel_Alan" id="Ozel_Alan" class="form-control" placeholder="Açıklama" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary" id="SaveClient" type="submit" onclick="InsertClient();">Kaydet</button>
+				<button class="btn btn-danger" id="Close" type="submit" onclick="HideModalClient();">Kapat</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 @section Scripts
 {
