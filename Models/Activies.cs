@@ -10,7 +10,7 @@ namespace MuvekkilTakipSistemi.Models
 		public int Id { get; set; }
 
 		[Required]
-		public string Tarih { get; set; }
+		public string Tarih { get; set; } = DateTime.Now.ToString();
 
 		[Required]
 		public int Evrak_No { get; set; }
@@ -37,12 +37,12 @@ namespace MuvekkilTakipSistemi.Models
 		public string Avukat { get; set; }
 
 		[Required]
-		public int Odeme_Sekli { get; set; }
+		public string Odeme_Sekli { get; set; }
 
 		[Required]
-		public string Islem_Tutari { get; set; }
+		public decimal Islem_Tutari { get; set; }
 
-		[Required]
-		public string Aciklama { get; set; }
+
+		public string? Aciklama { get; set; }
 	}
 }

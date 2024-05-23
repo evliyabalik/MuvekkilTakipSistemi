@@ -9,7 +9,7 @@ $(document).ready(function () {
 /*Read Data*/
 function GetFiles() {
     $.ajax({
-        url: '/user/GetFilesOnTable',
+        url: '/user/GetActivities',
         type: 'get',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
@@ -28,22 +28,18 @@ function GetFiles() {
                 var object = '';
                 $.each(response, function (index, item) {
                     object += '<tr>';
-                    object += '<td>' + item.dosyaNo + '</td>';
+                    object += '<td>' + item.tarih + '</td>';
+                    object += '<td>' + item.evrak_No + '</td>';
+                    object += '<td>' + item.islem_Turu + '</td>';
+                    object += '<td>' + item.yapilan_Islem + '</td>';
+                    object += '<td>' + item.muvekkil + '</td>';
+                    object += '<td>' + item.dosya + '</td>';
+                    object += '<td>' + item.mahkeme + '</td>';
                     object += '<td>' + item.konusu + '</td>';
                     object += '<td>' + item.avukat + '</td>';
-                    object += '<td>' + item.mahkeme + '</td>';
-                    object += '<td>' + item.muvekkil + '</td>';
-                    object += '<td>' + item.muvekkil_Grubu + '</td>';
-                    object += '<td>' + item.adres + '</td>';
-                    object += '<td>' + item.adi_telefon + '</td>';
-                    object += '<td>' + item.adi_telefon2 + '</td>';
-                    object += '<td>' + item.ozel_Alan + '</td>';
-                    object += '<td>' + item.ozel_Alan2 + '</td>';
-                    object += '<td>' + item.referans + '</td>';
-                    object += '<td>' + item.ucret_Sozlesmesi + '</td>';
-                    object += '<td>' + item.sozlesme_No + '</td>';
-                    object += '<td>' + item.serbest_Meslek_Makbuzu + '</td>';
-                    object += '<td>' + item.dosya_Durumu + '</td>';
+                    object += '<td>' + item.odeme_Sekli + '</td>';
+                    object += '<td>' + item.islem_Tutari + '</td>';
+                    object += '<td>' + item.aciklama + '</td>';
                     object += '<td> <a href="#" class="btn btn-primary btn-sm" onclick="Edit(' + item.id + ')">Edit</a>';
                     object += '<a href="#" class="btn btn-danger btn-sm" onclick="Delete(' + item.id + ')">Delete</a></td>';
                     object += '</tr>';
@@ -62,45 +58,6 @@ function GetFiles() {
 }
 
 
-/*Insert Client Data Data*/
-$('#newClient').click(function () {
-    $('#ClientModal').modal('show');
-    $('#modalTitle').text('Muvekkil Ekle');
-});
-
-function InsertClient() {
-    var formData = new Object();
-    formData.ad_Unvan = $('#Ad_Unvan').val();
-    formData.grupAdi = $('#GrupAdi').val();
-    formData.tcno = $('#Tcno').val();
-    formData.gsm = $('#GSM').val();
-    formData.tel = $('#Tel').val();
-    formData.vergi_Dairesi = $('#Vergi_Dairesi').val();
-    formData.no = $('#No').val();
-    formData.ozel_Alan = $('#Ozel_Alan').val();
-
-    $.ajax({
-        url: '/User/InserClient',
-        data: formData,
-        type: 'post',
-        success: function (response) {
-            if (response == null || response == undefined || response.length == 0) {
-                alert("Kullanýcý eklerken hata oluþtu");
-            } else {
-                updateSelect();
-
-                HideModalClient();
-            }//if
-
-        },//success
-
-        error: function () {
-            alert("Kullanýcý eklerken hata oluþtu");
-        }//Error
-
-    });//Ajax
-
-}
 
 //Dropdown select update
 function updateSelect() {
@@ -133,8 +90,8 @@ function updateSelect() {
 
 /*Insert Files Data*/
 $('#btnNew').click(function () {
-    $('#FileModal').modal('show');
-    $('#modalTitle').text('Dosya Ekle');
+    $('#ActivitiesModal').modal('show');
+    $('#modalTitle').text('Ýþlem Ekle');
 });
 
 function Insert() {
@@ -144,26 +101,17 @@ function Insert() {
     }
 
     var formData = new Object();
-    formData.dosyaNo = $('#DosyaNo').val();
-    formData.konusu = $('#Konusu').val();
-    formData.mahkeme = $('#Mahkeme').val();
+    formData.evrak_No = $('#Evrak_No').val();
+    formData.islem_Turu = $('#Islem_Turu').val();
+    formData.yapilan_Islem = $('#Yapilan_Islem').val();
     formData.muvekkil = $('#Muvekkil').val();
-    formData.adres = $('#Adres').val();
-    formData.adi_telefon = $('#Adi_Telefon').val();
-    formData.adi_telefon2 = $('#Adi_Telefon2').val();
-    formData.ozel_Alan = $('#Ozel_Alan').val();
-    formData.ozel_Alan2 = $('#Ozel_Alan2').val();
-    formData.referans = $('#Referans').val();
-    formData.ucret_Sozlesmesi = $('#Ucret_Sozlesmesi').val();
-    formData.sozlesme_No = $('#Sozlesme_No').val();
-    formData.serbest_Meslek_Makbuzu = $('#Serbest_Meslek_Makbuzu').val();
-    formData.dosya_Durumu = $('#Dosya_Durumu').val();
-
-
-
+    formData.Dosya = $('#Dosya').val();
+    formData.odeme_Sekli = $('#Odeme_Sekli').val();
+    formData.islem_Tutari = $('#Islem_Tutari').val();
+    formData.aciklama = $('#Aciklama').val();
 
     $.ajax({
-        url: '/User/InserFile',
+        url: '/User/InsertActivities',
         data: formData,
         type: 'post',
         success: function (response) {
@@ -171,7 +119,7 @@ function Insert() {
                 alert("Dosya eklerken hata oluþtu");
             } else {
                 HideModal();
-                GetFiles();
+                GetActivities();
                 alert(response);
             }//if
 
@@ -188,14 +136,8 @@ function Insert() {
 //File Hide
 function HideModal() {
     ClearData();
-    $('#FileModal').modal('hide');
+    $('#ActiviesModal').modal('hide');
     ReloadPage();
-}
-
-//ClientHide
-function HideModalClient() {
-    ClearData();
-    $('#ClientModal').modal('hide');
 }
 
 //Reload
@@ -207,20 +149,15 @@ function ReloadPage() {
 }
 
 function ClearData() {
-    $('#DosyaNo').val('');
-    $('#Konusu').val('');
-    $('#Mahkeme').val('');
+    $('#Evrak_ho').val('');
+    $('#Islem_Turu').val('');
+    $('#Yapilan_Islem').val('');
     $('#Muvekkil').val('');
-    $('#Adres').val('');
-    $('#Adi_Telefon').val('');
-    $('#Adi_Telefon2').val('');
-    $('#Ozel_Alan').val('');
-    $('#Ozel_Alan2').val('');
-    $('#Referans').val('');
-    $('#Ucret_Sozlesmesi').val('');
-    $('#Sozlesme_No').val('');
-    $('#Serbest_Meslek_Makbuzu').val('');
-    $('#Dosya_Durumu').val('');
+    $('#Dosya').val('');
+    $('#Odeme_Sekli').val('');
+    $('#Islem_Tutari').val('');
+    $('#Aciklama').val('');
+   
 
 }
 
@@ -259,6 +196,7 @@ $('.validate-input').change(function () {
 
     IsValidate();
 
+
 });
 
 
@@ -267,7 +205,7 @@ $('.validate-input').change(function () {
 //Edit
 function Edit(id) {
     $.ajax({
-        url: '/User/EditFile?Id=' + id,
+        url: '/User/EditActivities?Id=' + id,
         type: 'get',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
@@ -280,26 +218,20 @@ function Edit(id) {
             }
 
             else {
-                $('#FileModal').modal('show');
+                $('#ActivitiesModal').modal('show');
                 $('#modalTitle').text('Güncelle')
                 $('#Save').css('display', 'none');
                 $('#Update').css('display', 'block');
                 $('#id').val(response.id);
-                $('#DosyaNo').val(response.dosyaNo);
-                $('#Konusu').val(response.konusu);
-                $('#Mahkeme').val(response.mahkeme);
+                $('#Evrak_No').val(response.evrak_No);
+                $('#Islem_Turu').val(response.islem_Turu);
+                $('#Yapilan_Islem').val(response.yapilan_Islem);
                 $('#Muvekkil').val(response.muvekkil);
-                $('#Adres').val(response.adres);
-                $('#Adi_Telefon').val(response.adi_telefon);
-                $('#Adi_Telefon2').val(response.adi_telefon2);
-                $('#Ozel_Alan').val(response.ozel_Alan);
-                $('#Ozel_Alan2').val(response.ozel_Alan2);
-                $('#Referans').val(response.referans);
-                $('#Ucret_Sozlesmesi').val(response.ucret_Sozlesmesi);
-                $('#Sozlesme_No').val(response.sozlesme_No);
-                $('#Serbest_Meslek_Makbuzu').val(response.serbest_Meslek_Makbuzu);
-                $('#Dosya_Durumu').val(response.dosya_Durumu);
-
+                $('#Dosya').val(response.dosya);
+                $('#Odeme_Sekli').val(response.odeme_Sekli);
+                $('#Islem_Tutari').val(response.islem_Tutari);
+                $('#Aciklama').val(response.aciklama);
+               
 
 
             }//if
@@ -319,29 +251,20 @@ function Update() {
 
     var formData = new Object();
     formData.id = $('#id').val();
-    formData.dosyaNo = $('#DosyaNo').val();
-    formData.konusu = $('#Konusu').val();
-    formData.mahkeme = $('#Mahkeme').val();
+    formData.evrak_No = $('#Evrak_No').val();
+    formData.islem_Turu = $('#Islem_Turu').val();
+    formData.yapilan_Islem = $('#Yapilan_Islem').val();
     formData.muvekkil = $('#Muvekkil').val();
-    formData.adres = $('#Adres').val();
-    formData.adi_telefon = $('#Adi_Telefon').val();
-    formData.adi_telefon2 = $('#Adi_Telefon2').val();
-    formData.ozel_Alan = $('#Ozel_Alan').val();
-    formData.ozel_Alan2 = $('#Ozel_Alan2').val();
-    formData.referans = $('#Referans').val();
-
-    formData.ucret_Sozlesmesi = $('#Ucret_Sozlesmesi').val();
-
-    formData.sozlesme_No = $('#Sozlesme_No').val();
-
-    formData.serbest_Meslek_Makbuzu = $('#Serbest_Meslek_Makbuzu').val();
-
-    formData.dosya_Durumu = $('#Dosya_Durumu').val();
+    formData.Dosya = $('#Dosya').val();
+    formData.odeme_Sekli = $('#Odeme_Sekli').val();
+    formData.islem_Tutari = $('#Islem_Tutari').val();
+    formData.aciklama = $('#Aciklama').val();
+   
 
 
 
     $.ajax({
-        url: '/User/UpdateFile',
+        url: '/User/UpdateActivities',
         data: formData,
         type: 'post',
         success: function (response) {
@@ -367,7 +290,7 @@ function Update() {
 //Delete
 function Delete(id) {
     $.ajax({
-        url: '/User/DeleteFiles?Id=' + id,
+        url: '/User/DeleteActivities?Id=' + id,
         type: 'post',
 
         success: function (response) {
