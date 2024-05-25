@@ -43,8 +43,20 @@ body {
     bottom: 0px;
 }
 
-.bi{
-    position:absolute;
-    right:-50px;
-    z-index:1;
+
+
+.contact_section .contact-form .invalid {
+    border: 1px solid red;
+}
+
+.contact_section .contact-form .valid{
+    border: 1px solid green;
+}
+
+.invalid {
+    border: 1px solid red;
+}
+
+.valid{
+    border: 1px solid green;
 }

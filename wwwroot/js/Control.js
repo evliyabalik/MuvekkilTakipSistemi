@@ -1,9 +1,5 @@
 ﻿
 //Değişkenler
-var isEmail = false;
-var isEmailR = false;
-var isPass = false;
-var isPassR = false;
 var isTc = false;
 
 
@@ -36,7 +32,6 @@ $("document").ready(function () {
         event.preventDefault();
         var isValid = checkTcNum($(this).val());
         isTc = isValid;
-        updateSubmitState(isValid);
         console.log('isValid ', isValid);
         if (isValid) {
             document.getElementById("Tcno").style.borderColor = "green";
@@ -47,79 +42,176 @@ $("document").ready(function () {
 
         }
     });
-
-
-    //Şifre ve Email Kontrolü
-
-    var checkInputValues = function (input1, input2) {
-        return input1.value === input2.value && input1.value !== "" && input2.value !== "";
-    }
-
-
-
-
-
-
-    // Giriş alanı seçicileri
-    const emailSelector = "#Email";
-    const emailRSelector = "#EmailR";
-    const PassSelector = "#Pass"; 
-    const PassRSelector = "#PassR"; 
-    const SubmitSelector = "#submit"; 
-
-    // Gerçekleştirilen olaylar
-    $(emailSelector).on("keyup focus blur load input mouseover", function () {
-        const isValid = checkInputValues(this, $(emailRSelector)[0]); // Email
-        isEmail = isValid;
-        updateSubmitState(isValid); 
-    });
-
-    $(emailRSelector).on("keyup focus blur load input mouseover", function () {
-        const isValid = checkInputValues(this, $(emailSelector)[0]); // email Tekrar
-        isEmailR = isValid;
-        UpdateEventBgColor(isValid, isEmail, emailSelector, emailRSelector);
-        updateSubmitState(isValid); 
-    });
-
-
-    $(PassSelector).on("keyup focus blur load input", function () {
-        const isValid = checkInputValues(this, $(PassRSelector)[0]); //Şifre 
-        isPass = isValid;
-        updateSubmitState(isValid); 
-    });
-
-    $(PassRSelector).on("keyup focus blur load input", function () {
-        const isValid = checkInputValues(this, $(PassSelector)[0]); //Şifre Tekara
-        isPassR = isValid;
-        UpdateEventBgColor(isValid, isPass, PassSelector, PassRSelector);
-        updateSubmitState(isValid);
-    });
-
-    //Submit disable/enable
-    function updateSubmitState(isValid) {
-        if (isValid && isEmail && isEmailR && isPass &&  isPassR && isTc) {
-            $(SubmitSelector).removeAttr("disabled");
-        }
-        else {
-            $(SubmitSelector).attr("disabled", "disabled");
-        }
-    }
-
-    //Event durum renkleri.
-    function UpdateEventBgColor(isValid, isValid2, eventName, eventName2) {
-        if (isValid && isValid2) {
-            $(eventName).css("border-color", "green");
-            $(eventName2).css("border-color", "green");
-
-        }
-        else {
-            $(eventName).css("border-color", "Red");
-            $(eventName2).css("border-color", "Red");
-        }
-    }
-
-
-
 }); //document.ready
+
+//Şifre ve Email Kontrolü
+
+const form = document.getElementById('myForm');
+const email = document.getElementById('Email');
+const emailR = document.getElementById('EmailR');
+const pass = document.getElementById('Pass');
+const passR = document.getElementById('PassR');
+
+
+
+form.addEventListener('submit', (e) => {
+
+
+    
+
+    if (email.value === emailR.value && pass.value === passR.value) {
+
+        email.classList.add('valid');
+
+        emailR.classList.add('valid');
+
+        pass.classList.add('valid');
+
+        passR.classList.add('valid');
+
+    } else {
+
+        email.classList.remove('valid');
+
+        emailR.classList.remove('valid');
+
+        pass.classList.remove('valid');
+        passR.classList.remove('valid');
+
+        email.classList.add('invalid');
+
+        emailR.classList.add('invalid');
+
+        pass.classList.add('invalid');
+        passR.classList.add('invalid');
+
+
+
+    }
+
+
+
+    if (isTc && email.value === emailR.value && pass.value === passR.value) {
+
+        console.log('Form gönderilebilir.');
+
+        // Form gönderimini aktif etmek için
+
+        e.target.submit();
+
+    } else {
+
+        console.log('Form gönderilemiyor.');
+
+        e.preventDefault();
+
+    }
+
+});
+
+
+email.addEventListener('input', () => {
+    if (email.value === emailR.value) {
+
+        email.classList.add('valid');
+
+        emailR.classList.add('valid');
+
+        email.classList.remove('invalid');
+
+        emailR.classList.remove('invalid');
+
+    } else {
+
+        email.classList.remove('valid');
+
+        emailR.classList.remove('valid');
+
+        email.classList.add('invalid');
+
+        emailR.classList.add('invalid');
+
+    }
+
+});
+
+
+emailR.addEventListener('input', () => {
+
+    if (email.value === emailR.value) {
+
+        email.classList.add('valid');
+
+        emailR.classList.add('valid');
+
+        email.classList.remove('invalid');
+
+        emailR.classList.remove('invalid');
+
+    } else {
+
+        email.classList.remove('valid');
+
+        emailR.classList.remove('valid');
+        email.classList.add('invalid');
+
+        emailR.classList.add('invalid');
+    }
+
+});
+
+
+pass.addEventListener('input', () => {
+
+    if (pass.value === passR.value) {
+
+        pass.classList.add('valid');
+
+        passR.classList.add('valid');
+
+        pass.classList.remove('invalid');
+
+        passR.classList.remove('invalid');
+
+    } else {
+
+        pass.classList.remove('valid');
+
+        passR.classList.remove('valid');
+
+        pass.classList.add('invalid');
+        passR.classList.add('invalid');
+
+    }
+
+});
+
+
+passR.addEventListener('input', () => {
+
+    if (pass.value === passR.value) {
+
+        pass.classList.add('valid');
+
+        passR.classList.add('valid');
+
+        pass.classList.remove('invalid');
+
+        passR.classList.remove('invalid');
+
+    } else {
+
+        pass.classList.remove('valid');
+
+        passR.classList.remove('valid');
+        pass.classList.add('invalid');
+        passR.classList.add('invalid');
+
+    }
+
+});
+
+
+
 
 

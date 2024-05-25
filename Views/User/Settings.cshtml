@@ -11,7 +11,7 @@
 
     <div class="row-cols-lg-6">
      
-        <form enctype="multipart/form-data" method="post" style="margin:10px;">
+        <form id="myForm" enctype="multipart/form-data" method="post" style="margin:10px;">
           <div class="form-group">
                 @if (ViewData["sonuc"] != null)
                 {
@@ -60,6 +60,5 @@
 
 @section Scripts
            {
-
-    <script type="text/javascript" src="~/js/Control.js"></script>
+    <script type="text/javascript" src="~/js/SettingsControl.js"></script>
 }

@@ -127,9 +127,12 @@ namespace MuvekkilTakipSistemi.Controllers
 		{
 			var id = HttpContext.Session.GetInt32("UserId");
 			var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
+			var isClient = _context.Muvekkil.FirstOrDefault(m => m.Tcno == info.Tcno || m.GSM==info.GSM);
 
 			if (!ModelState.IsValid)
 			{
+				if (isClient!=null) { return Json("Müvekkil zaten kayıtlı."); }
+
 				info.Avukat = avukat.Adsoyad;
 
 				_context.Muvekkil.Add(info);

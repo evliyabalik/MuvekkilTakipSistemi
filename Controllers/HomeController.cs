@@ -124,6 +124,8 @@ namespace MuvekkilTakipSistemi.Controllers
 		{
 			if (!String.IsNullOrEmpty(Tcno))
 			{
+				var getUser = _context.User.FirstOrDefault(u => u.Tcno == Tcno || u.BaroSicilNo==BaroSicilNo);
+				var getUserContact = _context.UserContact.FirstOrDefault(uc => uc.Email == Email || uc.Telno == Telno);
 				try
 				{
 					var user = new User()
@@ -143,12 +145,10 @@ namespace MuvekkilTakipSistemi.Controllers
 					};
 
 
-					if (
-						_context.User.FirstOrDefault(u => u.Tcno == Tcno) != null || _context.User.FirstOrDefault(u => u.BaroSicilNo == BaroSicilNo) != null
-					  || _context.UserContact.FirstOrDefault(u => u.Email == Email) != null || _context.UserContact.FirstOrDefault(u => u.Telno == Telno) != null
-					  )
+
+					if (getUser!=null || getUserContact!=null)
 					{
-						ViewData["registerValue"] = "Kullanýcý zaten kayýtlý";
+						ViewData["registerValue"] = "Kullanýcý zaten kayýtlý. Þifrenizi unuttuysanýz \"Þifremi Unuttum\" linkinden yenileyebilirsiniz.";
 						ViewData["Class"] = "bg-warning";
 						return View();
 					}
@@ -190,7 +190,7 @@ namespace MuvekkilTakipSistemi.Controllers
 			{
 				var adSoyad = _context.User.Select(u => u.Adsoyad).FirstOrDefault();
 				var emailTo = _context.UserContact.Select(u => u.Email).FirstOrDefault();
-				
+
 
 
 				//Token oluþturma
@@ -199,7 +199,7 @@ namespace MuvekkilTakipSistemi.Controllers
 
 				var message = $"Sayýn {adSoyad}\n\r\n\r" +
 					$"Þifrenizin sýfýrlanmasýný talep ettiniz. Yeni bir þifre seçmek için \"Þifremi sýfýrla\"ya týklayýn þifre.\r\nÞifrenizi deðiþtirmek ayný zamanda API belirtecinizi de sýfýrlayacaktýr\n\r\n\r" +
-					"Link 1 saat sonra aktif olmayacaktýr!"+
+					"Link 1 saat sonra aktif olmayacaktýr!" +
 
 					$"\r\n\r\n{ResetLink}";
 
