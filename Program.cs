@@ -28,6 +28,7 @@ builder.Services.AddHttpContextAccessor();
 // Diðer hizmetleri ekleyin
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddSession(options =>
 {
 	options.Cookie.HttpOnly = true;

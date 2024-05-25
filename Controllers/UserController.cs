@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MuvekkilTakipSistemi.Classes;
 using MuvekkilTakipSistemi.DatabaseContext;
+using MuvekkilTakipSistemi.Helper;
 using MuvekkilTakipSistemi.Models;
 using MuvekkilTakipSistemi.Models.ControlModels;
 
@@ -12,20 +13,26 @@ namespace MuvekkilTakipSistemi.Controllers
 		private readonly ILogger<HomeController> _logger;
 		private readonly MyContext _context;
 		private string _adsoyad;
+		private int? _userId;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
 
-		public UserController(ILogger<HomeController> logger, MyContext context)
+        public UserController(ILogger<HomeController> logger, MyContext context, IWebHostEnvironment hostingEnvironment)
 		{
 			_logger = logger;
 			_context = context;
+			_hostingEnvironment= hostingEnvironment;
 		}
 
 
 		//Clients Operations
 		public IActionResult Index()
 		{
+			var id = HttpContext.Session.GetInt32("UserId");
 			_adsoyad = HttpContext.Session.GetString("Adsoyad");
 			TempData["isim"] = _adsoyad;
+			var getUser = _context.User.Find(id);
+			ViewData["resim"] = getUser.Profil_Resim;
 			ViewBag.GroupAdi = _context.ClientGroupNames.ToList();
 
 			return View();
@@ -35,7 +42,8 @@ namespace MuvekkilTakipSistemi.Controllers
 		{
 			var id = HttpContext.Session.GetInt32("UserId");
 			var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
-
+			var getUser = _context.User.Find(id);
+			ViewData["resim"] = getUser.Profil_Resim;
 			TempData["isim"] = _adsoyad;
 			ViewBag.Mahkeme = _context.Mahkemeleer.ToList();
 			ViewBag.GroupAdi = _context.ClientGroupNames.ToList();
@@ -47,6 +55,8 @@ namespace MuvekkilTakipSistemi.Controllers
 			var id = HttpContext.Session.GetInt32("UserId");
 			var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
 			TempData["isim"] = _adsoyad;
+			var getUser = _context.User.Find(id);
+			ViewData["resim"] = getUser.Profil_Resim;
 			ViewBag.Dosya = _context.Dosyalar.Where(d => d.Avukat == avukat.Adsoyad).ToList();
 			ViewBag.IslemTuru = _context.Islem_Turleri.ToList();
 			ViewBag.YapilanIslem = _context.Yapilan_Islem.ToList();
@@ -58,7 +68,43 @@ namespace MuvekkilTakipSistemi.Controllers
 		public IActionResult Settings()
 		{
 			TempData["isim"] = _adsoyad;
-			return View();
+			_userId = HttpContext.Session.GetInt32("UserId");
+			var getUser= _context.User.Find(_userId);
+			ViewData["resim"] = getUser.Profil_Resim;
+			var model = _context.User.Where(u => u.UserId == _userId).FirstOrDefault();
+			return View(model);
+		}
+
+		[HttpPost]
+		public async  Task<IActionResult> Settings(User user, string PassR, IFormFile Profil)
+		{
+
+			TempData["isim"] = _adsoyad;
+            _userId = HttpContext.Session.GetInt32("UserId");
+			 var getUser = _context.User.Find(_userId);
+            if (Profil != null && Profil.Length > 0)
+            {
+				getUser.Profil_Resim = await UploadFiles.UploadImage(Profil, _hostingEnvironment);
+            }
+			else{
+                TempData["sonuc"] = "Profil resmi kaydedilirken bir hata ile karşılaşıldı";
+                TempData["class"] = "bg-danger";
+            }
+			if(user.Pass!=null && user.Pass==PassR)
+			{
+				getUser.Pass = HtmlEncodes.EncodeTurkishCharacters(HashHelper.GetMd5Hash(user.Pass.Trim()));
+			}
+			else
+			{
+				TempData["sonuc"] = "Şifreler Uyuşmuyor";
+                TempData["class"] = "bg-danger";
+			}
+            _context.User.Update(getUser);
+			_context.SaveChanges();
+
+            TempData["sonuc"] = "Değişiklikler başarıyla uygulandı";
+            TempData["class"] = "bg-success";
+            return RedirectToAction("Settings", "User");
 		}
 
 		public IActionResult Exit()

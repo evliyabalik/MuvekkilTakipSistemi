@@ -25,8 +25,8 @@
 	<title>@ViewData["Title"]</title>
 
 	<style>
-		input{
-			margin-top:5px;
+		input {
+			margin-top: 5px;
 		}
 	</style>
 
@@ -42,6 +42,7 @@
 					<a class="navbar-brand" href="@Url.Action(nav[0].ActionName, nav[0].ControlName,null)">
 						<span>
 							Müvekkil Takip Sistemi
+
 						</span>
 					</a>
 
@@ -59,20 +60,22 @@
 							</ul> *@
 							<div class="user_option">
 								<div>
-									<p class="text-white profil-text" >
+									<p class="text-white profil-text">
 										@await Component.InvokeAsync("UserName")
 									</p>
 								</div>
 								<div class="dropdown">
 									<button class="btn btn-primary dropdown-toggle btn-profil" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										@if (ViewData["resim"] == null)
-										{
-											<img src="~/images/user.png" alt="">
-										}
-										else
-										{
-											<img class="profil-resmi" src="~/Yukle/@ViewData["resim"]" alt="Profil Resmi">
-										}
+										<span>
+											@if (ViewData["resim"] == null)
+											{
+												<img src="~/images/user.png" alt="">
+											}
+											else
+											{
+												<img class="profil-resmi" src="~/Yukle/@ViewData["resim"]" alt="Profil Resmi">
+											}
+										</span>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<a class="dropdown-item" href=@Url.ActionLink("Exit","User")>Çıkış Yap</a>
@@ -119,7 +122,7 @@
 
 
 	<!-- footer section -->
-	<section class="container-fluid footer_section fixed-bottom">
+	<section class="container-fluid footer_section">
 		<p>
 			&copy; 2024 Tüm Hakları Saklıdır.
 		</p>

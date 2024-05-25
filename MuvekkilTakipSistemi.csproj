@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\esigned-1.0.0\css\" />
     <Folder Include="wwwroot\esigned-1.0.0\js\" />
+    <Folder Include="wwwroot\Yukle\" />
   </ItemGroup>
 
   <ItemGroup>
