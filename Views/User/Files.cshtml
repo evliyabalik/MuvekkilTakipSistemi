@@ -144,7 +144,7 @@
 				</div>
 				<div class="mb-2">
 					<select name="Dosya_Durumu" id="Dosya_Durumu" class="form-control validate-input">
-						<option selected disabled>Dosya Durumu</option>
+						<option selected disabled>Dosya Kapandı mı</option>
 						<option value="Hayır">Hayır</option>
 						<option value="Evet">Evet</option>
 					</select>
@@ -176,6 +176,7 @@
 				</div>
 				<div class="mb-2">
 					<select name="GrupAdi" id="GrupAdi" class="form-control">
+						<option selected disabled>Müvekkil Grubu</option>
 						@foreach (var item in (List<ClientGroupName>)ViewBag.GroupAdi)
 						{
 							<option value="@item.Group_Name">@item.Group_Name</option>

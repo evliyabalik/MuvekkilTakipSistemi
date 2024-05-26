@@ -84,7 +84,7 @@ namespace MuvekkilTakipSistemi.Controllers
 			 var getUser = _context.User.Find(_userId);
             if (Profil != null && Profil.Length > 0)
             {
-				getUser.Profil_Resim = await UploadFiles.UploadImage(Profil, _hostingEnvironment);
+				getUser.Profil_Resim = await UploadFiles.UploadImage(Profil, _hostingEnvironment, "Yukle");
             }
 			else{
                 TempData["sonuc"] = "Profil resmi kaydedilirken bir hata ile karşılaşıldı";

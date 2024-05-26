@@ -3,7 +3,7 @@
 	public class UploadFiles
 	{
 
-        public async static Task<string> UploadImage(IFormFile Profil, IWebHostEnvironment env)
+        public async static Task<string> UploadImage(IFormFile Profil, IWebHostEnvironment env, string folder)
         {
             string dosyaIsmi = "";
 
@@ -12,7 +12,7 @@
             if (Profil.Length > 0 && Path.GetExtension(Profil.FileName).ToUpper() == ".JPG" || Path.GetExtension(Profil.FileName).ToUpper() == ".JPEG" || Path.GetExtension(Profil.FileName).ToUpper() == ".PNG")
             {
                 var wwwRootPath = env.WebRootPath;
-                var uploadFolder = Path.Combine(wwwRootPath, "Yukle");
+                var uploadFolder = Path.Combine(wwwRootPath, folder);
                 var dosyaYolu = Path.Combine(uploadFolder, Profil.FileName);
 
                 // İzin kontrolü

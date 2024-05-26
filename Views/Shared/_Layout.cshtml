@@ -32,7 +32,7 @@
 	@await Html.PartialAsync("_Styles")
 </head>
 <body>
-	<div class="hero_area">
+	<div class="hero_area" id="HeroArea">
 		<!-- header section strats -->
 		<header class="header_section">
 			<div class="container-fluid">
@@ -195,7 +195,10 @@
 	-->
 	<!-- end owl carousel script -->
 	@await Html.PartialAsync("_Scripts");
-
+	<script>
+		const div = document.querySelector('div#HeroArea'); // Özelleştirilmiş bir ID'ye sahip div'i seçin
+		div.style.backgroundImage = 'url("../images/lawyerOffice.png")'; // Yeni background-image URL'sini girin
+	</script>
 
 </body>
 

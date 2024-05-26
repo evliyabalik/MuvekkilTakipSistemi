@@ -1,0 +1,60 @@
+﻿@{
+	List<Navigation> nav = new List<Navigation>()
+			{
+				new Navigation(){MenuText="Müvekiller",ActionName="Index",ControlName="User"},
+				new Navigation(){MenuText="Dosyalar",ActionName="Files",ControlName="User"},
+				new Navigation(){MenuText="İşlemler",ActionName="Activities",ControlName="User"},
+			};
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Basic -->
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<!-- Site Metas -->
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<meta charset="utf-8" />
+
+	<title>@ViewData["Title"]</title>
+	
+
+	<style>
+		input {
+			margin-top: 5px;
+		}
+	</style>
+
+	@await Html.PartialAsync("_Styles")
+</head>
+<body>
+	
+	<!-- end header section -->
+
+	<div class="container-fluid">
+		<div class="row">
+			
+			@RenderBody()
+
+		</div>
+	</div>
+
+
+
+
+
+
+	<!-- JavaScript -->
+	@await Html.PartialAsync("_Scripts");
+	@await RenderSectionAsync("Scripts", required: false)
+	
+
+</body>
+
+</html>

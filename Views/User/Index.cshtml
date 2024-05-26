@@ -77,6 +77,7 @@
 				</div>
 				<div class="mb-2">
 					<select name="GrupAdi" id="GrupAdi" class="form-control">
+						<option selected disabled>Müvekkil Grubu</option>
 					@foreach (var item in (List<ClientGroupName>)ViewBag.GroupAdi)
 					{
 						<option value="@item.Group_Name">@item.Group_Name</option>

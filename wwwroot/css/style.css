@@ -72,14 +72,14 @@ body {
 .hero_area {
     height: 100vh;
     background-color: #b5caee;
-    background-image: url(../images/lawyerOffice.png);
+    /*background-image: url(../images/lawyerOffice.png);*/
     background-size: cover;
 }
 
 .Login-area {
     height: 30vh;
     background-color: black;
-    background-image: url(../images/lawyerOffice.png);
+    /*background-image: url(../images/lawyerOffice.png);*/
     background-size: cover;
 }
 

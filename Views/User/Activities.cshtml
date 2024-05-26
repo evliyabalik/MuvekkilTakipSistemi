@@ -92,12 +92,13 @@
 
 					<div class="mb-2">
 						<select name="Muvekkil" id="Muvekkil" class="form-control validate-input">
-						
+							
 						</select>
 					</div>
 
 					<div class="mb-2">
 						<select name="Dosya" id="Dosya" class="form-control validate-input">
+							<option selected disabled>Dosyalar</option>
 							@foreach (var item in (List<Files>)ViewBag.Dosya)
 							{
 								<option value="@item.DosyaNo">@item.DosyaNo - @item.Muvekkil</option>

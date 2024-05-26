@@ -126,6 +126,15 @@ namespace MuvekkilTakipSistemi.Controllers
 			{
 				var getUser = _context.User.FirstOrDefault(u => u.Tcno == Tcno || u.BaroSicilNo==BaroSicilNo);
 				var getUserContact = _context.UserContact.FirstOrDefault(uc => uc.Email == Email || uc.Telno == Telno);
+
+
+				if (getUser != null || getUserContact != null)
+				{
+					ViewData["registerValue"] = "Kullanýcý zaten kayýtlý. Þifrenizi unuttuysanýz \"Þifremi Unuttum\" linkinden yenileyebilirsiniz.";
+					ViewData["Class"] = "bg-warning";
+					return View();
+				}
+
 				try
 				{
 					var user = new User()
@@ -138,23 +147,16 @@ namespace MuvekkilTakipSistemi.Controllers
 						IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString()
 					};
 
+					_context.User.Add(user);
+					_context.SaveChanges();
+
 					var userContact = new UserContact()
 					{
+						UserId=user.UserId,
 						Email = HtmlEncodes.EncodeTurkishCharacters(Email.Trim()),
 						Telno = HtmlEncodes.EncodeTurkishCharacters(Telno.Trim())
 					};
 
-
-
-					if (getUser!=null || getUserContact!=null)
-					{
-						ViewData["registerValue"] = "Kullanýcý zaten kayýtlý. Þifrenizi unuttuysanýz \"Þifremi Unuttum\" linkinden yenileyebilirsiniz.";
-						ViewData["Class"] = "bg-warning";
-						return View();
-					}
-
-					_context.User.Add(user);
-					_context.SaveChanges();
 
 					_context.UserContact.Add(userContact);
 					_context.SaveChanges();

@@ -16,6 +16,7 @@ namespace MuvekkilTakipSistemi.Models
         public string Pass { get; set; }
         public int StatusId { get; set; }
         public string IpAddress { get; set; }
+        public DateTime? RegisterDate { get; set; } = DateTime.Now;
         public string? Profil_Resim { get; set; }
 
 	}

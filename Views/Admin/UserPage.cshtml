@@ -1,0 +1,58 @@
+﻿@using MuvekkilTakipSistemi.Models.ControlModels
+@model MuvekkilTakipSistemi.Models.ControlModels.UserAndContact
+
+@{
+	ViewData["Title"] = "Admin-User Page";
+	Layout = "_LayoutAdmin";
+
+}
+
+<div class="container">
+	<div class="row">
+		<h3 class="text-center">Kullanıcılar</h3>
+		<hr />
+		@if (ViewData["yaz"] != null)
+		{
+			<p>@ViewData["yaz"]</p>
+		}
+		<table class="table table-striped table-success table-responsive table-hover">
+			<thead>
+			<th>Kullanıcı id</th>
+			<th>Tc No</th>
+			<th>Baro Sicil No</th>
+			<th>Ad Soyad</th>
+			<th>Statüsü</th>
+			<th>Kayıt İp Adresi</th>
+			<th>Kayıt Tarihi</th>
+			<th>Email</th>
+			<th>Cep Tel</th>
+			<th>İşlem</th>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.UserAndContacts)
+				{
+				<tbody>
+				<td>@item.Users.UserId</td>
+				<td>@item.Users.Tcno</td>
+				<td>@item.Users.BaroSicilNo</td>
+				<td>@item.Users.Adsoyad</td>
+				<td>@item.Users.StatusId</td>
+				<td>@item.Users.IpAddress</td>
+				<td>@item.Users.RegisterDate</td>
+				<td>@item.UserContact.Email</td>
+				<td>@item.UserContact.Telno</td>
+				<td>
+					<form method="get">
+						<button name="Edit" id="Edit" value="@item.Users.UserId" class="btn btn-primary" type="submit">Edit</button>
+						<button name="Del" id="Del" value="@item.Users.UserId" class="btn btn-danger" type="submit">Sil</button>
+					</form>
+				</td>
+				</tbody>
+				}
+			
+
+			</tbody>
+
+		</table>
+	</div>
+</div>

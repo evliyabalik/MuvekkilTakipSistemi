@@ -74,9 +74,8 @@ function updateSelect() {
             // Loop through the updated data and append new options
             $.each(data, function (index, value) {
                 $('#Muvekkil').append('<option value="' + value.ad_Unvan + '">' + value.ad_Unvan + '</option>');
-
             });
-
+            
         },
         error: function () {
 

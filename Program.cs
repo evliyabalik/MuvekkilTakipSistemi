@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Baðlantý dizisi
 builder.Services.AddDbContext<MyContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Latin harflerini desteklemesi için
 builder.Services.AddSingleton(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.Latin1Supplement, UnicodeRanges.LatinExtendedA }));
@@ -42,9 +42,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -62,19 +62,13 @@ app.Use(async (context, next) =>
 {
 	var endpoint = context.GetEndpoint();
 
-	
+
 	// HomeController veya diðer controller'lar için
 	if (endpoint != null)
 	{
 		var controllerActionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();
 
-	   if (controllerActionDescriptor != null && controllerActionDescriptor.ControllerName != "User")
-		{
-			await next();
-			return;
-		}
-
-		else
+		if (controllerActionDescriptor != null && controllerActionDescriptor.ControllerName == "User")
 		{
 			if (!context.Session.Keys.Contains("UserId"))
 			{
@@ -82,11 +76,30 @@ app.Use(async (context, next) =>
 				return;
 			}
 		}
+		else if (controllerActionDescriptor != null && controllerActionDescriptor.ControllerName == "Admin" && controllerActionDescriptor.ActionName=="UserPage" 
+		|| controllerActionDescriptor.ActionName == "Settings" || controllerActionDescriptor.ActionName == "AddPage" || controllerActionDescriptor.ActionName == "AddAdmin")
+		{
+			if (!context.Session.Keys.Contains("AdminId"))
+			{
+				context.Response.Redirect("/Admin/Index"); // Eðer session yoksa, login sayfasýna yönlendir.
+				return;
+			}
+		}
+
+		else
+		{
+
+			await next();
+			return;
+		}
 	}
 
 	// UserController için
 	await next();
 });
+
+
+
 
 
 app.MapControllerRoute(
