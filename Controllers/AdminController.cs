@@ -18,7 +18,7 @@ namespace MuvekkilTakipSistemi.Controllers
 		{
 			_logger = logger;
 			_context = context;
-
+			
 		}
 
 		public IActionResult Index()
@@ -29,6 +29,9 @@ namespace MuvekkilTakipSistemi.Controllers
 		[HttpPost]
 		public IActionResult Index(string Kullanici_Adi, string Pass)
 		{
+			
+
+
 			var kull_adi = _context.Admins.FirstOrDefault(u => u.Kullanici_adi == HtmlEncodes.EncodeTurkishCharacters(Kullanici_Adi.Trim()));
 			var pass = _context.Admins.FirstOrDefault(u => u.Pass == HashHelper.GetMd5Hash(Pass.Trim()));
 
@@ -41,16 +44,15 @@ namespace MuvekkilTakipSistemi.Controllers
 
 			if (kull_adi != null && pass != null)
 			{
-				/*ViewData["login"] = "Tebrikler Giriş Başarılı";
-				ViewData["Class"] = "bg-success";*/
-
 				return RedirectToAction("UserPage", "Admin");
 			}
 			else
 			{
-				ViewData["login"] = "Baro sicil no veya şifre hatalı";
+				ViewData["login"] = "Kullanıcı adı veya şifre hatalı";
 				ViewData["Class"] = "bg-warning";
 			}
+
+			
 
 
 			return View();
@@ -63,11 +65,13 @@ namespace MuvekkilTakipSistemi.Controllers
 														 join contact in _context.UserContact on user.UserId equals contact.UserId
 														 select new UserAndContact { Users = user, UserContact = contact }).ToList()
 		};
+
+
 			return View(model);
 		}
 
 		[HttpGet]
-		public IActionResult UserPage(string Del, string Edit)
+		public IActionResult UserPage(string Del)
 		{
 
 			UserAndContact model = new UserAndContact()
@@ -96,11 +100,7 @@ namespace MuvekkilTakipSistemi.Controllers
 				return RedirectToAction("UserPage", "Admin");
 			}
 
-			if (Edit != null)
-			{
-				ViewData["yaz"] = Edit;
-				
-			}
+			
 
 			return View(model);
 		
@@ -108,19 +108,91 @@ namespace MuvekkilTakipSistemi.Controllers
 			
 		}
 
-		public IActionResult AddPage()
+		public IActionResult AddAdmin()
 		{
+			
+
+			ViewBag.Statu = _context.Status.ToList();
+
 			return View();
 		}
 
-		public IActionResult AddAdmin()
+
+		public JsonResult GetAdmin()
 		{
-			return View();
+			var admin = _context.Admins.ToList();
+			return Json(admin);
 		}
+
+
+		public JsonResult InsertAdmin(AdminUser info)
+		{
+			var isAdmin = _context.Admins.FirstOrDefault(m => m.Adsoyad == info.Adsoyad || m.Email == info.Email);
+
+			if (ModelState.IsValid)
+			{
+				if (isAdmin != null) { return Json("Müvekkil zaten kayıtlı."); }
+				info.Pass = HashHelper.GetMd5Hash(HtmlEncodes.EncodeTurkishCharacters(info.Pass.Trim()));
+				
+				_context.Admins.Add(info);
+				_context.SaveChanges();
+				return Json("Müvekkil Başarı ile kaydedildi.");
+			}
+
+			return Json("Model Doğrulaması Başarısız.");
+		}
+		[HttpGet]
+		public JsonResult EditAdmin(int id)
+		{
+			var admin = _context.Admins.Find(id);
+			return Json(admin);
+		}
+
+		[HttpPost]
+		public JsonResult UpdateAdmin(AdminUser admin)
+		{
+			if (ModelState.IsValid)
+			{
+				if (admin.Pass.Length < 64)
+				{
+					admin.Pass = HashHelper.GetMd5Hash(HtmlEncodes.EncodeTurkishCharacters(admin.Pass.Trim()));
+				}
+
+
+				_context.Attach(admin);
+				_context.Entry(admin).State=EntityState.Modified;
+				_context.SaveChanges();
+				return Json("Güncelleme Başarılı");
+			}
+			return Json("Güncelleme Başarısız");
+		}
+
+
+		[HttpPost]
+		public JsonResult DeleteAdmin(int id)
+		{
+			var admin = _context.Admins.Find(id);
+			if (admin != null)
+			{
+
+				_context.Admins.Remove(admin);
+				_context.SaveChanges();
+				return Json("Silme Başarılı");
+			}
+			return Json("Silme Başarısız");
+		}
+
 
 		public IActionResult Settings()
 		{
+			
 			return View();
+		}
+
+		public IActionResult Exit()
+		{
+			HttpContext.Session.Clear();
+			return RedirectToAction("Index", "Admin");
 		}
 	}
 }

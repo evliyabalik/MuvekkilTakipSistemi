@@ -1,9 +1,9 @@
 ﻿//Değişkenler
 var isTc = false;
 //Tc Kontrolü
-$("document").ready(function () {
+$("document").ready(function() {
 
-    var checkTcNum = function (value) {
+    var checkTcNum = function(value) {
         value = value.toString();
         var isEleven = /^[0-9]{11}$/.test(value);
         var totalX = 0;
@@ -24,7 +24,7 @@ $("document").ready(function () {
     };
 
 
-    $('#Tcno').on('keyup focus blur load input mouseover', function (event) {
+    $('#Tcno').on('keyup focus blur load input mouseover', function(event) {
         event.preventDefault();
         var isValid = checkTcNum($(this).val());
         isTc = isValid;

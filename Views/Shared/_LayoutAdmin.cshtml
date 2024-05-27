@@ -1,9 +1,10 @@
 ﻿@{
 	List<Navigation> nav = new List<Navigation>()
 			{
-				new Navigation(){MenuText="Müvekiller",ActionName="Index",ControlName="User"},
-				new Navigation(){MenuText="Dosyalar",ActionName="Files",ControlName="User"},
-				new Navigation(){MenuText="İşlemler",ActionName="Activities",ControlName="User"},
+				new Navigation(){MenuText="Kullanıcılar",ActionName="UserPage",ControlName="Admin"},
+				new Navigation(){MenuText="Admin",ActionName="AddAdmin",ControlName="Admin"},
+				new Navigation(){MenuText="Site Ayarları",ActionName="Settings",ControlName="Admin"},
+				new Navigation(){MenuText="Mesajlar",ActionName="Message",ControlName="Admin"},
 			};
 }
 
@@ -23,7 +24,7 @@
 	<meta charset="utf-8" />
 
 	<title>@ViewData["Title"]</title>
-	
+
 
 	<style>
 		input {
@@ -34,12 +35,18 @@
 	@await Html.PartialAsync("_Styles")
 </head>
 <body>
-	<div class="Login-area" id="LoginArea">
+	<div class="admin-panel" id="admin-panel">
 		<!-- header section strats -->
 		<header class="header_section">
 			<div class="container-fluid">
-				
+				<h1 class="text-center">Admin Panel</h1>
+				<div class="exit-btn">
+					<a class="btn btn-outline-danger" asp-action="Exit" asp-asp-controller="Admin">Çıkış</a>
+				</div>
 			</div>
+
+
+
 		</header>
 	</div>
 	<!-- end header section -->
@@ -74,7 +81,7 @@
 	<!-- JavaScript -->
 	@await Html.PartialAsync("_Scripts");
 	@await RenderSectionAsync("Scripts", required: false)
-	
+
 
 </body>
 

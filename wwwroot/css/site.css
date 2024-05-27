@@ -43,6 +43,21 @@ body {
     bottom: 0px;
 }
 
+.admin-panel{
+    width:100%;
+    height:auto;
+    padding:10px;
+    background-color:black;
+    color:white;
+}
+.exit-btn{
+    position:absolute;
+    right:5%;
+    text-align:center;
+    top:1%;
+}
+
+
 
 
 .contact_section .contact-form .invalid {
