@@ -77,7 +77,7 @@ app.Use(async (context, next) =>
 			}
 		}
 		else if (controllerActionDescriptor != null && controllerActionDescriptor.ControllerName == "Admin" && controllerActionDescriptor.ActionName=="UserPage" 
-		|| controllerActionDescriptor.ActionName == "Settings" || controllerActionDescriptor.ActionName == "AddPage" || controllerActionDescriptor.ActionName == "AddAdmin")
+		|| controllerActionDescriptor.ActionName == "Settings" || controllerActionDescriptor.ActionName == "Message" || controllerActionDescriptor.ActionName == "AddAdmin")
 		{
 			if (!context.Session.Keys.Contains("AdminId"))
 			{

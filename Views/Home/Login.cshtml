@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
+@{
     ViewData["Title"] = "Giriş Yap";
     Layout = "_Layout2";
 }
@@ -44,3 +45,9 @@
        
     </div>
 </section>
+@section Scripts
+{
+    <script>
+        setBackgroundImage('#LoginArea', '@Model.settings[0].Banner');
+    </script>
+}

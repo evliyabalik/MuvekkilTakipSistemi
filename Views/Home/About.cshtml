@@ -1,4 +1,5 @@
-﻿
+﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
+
 @{
 	ViewData["Title"] = "Hakkımızda";
 }
@@ -49,4 +50,9 @@
     </p>
 </div>
 
-<!-- end info_section -->
+@section Scripts
+{
+    <script>
+        setBackgroundImage('#HeroArea', '@Model.settings[0].Banner');
+    </script>
+}

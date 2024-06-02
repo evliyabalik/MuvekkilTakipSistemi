@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
+
+@{
 	ViewData["Title"] = "Kayıt Ol";
     Layout = "_Layout2";
 }
@@ -69,7 +71,9 @@
 
                         @section Scripts
                         {
-                            
+                            <script>
+                                setBackgroundImage('#LoginArea', '@Model.settings[0].Banner');
+                            </script>
 
                             <script type="text/javascript" src="~/js/Control.js"></script>
                         }

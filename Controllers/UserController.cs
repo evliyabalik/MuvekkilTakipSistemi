@@ -33,6 +33,8 @@ namespace MuvekkilTakipSistemi.Controllers
 			TempData["isim"] = _adsoyad;
 			var getUser = _context.User.Find(id);
 			ViewData["resim"] = getUser.Profil_Resim;
+			var bg = _context.SiteSettings.Where(s => s.Id == 1).ToList();
+			ViewData["bg"] = bg[0].Banner;
 			ViewBag.GroupAdi = _context.ClientGroupNames.ToList();
 
 			return View();
@@ -45,6 +47,9 @@ namespace MuvekkilTakipSistemi.Controllers
 			var getUser = _context.User.Find(id);
 			ViewData["resim"] = getUser.Profil_Resim;
 			TempData["isim"] = _adsoyad;
+
+			var bg = _context.SiteSettings.Where(s => s.Id == 1).ToList();
+			ViewData["bg"] = bg[0].Banner;
 			ViewBag.Mahkeme = _context.Mahkemeleer.ToList();
 			ViewBag.GroupAdi = _context.ClientGroupNames.ToList();
 			return View();
@@ -56,6 +61,9 @@ namespace MuvekkilTakipSistemi.Controllers
 			var avukat = _context.User.Where(u => u.UserId == id).FirstOrDefault();
 			TempData["isim"] = _adsoyad;
 			var getUser = _context.User.Find(id);
+			var bg = _context.SiteSettings.Where(s => s.Id == 1).ToList();
+			ViewData["bg"] = bg[0].Banner;
+
 			ViewData["resim"] = getUser.Profil_Resim;
 			ViewBag.Dosya = _context.Dosyalar.Where(d => d.Avukat == avukat.Adsoyad).ToList();
 			ViewBag.IslemTuru = _context.Islem_Turleri.ToList();
@@ -71,6 +79,8 @@ namespace MuvekkilTakipSistemi.Controllers
 			_userId = HttpContext.Session.GetInt32("UserId");
 			var getUser= _context.User.Find(_userId);
 			ViewData["resim"] = getUser.Profil_Resim;
+			var bg = _context.SiteSettings.Where(s => s.Id == 1).ToList();
+			ViewData["bg"] = bg[0].Banner;
 			var model = _context.User.Where(u => u.UserId == _userId).FirstOrDefault();
 			return View(model);
 		}
@@ -80,7 +90,10 @@ namespace MuvekkilTakipSistemi.Controllers
 		{
 
 			TempData["isim"] = _adsoyad;
-            _userId = HttpContext.Session.GetInt32("UserId");
+			var bg = _context.SiteSettings.Where(s => s.Id == 1).ToList();
+			ViewData["bg"] = bg[0].Banner;
+
+			_userId = HttpContext.Session.GetInt32("UserId");
 			 var getUser = _context.User.Find(_userId);
             if (Profil != null && Profil.Length > 0)
             {

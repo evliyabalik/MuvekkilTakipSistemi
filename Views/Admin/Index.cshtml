@@ -2,7 +2,7 @@
 	Layout = "_LayoutLogin";
 }
 <div class="container ">
-	<div  style="margin-top:20%; margin-left:20%; background-color:aquamarine; padding:20px;	width:60%;">
+	<div  style="margin-top:20%; margin-left:20%; background-color:black; padding:20px; width:60%; color:white;">
 		<form method="post" style="width:70%; margin:auto;">
 			<div class="form-group">
 				<h1 class="text-center">Admin Giriş</h1>
@@ -16,5 +16,10 @@
 			</div>
 			<input type="submit" value="Giriş Yap" class="btn btn-primary" />
 		</form>
+
+		<div class="@ViewData["Class"] rounded-pill" style="padding: 0px 15px 0 15px; color:black;">
+			<p>@ViewData["login"]</p>
+		</div>
 	</div>
+	
 </div>

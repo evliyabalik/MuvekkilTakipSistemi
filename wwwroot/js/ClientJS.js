@@ -169,7 +169,7 @@ function Edit(id) {
 
             else {
                 $('#ClientModal').modal('show');
-                $('#modalTitle').text('Güncelle')
+               $('#modalTitle').text('G\u00FCncelle');
                 $('#Save').css('display', 'none');
                 $('#Update').css('display', 'block');
                 $('#id').val(response.id);

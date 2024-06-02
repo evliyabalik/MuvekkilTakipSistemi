@@ -24,6 +24,7 @@ namespace MuvekkilTakipSistemi.DatabaseContext
         public DbSet<OdemeSekli> Odeme_Sekli { get; set; }
         public DbSet<AdminUser> Admins { get; set; }
         public DbSet<Statu> Status { get; set; }
+        public DbSet<SiteSettings> SiteSettings { get; set; }
 
 
       

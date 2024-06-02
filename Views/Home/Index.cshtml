@@ -1,218 +1,159 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
+
+@{
+	ViewData["Title"] = "Home Page";
 }
 
 <!-- do section -->
 
 <section class="do_section layout_padding">
-    <div class="container">
-        <div class="heading_container">
-            <h2>
-                Ne yapıyoruz
-            </h2>
-            <p>
-                Davalarınızı ve dosyalarınızı ofise bağlı kalmadan yönetmenizi sağlıyoruz. 
-                İlkel çalışma modellerine son veriyor, işlemlerinizi her yerde kolaylıkla sürdürmenizi sağlıyoruz. 
-                Daha fazla zaman kazanın, işlerinizi dijital dünyada halledin.
-            </p>
-        </div>
-       
-    </div>
+	<div class="container">
+		<div class="heading_container">
+			<h2>
+				Ne yapıyoruz
+			</h2>
+			<p>
+				Davalarınızı ve dosyalarınızı ofise bağlı kalmadan yönetmenizi sağlıyoruz.
+				İlkel çalışma modellerine son veriyor, işlemlerinizi her yerde kolaylıkla sürdürmenizi sağlıyoruz.
+				Daha fazla zaman kazanın, işlerinizi dijital dünyada halledin.
+			</p>
+		</div>
+
+	</div>
 </section>
 
 <!-- end do section -->
 <!-- who section -->
 
 <section class="who_section ">
-    <div class="container">
-        <div class="row">
-    
-            <div class="col-md-5">
-                <div class="img-box">
-                    <img src="~/images/who.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="detail-box">
-                    <div class="heading_container">
-                        <h2>
-                            BİZ KİMİZ?
-                        </h2>
-                    </div>
-                    <p>
-                        Müvekkil Takip Sistemi, avukatlık bürolarının iş yükünü hafifletmek ve müvekkil ilişkilerini optimize etmek için
-                        tasarlanmış bir platformdur. Amacımız, avukatların zamanlarını daha verimli kullanmalarını ve müvekkillerine en üst düzeyde hizmeti 
-                        sunmalarını sağlamaktır.
-                    </p>
-                    <div>
-                        <a href=@Url.ActionLink("About","Home")>
-                            Okumaya devam et
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-5">
+				<div class="img-box">
+					<img src="~/images/who.jpg" alt="">
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="detail-box">
+					<div class="heading_container">
+						<h2>
+							BİZ KİMİZ?
+						</h2>
+					</div>
+					<p>
+						Müvekkil Takip Sistemi, avukatlık bürolarının iş yükünü hafifletmek ve müvekkil ilişkilerini optimize etmek için
+						tasarlanmış bir platformdur. Amacımız, avukatların zamanlarını daha verimli kullanmalarını ve müvekkillerine en üst düzeyde hizmeti
+						sunmalarını sağlamaktır.
+					</p>
+					<div>
+						<a href=@Url.ActionLink("About","Home")>
+							Okumaya devam et
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- end who section -->
 <!-- work section -->
 <section class="work_section layout_padding">
-    <div class="container">
-        <div class="heading_container">
-            <h2>
-                YARATICI ÇALIŞMALAR
-            </h2>
-            <p>
-                Müvekkillerin hesaplarını takip etmek, 
-                büyük bir emek ve titizlik gerektirir. Her ayrıntının önemsendiği bir süreçtir. Bu bağlamda, sistemimizin egzersizi nedir?
-            </p>
-        </div>
-        <div class="work_container layout_padding2">
-            <div class="box b-1">
-                <img src="~/images/w-1.webp" alt="">
-            </div>
-            <div class="box b-2">
-                <img src="~/images/w-2.webp" alt="">
+	<div class="container">
+		<div class="heading_container">
+			<h2>
+				YARATICI ÇALIŞMALAR
+			</h2>
+			<p>
+				Müvekkillerin hesaplarını takip etmek,
+				büyük bir emek ve titizlik gerektirir. Her ayrıntının önemsendiği bir süreçtir. Bu bağlamda, sistemimizin egzersizi nedir?
+			</p>
+		</div>
+		<div class="work_container layout_padding2">
+			<div class="box b-1">
+				<img src="~/images/w-1.webp" alt="">
+			</div>
+			<div class="box b-2">
+				<img src="~/images/w-2.webp" alt="">
 
-            </div>
-            <div class="box b-3">
-                <img src="~/images/w-3.webp" alt="">
+			</div>
+			<div class="box b-3">
+				<img src="~/images/w-3.webp" alt="">
 
-            </div>
-            <div class="box b-4">
-                <img src="~/images/w-4.webp" alt="">
+			</div>
+			<div class="box b-4">
+				<img src="~/images/w-4.webp" alt="">
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- end work section -->
 <!-- client section -->
-<section class="client_section">
-    <div class="container">
-        <div class="heading_container">
-            <h2>
-                KULLANICILAR NE DİYOR?
-            </h2>
-        </div>
-        <div class="carousel-wrap ">
-            <div class="owl-carousel">
-                <div class="item">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="~/images/c-1.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Tempor incididunt <br>
-                                <span>
-                                    Dipiscing elit
-                                </span>
-                            </h5>
-                            <img src="~/images/quote.png" alt="">
-                            <p>
-                                Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="~/images/c-2.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Tempor incididunt <br>
-                                <span>
-                                    Dipiscing elit
-                                </span>
-                            </h5>
-                            <img src="~/images/quote.png" alt="">
-                            <p>
-                                Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="~/images/c-3.png" alt="">
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Tempor incididunt <br>
-                                <span>
-                                    Dipiscing elit
-                                </span>
-                            </h5>
-                            <img src="~/images/quote.png" alt="">
-                            <p>
-                                Dipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- end client section -->
-
 <!-- contact section -->
 
 <section class="contact_section layout_padding">
-    <div class="container">
+	<div class="container">
 
-        <div class="heading_container">
-            <h2>
-                Bizimle İletişime Geçin
-            </h2>
-        </div>
-        <div class="">
-            <div class="">
-                <div class="row">
-                    <div class="col-md-9 mx-auto">
-                        <div class="contact-form">
-                            <form method="post" action="/Home/Concat">
-                                <div>
-                                    <input type="text" placeholder="Adınız Soyadınız" name="Adsoyad" id="Adsoyad" required maxlength="35">
-                                </div>
-                                <div>
-                                    <input type="tel" placeholder="Telefon Numaranız örn(5xx xxx xx xx)" name="Telno" id="Telno" required maxlength="10">
-                                </div>
-                                <div>
-                                    <input type="email" placeholder="Email Adresiniz" name="Email" id="Email" required maxlength="50">
-                                </div>
+		<div class="heading_container">
+			<h2>
+				Bizimle İletişime Geçin
+			</h2>
+		</div>
+		<div class="">
+			<div class="">
+				<div class="row">
+					<div class="col-md-9 mx-auto">
+						<div class="contact-form">
+							<form method="post" action="/Home/Concat">
+								<div>
+									<input type="text" placeholder="Adınız Soyadınız" name="Adsoyad" id="Adsoyad" required maxlength="35">
+								</div>
+								<div>
+									<input type="tel" placeholder="Telefon Numaranız örn(5xx xxx xx xx)" name="Telno" id="Telno" required maxlength="10">
+								</div>
+								<div>
+									<input type="email" placeholder="Email Adresiniz" name="Email" id="Email" required maxlength="50">
+								</div>
 
-                                <div>
-                                    <select name="Department" id="Department" required class="form-control rounded-pill border-5 show-tick" style="padding:5px 20px 5px 15px">
-                                        <option value="Destek">Destek</option>
-                                        <option value="Satış">Satış</option>
-                                        <option value="Geliştirici">Geliştirici</option>
-                                    </select>
-                                </div>
+								<div>
+									<select name="Department" id="Department" required class="form-control rounded-pill border-5 show-tick" style="padding:5px 20px 5px 15px">
+										<option disabled selected>Departman</option>
+										@foreach (var item in Model.status)
+										{
+											if (item.Id > 2)
+											{
+												<option value="@item.Id">@item.Name</option>
+											}
+										}
 
-                                <div>
-                                    <textarea placeholder="Message" class="input_message" name="Message" id="Message" required></textarea>
+									</select>
+								</div>
 
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn_on-hover" name="Gonder" id="Gonder">
-                                        Gönder
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
-    </div>
+								<div>
+									<textarea placeholder="Message" class="input_message" name="Message" id="Message" required></textarea>
+
+								</div>
+								<div class="d-flex justify-content-center">
+									<button type="submit" class="btn_on-hover" name="Gonder" id="Gonder">
+										Gönder
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- end contact section -->
+@section Scripts {
+	<script>
+		setBackgroundImage('#HeroArea', '@Model.settings[0].Banner');
+	</script>
+}

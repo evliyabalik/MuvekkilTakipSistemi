@@ -3,6 +3,7 @@ using MuvekkilTakipSistemi.Classes;
 using MuvekkilTakipSistemi.DatabaseContext;
 using MuvekkilTakipSistemi.Helper;
 using MuvekkilTakipSistemi.Models;
+using MuvekkilTakipSistemi.Models.ControlModels;
 
 namespace MuvekkilTakipSistemi.Controllers
 {
@@ -19,8 +20,14 @@ namespace MuvekkilTakipSistemi.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
-		}
+            DefaultModels model = new DefaultModels()
+            {
+                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+
+            };
+
+            return View(model);
+        }
 
 		[HttpGet]
 		public IActionResult Index(string token)
@@ -30,8 +37,14 @@ namespace MuvekkilTakipSistemi.Controllers
 				TempData["Hata"] = "Bağlantının zamanı dolmuş";
 			}
 
-			return View();
-		}
+            DefaultModels model = new DefaultModels()
+            {
+                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+
+            };
+
+            return View(model);
+        }
 
 		[HttpPost]
 		public IActionResult Index(ResetPassword rPass)
@@ -64,8 +77,13 @@ namespace MuvekkilTakipSistemi.Controllers
 
 
 
-			return View();
-		}
+            DefaultModels model = new DefaultModels()
+            {
+                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+            };
+
+            return View(model);
+        }
 
 
 	}

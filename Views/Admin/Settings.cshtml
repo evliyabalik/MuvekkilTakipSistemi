@@ -2,3 +2,88 @@
 	Layout = "_LayoutAdmin";
 	ViewData["Title"] = "Admin-Settings";
 }
+
+
+
+
+<div class="container" style="margin-top:20px; margin-left:15px; padding:30px; ">
+	<div class="row-cols-sm-6">
+		<div class="@TempData["class"] rounded-pill" style="padding: 0px 15px 0 15px;">
+			@if (TempData["sonuc"] != null)
+			{
+
+				<p>@TempData["sonuc"]</p>
+				<hr />
+			}
+		</div>
+		<h4>Banner</h4>
+		<form method="post" enctype="multipart/form-data" action="/Admin/AddBanner">
+			<div class="form-group">
+				<label>Site banner değiştir</label>
+				<input type="file" name="Banner" id="Banner" class="form-control" />
+			</div>
+			<input type="submit" value="Gönder" />
+		</form>
+		<hr />
+		<h4>Mahkeme</h4>
+
+	</div>
+	<form method="post" action="/Admin/AddMahkeme">
+		<div class="form-group">
+			<label>Mahkeme ekle (Birden fazla eklemek için aralarına virgül koyun)</label>
+			<input type="text" name="Name" id="Name" class="form-control" />
+		</div>
+		<input type="submit" value="Gönder" />
+	</form>
+	<hr />
+	<h4>İşlem Türü</h4>
+	<form method="post" action="/Admin/AddIslemTuru">
+		<div class="form-group">
+			<label>İşlem türü Ekle (Birden fazla eklemek için aralarına virgül koyun)</label>
+			<input type="text" name="Name" id="Name" class="form-control" />
+		</div>
+		<input type="submit" value="Gönder" />
+	</form>
+	<hr />
+
+	<h4>Yapılan İşlem</h4>
+	<form method="post" action="/Admin/AddYapilanIslem">
+		<div class="form-group">
+			<label>Yapılan işlem tablosuna Ekle (Birden fazla eklemek için aralarına virgül koyun)</label>
+			<input type="text" name="Name" id="Name" class="form-control" />
+		</div>
+		<input type="submit" value="Gönder" />
+	</form>
+	<hr />
+
+	<h4>Ödeme Şekli</h4>
+	<form method="post" action="/Admin/AddOdemeSekli">
+		<div class="form-group">
+			<label>Ödeme Şekli Ekle (Birden fazla eklemek için aralarına virgül koyun)</label>
+			<input type="text" name="Name" id="Name" class="form-control" />
+		</div>
+		<input type="submit" value="Gönder" />
+	</form>
+
+	<hr />
+	<h4>Departman</h4>
+	<form method="post" action="/Admin/AddDepartment">
+		<div class="form-group">
+			<label>Departman Ekle (Birden fazla eklemek için aralarına virgül koyun)</label>
+			<input type="text" name="Name" id="Name" class="form-control" />
+		</div>
+		<input type="submit" value="Gönder" />
+	</form>
+
+	<hr />
+	<h4>Müvekkil Grup</h4>
+	<form method="post" action="/Admin/AddClientGroup">
+		<div class="form-group">
+			<label>Müvekkil Grubu Ekle (Birden fazla eklemek için aralarına virgül koyun)</label>
+			<input type="text" name="Group_Name" id="Group_Name" class="form-control" />
+		</div>
+		<input type="submit" value="Gönder" />
+	</form>
+</div>
+
+

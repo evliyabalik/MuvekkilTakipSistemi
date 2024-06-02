@@ -13,6 +13,9 @@
 			<h3 class="text-center">Kullanıcılar</h3>
 			<hr />
 		</div>
+		<div class="col-md-4" style="">
+			<input type="text" id="searchInput" placeholder="Ara..." class="form-control" /><br />
+		</div>
 
 		<table class="table table-striped table-success table-responsive-lg table-hover text-center">
 			<thead>
@@ -30,27 +33,32 @@
 			<tbody>
 				@foreach (var item in Model.UserAndContacts)
 				{
-				<tbody>
-				<td>@item.Users.UserId</td>
-				<td>@item.Users.Tcno</td>
-				<td>@item.Users.BaroSicilNo</td>
-				<td>@item.Users.Adsoyad</td>
-				<td>@item.Users.StatusId</td>
-				<td>@item.Users.IpAddress</td>
-				<td>@item.Users.RegisterDate</td>
-				<td>@item.UserContact.Email</td>
-				<td>@item.UserContact.Telno</td>
-				<td>
-					<form method="get">
-						<button name="Del" id="Del" value="@item.Users.UserId" class="btn btn-danger" type="submit">Sil</button>
-					</form>
-				</td>
-				</tbody>
+					<tr>
+						<td>@item.Users.UserId</td>
+						<td>@item.Users.Tcno</td>
+						<td>@item.Users.BaroSicilNo</td>
+						<td>@item.Users.Adsoyad</td>
+						<td>@item.Users.StatusId</td>
+						<td>@item.Users.IpAddress</td>
+						<td>@item.Users.RegisterDate</td>
+						<td>@item.UserContact.Email</td>
+						<td>@item.UserContact.Telno</td>
+						<td>
+							<form method="get">
+								<button name="Del" id="Del" value="@item.Users.UserId" class="btn btn-danger" type="submit">Sil</button>
+							</form>
+						</td>
+					</tr>
+
 				}
-
-
 			</tbody>
+
 
 		</table>
 	</div>
 </div>
+
+@section Scripts{
+	<script type="text/javascript" src="~/js/SearchData.js"></script>
+
+}

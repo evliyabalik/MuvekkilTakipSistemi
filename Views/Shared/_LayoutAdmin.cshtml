@@ -1,11 +1,14 @@
 ﻿@{
+
 	List<Navigation> nav = new List<Navigation>()
 			{
-				new Navigation(){MenuText="Kullanıcılar",ActionName="UserPage",ControlName="Admin"},
-				new Navigation(){MenuText="Admin",ActionName="AddAdmin",ControlName="Admin"},
-				new Navigation(){MenuText="Site Ayarları",ActionName="Settings",ControlName="Admin"},
-				new Navigation(){MenuText="Mesajlar",ActionName="Message",ControlName="Admin"},
+				new Navigation(){Id=1, MenuText="Kullanıcılar",ActionName="UserPage",ControlName="Admin"},
+				new Navigation(){Id=2, MenuText="Admin",ActionName="AddAdmin",ControlName="Admin"},
+				new Navigation(){Id=3, MenuText="Mesajlar",ActionName="Message",ControlName="Admin"},
+				new Navigation(){Id=4, MenuText="Site Ayarları",ActionName="Settings",ControlName="Admin"},
+
 			};
+
 }
 
 <!DOCTYPE html>
@@ -50,7 +53,6 @@
 		</header>
 	</div>
 	<!-- end header section -->
-
 	<div class="container-fluid">
 		<div class="row">
 			<nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
@@ -58,13 +60,11 @@
 					<ul class="nav navbar-nav flex-column">
 						@foreach (var item in nav)
 						{
-
 							<li class="nav-item">
 								@Html.ActionLink(item.MenuText, item.ActionName, item.ControlName, null, new { @class = "nav-link" })
 							</li>
 						}
 					</ul>
-
 				</div>
 			</nav>
 
@@ -79,7 +79,8 @@
 
 
 	<!-- JavaScript -->
-	@await Html.PartialAsync("_Scripts");
+	@await Html.PartialAsync("_Scripts")
+	;
 	@await RenderSectionAsync("Scripts", required: false)
 
 

@@ -1,13 +1,13 @@
 
 
 $(document).ready(function () {
-    GetFiles();
+    GetActivities();
     updateSelect();
     IsValidate();
 });
 
 /*Read Data*/
-function GetFiles() {
+function GetActivities() {
     $.ajax({
         url: '/user/GetActivities',
         type: 'get',
@@ -90,7 +90,9 @@ function updateSelect() {
 /*Insert Files Data*/
 $('#btnNew').click(function () {
     $('#ActivitiesModal').modal('show');
-    $('#modalTitle').text('Ýþlem Ekle');
+    var title = '\u0130\u015flem Ekle'; // Ý ve þ için düzeltme
+
+    $('#modalTitle').html(title);
 });
 
 function Insert() {
@@ -218,7 +220,7 @@ function Edit(id) {
 
             else {
                 $('#ActivitiesModal').modal('show');
-                $('#modalTitle').text('Güncelle')
+                $('#modalTitle').text('G\u00FCncelle');
                 $('#Save').css('display', 'none');
                 $('#Update').css('display', 'block');
                 $('#id').val(response.id);
@@ -271,7 +273,7 @@ function Update() {
                 alert("Kullanýcý güncellenirken hata oluþtu");
             } else {
                 HideModal();
-                GetFiles();
+                GetActivities();
                 alert(response);
             }//if
 
@@ -301,7 +303,7 @@ function Delete(id) {
                 alert("Seçtiðiniz id'ye göre bir veri bulunamadý.")
             }
             else {
-                GetFiles();
+                GetActivities();
                 alert(response)
             }//if
         },//success

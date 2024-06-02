@@ -1,4 +1,7 @@
-﻿@{
+﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
+
+
+@{
 	ViewData["Title"] = "Concat";
 }
 <!-- contact section -->
@@ -33,13 +36,21 @@
                                 </div>
 
                                 <div>
-                                    <select name="Department" id="Department" required class="form-control rounded-pill border-5 show-tick" style="padding:5px 20px 5px 15px" >
-                                        <option value="Destek">Destek</option>
-                                        <option value="Satış">Satış</option>
-                                        <option value="Geliştirici">Geliştirici</option>
+                                    <select name="Department" id="Department" required class="form-control rounded-pill border-5 show-tick" style="padding:5px 20px 5px 15px">
+                                        <option disabled selected>Departman</option>
+                                        @foreach (var item in Model.status)
+                                        {
+                                            if (item.Id > 2)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+                                        }
+
                                     </select>
                                 </div>
-
+                                <div>
+                                    <input type="text" name="Subject" id="Subject" placeholder="Konu" maxlength="30" required />
+                                </div>
                                 <div>
                                     <textarea placeholder="Message" class="input_message" name="Message" id="Message" required></textarea>
 
@@ -60,4 +71,9 @@
 </section>
 
 
-<!-- end contact section -->
+@section Scripts
+{
+    <script>
+        setBackgroundImage('#HeroArea', '@Model.settings[0].Banner');
+    </script>
+}
