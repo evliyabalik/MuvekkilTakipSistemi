@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using MuvekkilTakipSistemi.Models;
 using System.Diagnostics;
 using MuvekkilTakipSistemi.DatabaseContext;
-
 using System.Security.Cryptography;
 using MuvekkilTakipSistemi.Helper;
 using Microsoft.AspNetCore.Identity;
@@ -17,8 +16,8 @@ namespace MuvekkilTakipSistemi.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		private readonly MyContext _context;
-		private const string SiteUrl = "http://evliya.somee.com/";
+		private readonly MyContext _context; //Veritabaný deðiþkeni
+		private const string SiteUrl = "http://evliya.somee.com"; //Sýfýrlama iþlemlerinde sitenin baðlantýsýný kullanarak tokken oluþturmak için bir deðiþken
 
 
 		public HomeController(ILogger<HomeController> logger, MyContext context)
@@ -27,42 +26,39 @@ namespace MuvekkilTakipSistemi.Controllers
 			_context = context;
 		}
 
+		//Ýndex, Sitenin ayarlar tablosundan veri çekmek için model gönderiyor
 		public IActionResult Index()
 		{
 			DefaultModels model = new DefaultModels()
 			{
 				status = _context.Status.ToList(),
 				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
-
 			};
-
 			return View(model);
 		}
 
 		public IActionResult About()
 		{
-            DefaultModels model = new DefaultModels()
-            {
-                status = _context.Status.ToList(),
-                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
-
-            };
-
-            return View(model);
-        }
+			DefaultModels model = new DefaultModels()
+			{
+				status = _context.Status.ToList(),
+				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			};
+			return View(model);
+		}
 
 		public IActionResult Concat()
 		{
-            DefaultModels model = new DefaultModels()
-            {
-                status = _context.Status.ToList(),
-                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			DefaultModels model = new DefaultModels()
+			{
+				status = _context.Status.ToList(),
+				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			};
+			return View(model);
+		}
 
-            };
 
-            return View(model);
-        }
-
+		//Ýletiþim sayfasýndan gelen verileri alýp Contact tablosuna verileri kaydediyor
 		[HttpPost]
 		public IActionResult Concat(string Adsoyad, string Email, string Telno, int Department, string Subject, string Message)
 		{
@@ -94,28 +90,29 @@ namespace MuvekkilTakipSistemi.Controllers
 			}
 
 
-            DefaultModels model = new DefaultModels()
-            {
-                status = _context.Status.ToList(),
-                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			DefaultModels model = new DefaultModels()
+			{
+				status = _context.Status.ToList(),
+				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
 
-            };
+			};
 
-            return View(model);
-        }
+			return View(model);
+		}
 
 		public IActionResult Login()
 		{
-            DefaultModels model = new DefaultModels()
-            {
-                status = _context.Status.ToList(),
-                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			DefaultModels model = new DefaultModels()
+			{
+				status = _context.Status.ToList(),
+				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
 
-            };
+			};
 
-            return View(model);
-        }
+			return View(model);
+		}
 
+		//Giriþ iþlemlerini sorgulayýp giriþ için gerekli verileri gönderiyor
 		[HttpPost]
 		public IActionResult Login(string BaroSicilNo, string Pass)
 		{
@@ -124,19 +121,13 @@ namespace MuvekkilTakipSistemi.Controllers
 
 			var bsicilNo = _context.User.Where(u => u.BaroSicilNo == HtmlEncodes.EncodeTurkishCharacters(BaroSicilNo.Trim())).FirstOrDefault();
 
-			HttpContext.Session.SetString("BSicilNo", bsicilNo.BaroSicilNo);
-			HttpContext.Session.SetString("Adsoyad", bsicilNo.Adsoyad);
-			HttpContext.Session.SetInt32("UserId", bsicilNo.UserId);
-
-			HttpContext.Session.GetString("BSicilNo");
-			HttpContext.Session.GetString("Adsoyad");
-			HttpContext.Session.GetInt32("UserId");
-
 
 			if (bSicilNo != null && pass != null)
 			{
-				/*ViewData["login"] = "Tebrikler Giriþ Baþarýlý";
-				ViewData["Class"] = "bg-success";*/
+				//Session oluþturma
+				HttpContext.Session.SetString("BSicilNo", bsicilNo.BaroSicilNo);
+				HttpContext.Session.SetString("Adsoyad", bsicilNo.Adsoyad);
+				HttpContext.Session.SetInt32("UserId", bsicilNo.UserId);
 
 				return RedirectToAction("Index", "User");
 			}
@@ -160,33 +151,35 @@ namespace MuvekkilTakipSistemi.Controllers
 
 		public IActionResult Register()
 		{
-            DefaultModels model = new DefaultModels()
-            {
-                status = _context.Status.ToList(),
-                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			DefaultModels model = new DefaultModels()
+			{
+				status = _context.Status.ToList(),
+				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			};
+			return View(model);
+		}
 
-            };
-
-            return View(model);
-        }
-
+		//Kayýt iþlemi, veri kontrolü saðladýktan sonra girilen bilgiler tabloda bulunmuyorsa yeni kayýt ekleniyor.
 		[HttpPost]
 		public IActionResult Register(string Tcno, string BaroSicilNo, string Adsoyad, string Telno,
 			string Pass, string Email)
 		{
-			if (!String.IsNullOrEmpty(Tcno))
+
+            DefaultModels model = new DefaultModels()
+            {
+                status = _context.Status.ToList(),
+                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+            };
+            if (!String.IsNullOrEmpty(Tcno))
 			{
 				var getUser = _context.User.FirstOrDefault(u => u.Tcno == Tcno || u.BaroSicilNo == BaroSicilNo);
 				var getUserContact = _context.UserContact.FirstOrDefault(uc => uc.Email == Email || uc.Telno == Telno);
-
-
 				if (getUser != null || getUserContact != null)
 				{
 					ViewData["registerValue"] = "Kullanýcý zaten kayýtlý. Þifrenizi unuttuysanýz \"Þifremi Unuttum\" linkinden yenileyebilirsiniz.";
 					ViewData["Class"] = "bg-warning";
-					return View();
+					return View(model);
 				}
-
 				try
 				{
 					var user = new User()
@@ -198,24 +191,18 @@ namespace MuvekkilTakipSistemi.Controllers
 						StatusId = 1,
 						IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString()
 					};
-
 					_context.User.Add(user);
 					_context.SaveChanges();
-
 					var userContact = new UserContact()
 					{
 						UserId = user.UserId,
 						Email = HtmlEncodes.EncodeTurkishCharacters(Email.Trim()),
 						Telno = HtmlEncodes.EncodeTurkishCharacters(Telno.Trim())
 					};
-
-
 					_context.UserContact.Add(userContact);
 					_context.SaveChanges();
-
 					ViewData["registerValue"] = "Kayýt Baþarýyla Eklendi";
 					ViewData["Class"] = "bg-success";
-
 				}
 				catch (Exception ex)
 				{
@@ -223,54 +210,44 @@ namespace MuvekkilTakipSistemi.Controllers
 					ViewData["Class"] = "bg-danger";
 				}
 			}
-
-			DefaultModels model = new DefaultModels()
-			{
-				status = _context.Status.ToList(),
-				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
-
-			};
-
+			
 			return View(model);
-
 		}
 
 		public IActionResult ForgotPass()
 		{
-            DefaultModels model = new DefaultModels()
-            {
-                status = _context.Status.ToList(),
-                settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
-
-            };
-            return View(model);
+			DefaultModels model = new DefaultModels()
+			{
+				status = _context.Status.ToList(),
+				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
+			};
+			return View(model);
 		}
 
+		//Þifremi unuttum 
 		[HttpPost]
 		public IActionResult ForgotPass(string BaroSicilNo, string Email)
 		{
+			//Girilen bilgiler veritabanýnda var mý
 			var barosno = _context.User.FirstOrDefault(u => u.BaroSicilNo == HtmlEncodes.EncodeTurkishCharacters(BaroSicilNo.Trim()));
 			var email = _context.UserContact.FirstOrDefault(u => u.Email == HtmlEncodes.EncodeTurkishCharacters(Email.Trim()));
 
-
-
-			if (barosno != null && email != null)
+			if (barosno != null && email != null)//Bilgiler boþ mu
 			{
+				//Bilgileri çek
 				var adSoyad = _context.User.Select(u => u.Adsoyad).FirstOrDefault();
 				var emailTo = _context.UserContact.Select(u => u.Email).FirstOrDefault();
 
-
-
 				//Token oluþturma
-				var token = HashHelper.GenerateToken(emailTo);
-				var ResetLink = $"{SiteUrl}{Url.Action("Index", "ResetPass", new { Email, token })}";
+				var token = HashHelper.GenerateToken(emailTo);//Token oluþtur.
+				var ResetLink = $"{SiteUrl}{Url.Action("Index", "ResetPass", new { Email, token })}";//Tokeni al ve bir link oluþtur.
+																									 //Mesaj
 				var message = $"Sayýn {adSoyad}\n\r\n\r" +
 					$"Þifrenizin sýfýrlanmasýný talep ettiniz. Yeni bir þifre seçmek için \"Þifremi sýfýrla\"ya týklayýn þifre.\r\nÞifrenizi deðiþtirmek ayný zamanda API belirtecinizi de sýfýrlayacaktýr\n\r\n\r" +
 					"Link 1 saat sonra aktif olmayacaktýr!" +
-
 					$"\r\n\r\n{ResetLink}";
 
-				if (MailModel.SendMessage(emailTo, "Þifre Sýfýrlama", message))
+				if (MailModel.SendMessage(emailTo, "Þifre Sýfýrlama", message))//Mesaj gönder
 				{
 					ViewData["forgetValue"] = "Mailinize sýfýrlama baðlantýsý iletilmiþtir.";
 					ViewData["Class"] = "bg-success";
@@ -280,28 +257,18 @@ namespace MuvekkilTakipSistemi.Controllers
 					ViewData["forgetValue"] = "Bir hata ile karþýlaþýldý: " + MailModel.GetErrorMessage();
 					ViewData["Class"] = "bg-danger";
 				}
-
-
-
 			}
 			else
 			{
 				ViewData["forgetValue"] = "Bilgilerinizi kontrol ediniz.";
 				ViewData["Class"] = "bg-warning";
 			}
-
-
-
-
 			DefaultModels model = new DefaultModels()
 			{
 				status = _context.Status.ToList(),
 				settings = _context.SiteSettings.Where(s => s.Id == 1).ToList(),
-
 			};
-
 			return View(model);
-
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

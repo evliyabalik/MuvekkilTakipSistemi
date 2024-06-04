@@ -1,48 +1,37 @@
 html {
     font-size: 14px;
 }
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
 }
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
-
 html {
     position: relative;
     min-height: 100%;
 }
-
 body {
     margin-bottom: 60px;
 }
-
 .profil-resmi {
-
     width: 100%;
     height: 100%;
     position: relative;
-
-
 }
-
 .btn-profil {
     width: 84px;
     height: 64px;
     padding:0px;
 }
-
 .profil-text {
     margin-right: 10px;
     position: absolute;
     right: 140px;
     bottom: 0px;
 }
-
 .admin-panel{
     width:100%;
     height:auto;
@@ -56,22 +45,15 @@ body {
     text-align:center;
     top:1%;
 }
-
-
-
-
 .contact_section .contact-form .invalid {
     border: 1px solid red;
 }
-
 .contact_section .contact-form .valid{
     border: 1px solid green;
 }
-
 .invalid {
     border: 1px solid red;
 }
-
 .valid{
     border: 1px solid green;
 }

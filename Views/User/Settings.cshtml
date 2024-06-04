@@ -8,9 +8,7 @@
     {
         <p class="rounded @TempData["class"]" style="margin-top:5px; text-align:center; color:white;">@TempData["sonuc"]</p>
     }
-
     <div class="row-cols-lg-6">
-     
         <form id="myForm" enctype="multipart/form-data" method="post" style="margin:10px;">
           <div class="form-group">
                 @if (ViewData["sonuc"] != null)
@@ -23,7 +21,6 @@
             <div class="form-group">
                 <input type="file" name="Profil" id="Profil" class="form-group" />
             </div>
-
             <div class="form-group">
                 <h4>Kişisel Bilgiler</h4>
                 <hr />
@@ -40,7 +37,6 @@
                 <label for="Adsoyad">Ad Soyad: </label><br />
                 <input type="Text" name="Adsoyad" id="Adsoyad" class="form-group" disabled value="@Model.Adsoyad" />
             </div>
-
             <div class="form-group">
                 <h4>Şifre Değiştir</h4>
                 <hr />
@@ -57,7 +53,6 @@
         </form>
    </div>
 </div>
-
 @section Scripts
            {
     <script type="text/javascript" src="~/js/SettingsControl.js"></script>

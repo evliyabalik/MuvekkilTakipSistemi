@@ -1,7 +1,6 @@
 $(document).ready(function () {
     GetAdmin();
 });
-
 /*Read Data*/
 function GetAdmin() {
     $.ajax({
@@ -9,16 +8,13 @@ function GetAdmin() {
         type: 'get',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
-
         success: function (response) {
-
             if (response == null || response == undefined || response.length == 0) {
                 var object = '';
                 object += '<tr>';
                 object += '<td colspan="11">' + 'Herhangi bir veri yok!' + '</td>';
                 object += '</tr>';
                 $('#tblBody').html(object);
-
             }
             else {
                 var object = '';
@@ -32,40 +28,31 @@ function GetAdmin() {
                     object += '<td> <a href="#" class="btn btn-primary btn-sm" onclick="Edit(' + item.id + ')">Edit</a>';
                     object += '<a href="#" class="btn btn-danger btn-sm" onclick="Delete(' + item.id + ')">Delete</a></td>';
                     object += '</tr>';
-
                 });/*each*/
                 $('#tblBody').html(object);
-
-
             }/*if*/
         }, /* Function*/
         error: function () {
             alert("Veri Okunamýyor.")
         }//Error
-
     });/*Ajax*/
 }
-
-
 /*Insert Data*/
 $('#btnNew').click(function () {
     $('#AdminModal').modal('show');
     $('#modalTitle').text('Admin Ekle');
 });
-
 function Insert() {
     var result = IsValidate();
     if (result == false) {
         return false;
     }
-
     var formData = new Object();
     formData.adsoyad = $('#Adsoyad').val();
     formData.kullanici_adi = $('#Kullanici_adi').val();
     formData.pass = $('#Pass').val();
     formData.email = $('#Email').val();
     formData.statusId = $('#StatusId').val();
-
     $.ajax({
         url: '/Admin/InsertAdmin',
         data: formData,
@@ -78,23 +65,17 @@ function Insert() {
                 GetAdmin();
                 alert(response);
             }//if
-
         },//success
-
         error: function () {
             alert("Kullanýcý eklerken hata oluþtu");
         }//Error
-
     });//Ajax
-
 }//Method
-
 function HideModal() {
     ClearData();
     $('#AdminModal').modal('hide');
     ReloadPage();
 }
-
 function ClearData() {
     $('#Adsoyad').val('');
     $('#Kullanici_adi').val('');
@@ -102,7 +83,6 @@ function ClearData() {
     $('#Email').val('');
     $('#StatusId').val('');
 }
-
 function IsValidate() {
     var validate = true;
     if ($('#Adsoyad').val().trim() == '') {
@@ -133,7 +113,6 @@ function IsValidate() {
     else {
         $('#Email').css("border-color", "Green"); 
     }
-
     if ($('#StatusId').val().trim() == '') {
         validate = false;
         $('#StatusId').css("border-color", "Red");
@@ -143,15 +122,12 @@ function IsValidate() {
     }
     return validate;
 }
-
 $('#Adsoyad').change(function () {
     IsValidate();
 });
-
 $('#Kullanici_adi').change(function () {
     IsValidate();
 });
-
 $('#Pass').change(function () {
     IsValidate();
 });
@@ -161,7 +137,6 @@ $('#Email').change(function () {
 $('#StatusId').change(function () {
     IsValidate();
 });
-
 //Edit
 function Edit(id) {
     $.ajax({
@@ -176,7 +151,6 @@ function Edit(id) {
             else if (response.length == 0) {
                 alert("Seçtiðiniz id'ye göre bir veri bulunamadý.")
             }
-
             else {
                 $('#AdminModal').modal('show');
                $('#modalTitle').text('G\u00FCncelle');
@@ -195,10 +169,8 @@ function Edit(id) {
         }//error
     });//ajax
 }//Method
-
 //Update Data
 function Update() {
-
     var formData = new Object();
     formData.id = $('#id').val();
     formData.adsoyad = $('#Adsoyad').val();
@@ -206,8 +178,6 @@ function Update() {
     formData.pass = $('#Pass').val();
     formData.email = $('#Email').val();
     formData.statusId = $('#StatusId').val();
-   
-
     $.ajax({
         url: '/Admin/UpdateAdmin',
         data: formData,
@@ -220,18 +190,12 @@ function Update() {
                 GetAdmin();
                 alert(response);
             }//if
-
         },//success
-
         error: function () {
             alert("Kullanýcý güncellenirken hata oluþtu");
         }//Error
-
     });//Ajax
-
-
 }//method
-
 //Reload
 function ReloadPage() {
     // URL'i temizleyerek sayfayý yeniden yükle
@@ -239,13 +203,11 @@ function ReloadPage() {
     window.history.replaceState({}, document.title, cleanUrl);
     window.location.reload();
 }
-
 //Delete
 function Delete(id) {
     $.ajax({
         url: '/Admin/DeleteAdmin?Id=' + id,
         type: 'post',
-
         success: function (response) {
             if (response == null || response == undefined) {
                 alert("Okuma baþarýsýz.")

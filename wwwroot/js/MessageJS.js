@@ -1,7 +1,6 @@
 $(document).ready(function () {
     GetMessage();
 });
-
 /*Read Data*/
 function GetMessage() {
     $.ajax({
@@ -9,16 +8,13 @@ function GetMessage() {
         type: 'get',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
-
         success: function (response) {
-
             if (response == null || response == undefined || response.length == 0) {
                 var object = '';
                 object += '<tr>';
                 object += '<td colspan="11">' + 'Herhangi bir veri yok!' + '</td>';
                 object += '</tr>';
                 $('#tblBody').html(object);
-
             }
             else {
                 var object = '';
@@ -34,27 +30,20 @@ function GetMessage() {
                     object += '<td>' + item.ip_address + '</td>';
                     object += '<td> <a href="#" class="btn btn-primary btn-sm" onclick="Read(' + item.id + ')">Oku</a>';
                     object += '</tr>';
-
                 });/*each*/
                 $('#tblBody').html(object);
-
-
             }/*if*/
         }, /* Function*/
         error: function () {
             alert("Veri Okunamýyor.")
         }//Error
-
     });/*Ajax*/
 }
-
-
 function HideModal() {
     ClearData();
     $('#MessageModel').modal('hide');
     ReloadPage();
 }
-
 function ClearData() {
     $('#Adsoyad').val('');
     $('#Kullanici_adi').val('');
@@ -62,9 +51,6 @@ function ClearData() {
     $('#Email').val('');
     $('#StatusId').val('');
 }
-
-
-
 //Edit
 function Read(id) {
     $.ajax({
@@ -79,7 +65,6 @@ function Read(id) {
             else if (response.length == 0) {
                 alert("Seçtiðiniz id'ye göre bir veri bulunamadý.")
             }
-
             else {
                 $('#MessageModel').modal('show');
                 $('#modalTitle').text('Mesaj Oku');
@@ -95,8 +80,6 @@ function Read(id) {
         }//error
     });//ajax
 }//Method
-
-
 //Reload
 function ReloadPage() {
     // URL'i temizleyerek sayfayý yeniden yükle

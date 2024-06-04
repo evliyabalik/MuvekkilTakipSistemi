@@ -1,11 +1,8 @@
 ﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
-
 @{
 	ViewData["Title"] = "Home Page";
 }
-
 <!-- do section -->
-
 <section class="do_section layout_padding">
 	<div class="container">
 		<div class="heading_container">
@@ -18,17 +15,13 @@
 				Daha fazla zaman kazanın, işlerinizi dijital dünyada halledin.
 			</p>
 		</div>
-
 	</div>
 </section>
-
 <!-- end do section -->
 <!-- who section -->
-
 <section class="who_section ">
 	<div class="container">
 		<div class="row">
-
 			<div class="col-md-5">
 				<div class="img-box">
 					<img src="~/images/who.jpg" alt="">
@@ -56,7 +49,6 @@
 		</div>
 	</div>
 </section>
-
 <!-- end who section -->
 <!-- work section -->
 <section class="work_section layout_padding">
@@ -76,28 +68,22 @@
 			</div>
 			<div class="box b-2">
 				<img src="~/images/w-2.webp" alt="">
-
 			</div>
 			<div class="box b-3">
 				<img src="~/images/w-3.webp" alt="">
-
 			</div>
 			<div class="box b-4">
 				<img src="~/images/w-4.webp" alt="">
-
 			</div>
 		</div>
 	</div>
 </section>
-
 <!-- end work section -->
 <!-- client section -->
 <!-- end client section -->
 <!-- contact section -->
-
 <section class="contact_section layout_padding">
 	<div class="container">
-
 		<div class="heading_container">
 			<h2>
 				Bizimle İletişime Geçin
@@ -118,7 +104,6 @@
 								<div>
 									<input type="email" placeholder="Email Adresiniz" name="Email" id="Email" required maxlength="50">
 								</div>
-
 								<div>
 									<select name="Department" id="Department" required class="form-control rounded-pill border-5 show-tick" style="padding:5px 20px 5px 15px">
 										<option disabled selected>Departman</option>
@@ -129,13 +114,10 @@
 												<option value="@item.Id">@item.Name</option>
 											}
 										}
-
 									</select>
 								</div>
-
 								<div>
 									<textarea placeholder="Message" class="input_message" name="Message" id="Message" required></textarea>
-
 								</div>
 								<div class="d-flex justify-content-center">
 									<button type="submit" class="btn_on-hover" name="Gonder" id="Gonder">
@@ -150,7 +132,6 @@
 		</div>
 	</div>
 </section>
-
 <!-- end contact section -->
 @section Scripts {
 	<script>

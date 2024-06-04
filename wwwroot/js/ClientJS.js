@@ -1,9 +1,6 @@
-
-
 $(document).ready(function () {
     GetClient();
 });
-
 /*Read Data*/
 function GetClient() {
     $.ajax({
@@ -11,16 +8,13 @@ function GetClient() {
         type: 'get',
         dataType: 'json',
         contentType: 'application/json;charset=utf-8',
-
         success: function (response) {
-
             if (response == null || response == undefined || response.length == 0) {
                 var object = '';
                 object += '<tr>';
                 object += '<td colspan="11">' + 'Herhangi bir veri yok!' + '</td>';
                 object += '</tr>';
                 $('#tblBody').html(object);
-
             }
             else {
                 var object = '';
@@ -38,33 +32,25 @@ function GetClient() {
                     object += '<td> <a href="#" class="btn btn-primary btn-sm" onclick="Edit(' + item.id + ')">Edit</a>';
                     object += '<a href="#" class="btn btn-danger btn-sm" onclick="Delete(' + item.id + ')">Delete</a></td>';
                     object += '</tr>';
-
                 });/*each*/
                 $('#tblBody').html(object);
-
-
             }/*if*/
         }, /* Function*/
         error: function () {
             alert("Veri Okunamýyor.")
         }//Error
-
     });/*Ajax*/
 }
-
-
 /*Insert Data*/
 $('#btnNew').click(function () {
     $('#ClientModal').modal('show');
     $('#modalTitle').text('Muvekkil Ekle');
 });
-
 function Insert() {
     var result = IsValidate();
     if (result == false) {
         return false;
     }
-
     var formData = new Object();
     formData.ad_Unvan = $('#Ad_Unvan').val();
     formData.grupAdi = $('#GrupAdi').val();
@@ -74,7 +60,6 @@ function Insert() {
     formData.vergi_Dairesi = $('#Vergi_Dairesi').val();
     formData.no = $('#No').val();
     formData.ozel_Alan = $('#Ozel_Alan').val();
-
     $.ajax({
         url: '/User/InserClient',
         data: formData,
@@ -87,23 +72,17 @@ function Insert() {
                 GetClient();
                 alert(response);
             }//if
-
         },//success
-
         error: function () {
             alert("Kullanýcý eklerken hata oluþtu");
         }//Error
-
     });//Ajax
-
 }//Method
-
 function HideModal() {
     ClearData();
     $('#ClientModal').modal('hide');
     ReloadPage();
 }
-
 function ClearData() {
     $('#Ad_Unvan').val('');
     $('#Tcno').val('');
@@ -113,7 +92,6 @@ function ClearData() {
     $('#No').val('');
     $('#Ozel_Alan').val('');
 }
-
 function IsValidate() {
     var validate = true;
     if ($('#Ad_Unvan').val().trim() == '') {
@@ -139,19 +117,15 @@ function IsValidate() {
     }
     return validate;
 }
-
 $('#Ad_Unvan').change(function () {
     IsValidate();
 });
-
 $('#Tcno').change(function () {
     IsValidate();
 });
-
 $('#GSM').change(function () {
     IsValidate();
 });
-
 //Edit
 function Edit(id) {
     $.ajax({
@@ -166,7 +140,6 @@ function Edit(id) {
             else if (response.length == 0) {
                 alert("Seçtiðiniz id'ye göre bir veri bulunamadý.")
             }
-
             else {
                 $('#ClientModal').modal('show');
                $('#modalTitle').text('G\u00FCncelle');
@@ -181,9 +154,6 @@ function Edit(id) {
                 $('#Vergi_Dairesi').val(response.vergi_Dairesi);
                 $('#No').val(response.no);
                 $('#Ozel_Alan').val(response.ozel_Alan);
-
-               
-
             }//if
         },//success
         error: function () {
@@ -191,14 +161,12 @@ function Edit(id) {
         }//error
     });//ajax
 }//Method
-
 //Update Data
 function Update() {
     var result = IsValidate();
     if (result == false) {
         return false;
     }//if
-
     var formData = new Object();
     formData.id = $('#id').val();
     formData.ad_Unvan = $('#Ad_Unvan').val();
@@ -209,7 +177,6 @@ function Update() {
     formData.vergi_Dairesi = $('#Vergi_Dairesi').val();
     formData.no = $('#No').val();
     formData.ozel_Alan = $('#Ozel_Alan').val();
-
     $.ajax({
         url: '/User/UpdateClient',
         data: formData,
@@ -222,18 +189,12 @@ function Update() {
                 GetClient();
                 alert(response);
             }//if
-
         },//success
-
         error: function () {
             alert("Kullanýcý güncellenirken hata oluþtu");
         }//Error
-
     });//Ajax
-
-
 }//method
-
 //Reload
 function ReloadPage() {
     // URL'i temizleyerek sayfayý yeniden yükle
@@ -241,13 +202,11 @@ function ReloadPage() {
     window.history.replaceState({}, document.title, cleanUrl);
     window.location.reload();
 }
-
 //Delete
 function Delete(id) {
     $.ajax({
         url: 'User/DeleteClient?Id=' + id,
         type: 'post',
-
         success: function (response) {
             if (response == null || response == undefined) {
                 alert("Okuma baþarýsýz.")

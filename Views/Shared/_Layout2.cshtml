@@ -6,10 +6,8 @@
 				new Navigation(){MenuText="İletişim",ActionName="Concat",ControlName="Home"},
 			};
 }
-
 <!DOCTYPE html>
 <html>
-
 <head>
 	<!-- Basic -->
 	<meta charset="utf-8" />
@@ -22,10 +20,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<meta charset="utf-8" />
-
 	<title>@ViewData["Title"]</title>
-
-
 	@await Html.PartialAsync("_Styles")
 </head>
 <body>
@@ -34,30 +29,24 @@
 		<header class="header_section">
 			<div class="container-fluid">
 				<nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-					
 					<a class="navbar-brand" href="@Url.Action(nav[0].ActionName, nav[0].ControlName,null)">
 						<span>
 							Müvekkil Takip Sistemi
 						</span>
 					</a>
-					
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-
 					<!--Navigation-->
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
 							<ul class="navbar-nav">
 								@foreach (var item in nav)
 								{
-
 									<li class="nav-item">
 										@Html.ActionLink(item.MenuText, item.ActionName, item.ControlName, null, new { @class = "nav-link" })
 									</li>
 								}
-
-								
 							</ul>
 							<div class="user_option">
 									<div class="dropdown">
@@ -80,15 +69,9 @@
 		</header>
 		<!-- end header section -->
 		<!-- slider section -->
-		
 		<!-- end slider section -->
 	</div>
-
-
-
 	@RenderBody()
-
-
 	<!-- info section -->
 	<section class="info_section ">
 		<div class="container">
@@ -112,7 +95,6 @@
 							</div>
 							<a href="mailto:destekmuvekkiltakip@gmail.com">
 								destekmuvekkiltakip@gmail.com
-
 							</a>
 						</div>
 					</div>
@@ -130,12 +112,10 @@
 						</ul>
 					</div>
 				</div>
-
 				<div class="col-md-3">
 					<div class="info_form ">
 						<h1>Muvekkil Takip Sistemi</h1>
 						<p>Sistemimiz ile hukuk her yerde</p>
-						
 					</div>
 				</div>
 			</div>
@@ -154,8 +134,5 @@
 	<!-- end owl carousel script -->
 	@await Html.PartialAsync("_Scripts");
 	@await RenderSectionAsync("Scripts", required: false)
-	
-
 </body>
-
 </html>

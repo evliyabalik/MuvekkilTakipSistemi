@@ -1,14 +1,9 @@
 ﻿@model MuvekkilTakipSistemi.Models.Activies
-
 @{
 	Layout = "_Layout3";
 	ViewData["Title"] = "İşlemler";
-
-
 }
-
 <div class="col-md-9">
-
 	<div class="row">
 		<div class="col-md-12" style="padding:10px">
 			<div class="col-md-4" style="">
@@ -16,31 +11,21 @@
 			</div>
 		</div>
 	</div>
-
 	<h1 class="display-4">İşlemler</h1>
-
 	<div class="row">
 		<div class="col-md-12">
 			<button class="btn btn-primary" id="btnNew">Yeni</button>
-
 		</div>
 	</div>
-
 	<table class="table table-striped table-success table-responsive-lg table-hover text-center">
-
 		<thead>
-
 			<tr>
-
 				<th>Tarih</th>
-
 				<th>Evrak No</th>
 				<th>İşlem Türü</th>
 				<th>Yapılan İşlem</th>
 				<th>Müvekkil</th>
-
 				<th>Dosya No</th>
-
 				<th>Mahkeme</th>
 				<th>Konusu</th>
 				<th>Avukat</th>
@@ -48,15 +33,11 @@
 				<th>İşlem Tutarı</th>
 				<th>Açıklama</th>
 				<th>İşlem</th>
-
 			</tr>
-
 		</thead>
-
 		<tbody id="tblBody">
 		</tbody>
 	</table>
-
 	<!--Activities-->
 	<div class="modal" id="ActivitiesModal">
 		<div class="modal-dialog">
@@ -66,11 +47,9 @@
 				</div>
 				<div class="modal-body">
 					<input asp-for="Id" type="hidden" value="0" id="id" />
-
 					<div class="mb-2">
 						<input type="number" name="Evrak_No" id="Evrak_No" class="form-control" placeholder="Evrak No" />
 					</div>
-
 					<div class="mb-2">
 						<select name="Islem_Turu" id="Islem_Turu" class="form-control validate-input">
 							<option selected disabled>İşlem Türü</option>
@@ -89,12 +68,10 @@
 							}
 						</select>
 					</div>
-
 					<div class="mb-2">
 						<select name="Muvekkil" id="Muvekkil" class="form-control validate-input">
 						</select>
 					</div>
-
 					<div class="mb-2">
 						<select name="Dosya" id="Dosya" class="form-control validate-input">
 							<option selected disabled>Dosyalar</option>
@@ -102,10 +79,8 @@
 							{
 								<option value="@item.DosyaNo">@item.DosyaNo - @item.Muvekkil</option>
 							}
-
 						</select>
 					</div>
-
 					<div class="mb-2">
 						<select name="Odeme_Sekli" id="Odeme_Sekli" class="form-control validate-input">
 							<option selected disabled>Ödeme Şekli</option>
@@ -115,30 +90,22 @@
 							}
 						</select>
 					</div>
-
 					<div class="mb-2">
 						<input type="number" name="Islem_Tutari" id="Islem_Tutari" class="form-control" placeholder="İşlem Tutarı" />
 					</div>
-
 					<div class="mb-2">
 						<input type="text" name="Aciklama" id="Aciklama" class="form-control" placeholder="Açıklama" />
 					</div>
 				</div>
-
 				<div class="modal-footer">
 					<button class="btn btn-primary" id="Save" type="submit" onclick="Insert();">Kaydet</button>
-
 					<button class="btn btn-success" id="Update" style="display:none;" type="submit" onclick="Update();">Güncelle</button>
 					<button class="btn btn-danger" data-bs-dismiss="modal" onclick="HideModal();">Kapat</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
 </div>
-
 @section Scripts
 {
 	<script type="text/javascript" src="~/js/ActiviesJS.js"></script>

@@ -1,13 +1,10 @@
 ﻿@model MuvekkilTakipSistemi.Models.ControlModels.DefaultModels
-
-
 @{
-	ViewData["Title"] = "Concat";
+	ViewData["Title"] = "Contact";
 }
 <!-- contact section -->
 <section class="contact_section layout_padding">
     <div class="container">
-
         <div class="heading_container">
             <h2>
                 Bizimle İletişime Geçin
@@ -34,7 +31,6 @@
                                 <div>
                                     <input type="email" placeholder="Email Adresiniz" name="Email" id="Email" required maxlength="50">
                                 </div>
-
                                 <div>
                                     <select name="Department" id="Department" required class="form-control rounded-pill border-5 show-tick" style="padding:5px 20px 5px 15px">
                                         <option disabled selected>Departman</option>
@@ -45,7 +41,6 @@
                                                 <option value="@item.Id">@item.Name</option>
                                             }
                                         }
-
                                     </select>
                                 </div>
                                 <div>
@@ -53,7 +48,6 @@
                                 </div>
                                 <div>
                                     <textarea placeholder="Message" class="input_message" name="Message" id="Message" required></textarea>
-
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" class="btn_on-hover" name="Gonder" id="Gonder">
@@ -62,15 +56,12 @@
                                 </div>
                             </form>
                         </div>
-                      
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
 @section Scripts
 {
     <script>

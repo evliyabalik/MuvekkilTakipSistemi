@@ -1,19 +1,14 @@
 ﻿@{
-
 	List<Navigation> nav = new List<Navigation>()
 			{
 				new Navigation(){Id=1, MenuText="Kullanıcılar",ActionName="UserPage",ControlName="Admin"},
 				new Navigation(){Id=2, MenuText="Admin",ActionName="AddAdmin",ControlName="Admin"},
 				new Navigation(){Id=3, MenuText="Mesajlar",ActionName="Message",ControlName="Admin"},
 				new Navigation(){Id=4, MenuText="Site Ayarları",ActionName="Settings",ControlName="Admin"},
-
 			};
-
 }
-
 <!DOCTYPE html>
 <html>
-
 <head>
 	<!-- Basic -->
 	<meta charset="utf-8" />
@@ -25,16 +20,12 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<meta charset="utf-8" />
-
 	<title>@ViewData["Title"]</title>
-
-
 	<style>
 		input {
 			margin-top: 5px;
 		}
 	</style>
-
 	@await Html.PartialAsync("_Styles")
 </head>
 <body>
@@ -47,9 +38,6 @@
 					<a class="btn btn-outline-danger" asp-action="Exit" asp-asp-controller="Admin">Çıkış</a>
 				</div>
 			</div>
-
-
-
 		</header>
 	</div>
 	<!-- end header section -->
@@ -67,23 +55,12 @@
 					</ul>
 				</div>
 			</nav>
-
 			@RenderBody()
-
 		</div>
 	</div>
-
-
-
-
-
-
 	<!-- JavaScript -->
 	@await Html.PartialAsync("_Scripts")
 	;
 	@await RenderSectionAsync("Scripts", required: false)
-
-
 </body>
-
 </html>

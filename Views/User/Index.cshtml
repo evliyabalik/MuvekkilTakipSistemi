@@ -1,67 +1,41 @@
 ﻿@model MuvekkilTakipSistemi.Models.ClientInfo
-
 @{
-
 	ViewData["Title"] = "Müvekkiller";
 	Layout = "_Layout3";
-
 }
-
 <div class="col-md-9">
-
 	<div class="row">
 		<div class="col-md-12" style="padding:10px">
 			<div class="col-md-4" style="">
-
 				<input type="text"  id="searchInput" placeholder="Ara..." class="form-control" /><br />
-					
 			</div>
 		</div>
 	</div>
-
 	<h1 class="display-4">Müvekkiller</h1>
-
 	<div class="row">
 		<div class="col-md-12">
 			<button class="btn btn-primary" id="btnNew">Yeni</button>
 		</div>
 	</div>
-
 	<table class="table table-striped table-success table-responsive-lg table-hover text-center">
-
 		<thead>
-
 			<tr>
-
 				<th>Adı/Ünvanı</th>
-
 				<th>Grup Adı</th>
-
 				<th>TC No</th>
-
 				<th>Gsm No</th>
-
 				<th>Telefon 1</th>
-
 				<th>Vergi Dairesi</th>
-
 				<th>Vergi No</th>
-
 				<th>Avukat</th>
-
 				<th>Özel Alan</th>
-
 				<th>İşlem</th>
-
 			</tr>
-
 		</thead>
-
 		<tbody id="tblBody">
 		</tbody>
 	</table>
 </div>
-
 <!--Modal Window-->
 <div class="modal" id="ClientModal">
 	<div class="modal-dialog">
@@ -71,7 +45,6 @@
 			</div>
 			<div class="modal-body">
 				<input asp-for="Id" type="hidden" value="0" id="id" />
-
 				<div class="mb-2">
 					<input type="text" name="Ad_Unvan" id="Ad_Unvan" class="form-control" placeholder="Ad/Ünvan" />
 				</div>
@@ -83,46 +56,34 @@
 						<option value="@item.Group_Name">@item.Group_Name</option>
 					}
 					</select>
-
-					
 				</div>
-
 				<div class="mb-2">
 					<input type="number" name="Tcno" id="Tcno" class="form-control" placeholder="Tc No" />
 				</div>
-
 				<div class="mb-2">
 					<input type="text" name="GSM" id="GSM" class="form-control" placeholder="Cep Tel" />
 				</div>
-
 				<div class="mb-2">
 					<input type="text" name="Tel" id="Tel" class="form-control" placeholder="Tel No" />
 				</div>
-
 				<div class="mb-2">
 					<input type="text" name="Vergi_Dairesi" id="Vergi_Dairesi" class="form-control" placeholder="Vergi Dairesi" />
 				</div>
-
 				<div class="mb-2">
 					<input type="number" name="No" id="No" class="form-control" placeholder="Vergi No" />
 				</div>
-
 				<div class="mb-2">
 					<input type="text" name="Ozel_Alan" id="Ozel_Alan" class="form-control" placeholder="Açıklama" />
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-primary" id="Save" type="submit" onclick="Insert();">Kaydet</button>
-
 				<button class="btn btn-success" id="Update" style="display:none;" type="submit" onclick="Update();">Güncelle</button>
 				<button class="btn btn-danger" data-bs-dismiss="modal" onclick="HideModal();">Kapat</button>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-
 @section Scripts
 {
 	<style>
@@ -130,11 +91,9 @@
 			max-height: 300px;
 		}
 	</style>
-
 	<script type="text/javascript" src="~/js/ClientJS.js"></script>
 	<script type="text/javascript" src="~/js/Control.js"></script>
 	<script type="text/javascript" src="~/js/SearchData.js"></script>
-
 	<script>
 		setBackgroundImage('#LoginArea', '@ViewData["bg"]');
 	</script>

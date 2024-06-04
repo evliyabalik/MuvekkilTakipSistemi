@@ -1,10 +1,8 @@
 ﻿@model MuvekkilTakipSistemi.Models.AdminUser
-
 @{
 	ViewData["Title"] = "Admin-Admins";
 	Layout = "_LayoutAdmin";
 }
-
 <div class="modal" role="dialog" id="AdminModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -15,34 +13,25 @@
 				</button>
 			</div>
 			<div class="modal-body">
-
 				<input asp-for="Id" type="hidden" value="0" id="id" />
-
 				<div class="mb-2">
 					<input type="text" name="Adsoyad" id="Adsoyad" class="form-control" placeholder="Ad Soyad" />
 				</div>
-
-
 				<div class="mb-2">
 					<input type="text" name="Kullanici_adi" id="Kullanici_adi" class="form-control" placeholder="Kullanıcı Adı" />
 				</div>
-
 				<div class="mb-2">
 					<input type="password" name="Pass" id="Pass" class="form-control" placeholder="Şifre" maxlength="16" minlength="8" />
 				</div>
-
 				<div class="mb-2">
 					<input type="password" name="PassR" id="PassR" class="form-control" placeholder="Şifre Tekrar" maxlength="16" minlength="8" />
 				</div>
-
 				<div class="mb-2">
 					<input type="email" name="Email" id="Email" class="form-control" placeholder="Email" />
 				</div>
-
 				<div class="mb-2">
 					<input type="email" name="EmailR" id="EmailR" class="form-control" placeholder="Email Tekrar" />
 				</div>
-
 				<div class="mb-2">
 					<select name="StatusId" id="StatusId" class="form-control">
 						<option value="" selected disabled>Statü</option>
@@ -52,24 +41,17 @@
 						}
 					</select>
 				</div>
-
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary" id="Save" type="submit" onclick="Insert();">Kaydet</button>
-
 					<button class="btn btn-success" id="Update" style="display:none;" type="submit" onclick="Update();">Güncelle</button>
 					<button class="btn btn-danger" data-bs-dismiss="modal" onclick="HideModal();">Kapat</button>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 </div>
-
-
 <div class="container">
 	<div class="row">
-	
 		<div class="d-block w-100">
 			<h3 class="text-center">Admin</h3>
 			<hr />
@@ -95,15 +77,9 @@
 			</tbody>
 		</table>
 	</div>
-
 </div>
-
-
-
-
 @section Scripts {
 	<script src="~/js/AdminJS.js"></script>
 	<script src="~/js/Control.js"></script>
 	<script type="text/javascript" src="~/js/SearchData.js"></script>
-
 }

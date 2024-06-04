@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-
 namespace MuvekkilTakipSistemi.Models
 {
     public class UserContact 

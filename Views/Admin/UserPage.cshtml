@@ -1,12 +1,9 @@
 ﻿@using MuvekkilTakipSistemi.Models.ControlModels
 @model MuvekkilTakipSistemi.Models.ControlModels.UserAndContact
-
 @{
 	ViewData["Title"] = "Admin-User Page";
 	Layout = "_LayoutAdmin";
-
 }
-
 <div class="container">
 	<div class="row">
 		<div class=" d-block w-100">
@@ -16,7 +13,6 @@
 		<div class="col-md-4" style="">
 			<input type="text" id="searchInput" placeholder="Ara..." class="form-control" /><br />
 		</div>
-
 		<table class="table table-striped table-success table-responsive-lg table-hover text-center">
 			<thead>
 			<th>Kullanıcı id</th>
@@ -49,16 +45,11 @@
 							</form>
 						</td>
 					</tr>
-
 				}
 			</tbody>
-
-
 		</table>
 	</div>
 </div>
-
 @section Scripts{
 	<script type="text/javascript" src="~/js/SearchData.js"></script>
-
 }

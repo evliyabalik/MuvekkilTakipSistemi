@@ -3,10 +3,8 @@
     ViewData["Title"] = "Giriş Yap";
     Layout = "_Layout2";
 }
-
 <section class="contact_section layout_padding">
     <div class="container">
-
         <div class="heading_container">
             <h2>
                 Giriş Yap
@@ -19,7 +17,6 @@
                         <div class="@ViewData["Class"] rounded-pill" style="padding: 0px 15px 0 15px;">
                             <p>@ViewData["login"]</p>
                         </div>
-
                         <div class="contact-form">
                             <form method="post">
                                 <div>
@@ -34,7 +31,6 @@
                                     </button>
                                 </div>
                             </form>
-
                             <a href=@Url.ActionLink("ForgotPass","Home")>Şifremi unuttum</a><br />
                             <a href=@Url.ActionLink("Register","Home")>Kayıt ol</a>
                         </div>
@@ -42,7 +38,6 @@
                 </div>
             </div>
         </div>
-       
     </div>
 </section>
 @section Scripts
