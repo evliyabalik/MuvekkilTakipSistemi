@@ -60,10 +60,10 @@ namespace MuvekkilTakipSistemi.Helper
             var handler = new JwtSecurityTokenHandler();
             var validationParameters = new TokenValidationParameters
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YOUR_LONGER_SECURITY_KEY_WITH_AT_LEAST_32_CHARACTERS")),
-                ValidateIssuer = false,
-                ValidateAudience = false,
+                ValidateIssuerSigningKey = true, //Token imzalama anahtarını doğrula
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YOUR_LONGER_SECURITY_KEY_WITH_AT_LEAST_32_CHARACTERS")), 
+                ValidateIssuer = false, //token kaynağı doğrula
+                ValidateAudience = false, //token alıcısı doğrulama
                 ValidateLifetime = true, // Token'ın süresini kontrol et
                 ClockSkew = TimeSpan.FromHours(1) // Zaman sapması için süre
             };

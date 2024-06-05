@@ -35,8 +35,6 @@ namespace MuvekkilTakipSistemi.Controllers
 		public IActionResult Index(string Kullanici_Adi, string Pass)
 		{
 
-
-
 			var kull_adi = _context.Admins.FirstOrDefault(u => u.Kullanici_adi == HtmlEncodes.EncodeTurkishCharacters(Kullanici_Adi.Trim()));
 			var pass = _context.Admins.FirstOrDefault(u => u.Pass == HashHelper.GetMd5Hash(Pass.Trim()));
 
@@ -239,7 +237,8 @@ namespace MuvekkilTakipSistemi.Controllers
 			{
 				TempData["sonuc"] = "Banner kaydedilirken bir hata ile karşılaşıldı";
 				TempData["class"] = "bg-danger";
-			}
+                return RedirectToAction("Settings", "Admin");
+            }
 
 			_context.SiteSettings.Update(setting);
 			_context.SaveChanges();
@@ -275,7 +274,7 @@ namespace MuvekkilTakipSistemi.Controllers
 
 				TempData["sonuc"] = "Mahkeme tablosuna eklenirken bir hata oluştu. Hata: " + ex.Message;
 				TempData["class"] = "bg-danger";
-			}
+            }
 
 			return RedirectToAction("Settings", "Admin");
 		}
@@ -304,7 +303,7 @@ namespace MuvekkilTakipSistemi.Controllers
 
 				TempData["sonuc"] = "İşlem Türü tablosuna eklenirken bir hata oluştu. Hata: " + ex.Message;
 				TempData["class"] = "bg-danger";
-			}
+            }
 
 			return RedirectToAction("Settings", "Admin");
 		}
@@ -333,7 +332,7 @@ namespace MuvekkilTakipSistemi.Controllers
 
 				TempData["sonuc"] = "Yapılan İşlemler tablosuna eklenirken bir hata oluştu. Hata: " + ex.Message;
 				TempData["class"] = "bg-danger";
-			}
+            }
 
 			return RedirectToAction("Settings", "Admin");
 		}
